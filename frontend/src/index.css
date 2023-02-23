@@ -11,3 +11,85 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+/* PAGINA DE INICIO */
+
+#pag-de-inicio {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #deb887;
+  color: #f5f5f5;
+}
+
+#divisor-l {
+  display: inline;
+  height: 0px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  width: 45%;
+  margin-right: 5%;
+  border: none;
+  border-bottom: solid 2px #f5f5f5;
+  border-radius: 0% 100% 0% 100%;
+}
+#divisor-r {
+  display: inline;
+  height: 0px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  width: 45%;
+  margin-left: 5%;
+  border: none;
+  border-bottom: solid 2px #f5f5f5;
+  border-radius: 100% 0% 100% 0%;
+}
+
+#pag-de-inicio h1 {
+  margin-top: 0;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+#pag-de-inicio h3 {
+  margin-top: 0;
+  text-align: center;
+  padding-right: 25%;
+}
+
+#formulario-login {
+  width: 100%;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+}
+
+#formulario-login input {
+  padding-bottom: 2%;
+  display: block;
+  border: none;
+  border-bottom: 2px solid #1C6EA4;
+  margin-bottom: 20px;
+  font-size: large;
+  background: none;
+  color: #f5f5f5;
+}
+
+#formulario-login input:focus {
+  outline: none
+}
+
+#formulario-login button {
+  width: 80px;
+  display: block;
+  border: none;
+  background-color: #1C6EA4;
+  color: #f5f5f5;
+  padding: 6px;
+  border-radius: 5px 15px 5px 5px;
+  font-size: medium;
+}
+
+/* TERMINA PAGINA DE INICIO */

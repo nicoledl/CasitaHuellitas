@@ -1,10 +1,10 @@
-import Administracion from './pages/Administracion'
+import Inicio from './pages/Inicio'
 
-function App () {
+const App = () => {
   return (
-    <div>
-      <Administracion />
-    </div>
+    <>
+      <Inicio />
+    </>
   )
 }
 

@@ -1,11 +1,11 @@
-import ListaMascotas from '../components/ListaMascotas'
-import Formulario from '../components/Formulario'
+import ListaMascotas from '../components/usuarioAvanzado/ListaMascotas'
+import FormularioDeMascota from '../components/usuarioAvanzado/FormularioDeMascota'
 
 const Administracion = () => {
   return (
     <>
       <ListaMascotas />
-      <Formulario />
+      <FormularioDeMascota />
     </>
   )
 }

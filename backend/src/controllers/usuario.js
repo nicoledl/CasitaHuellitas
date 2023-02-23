@@ -4,6 +4,10 @@ const { User } = require('../models/usuario')
 const createUser = async (req, res) => {
   const body = req.body
 
+  if (!body.email) {
+    return res.status(400).json({ error: 'Email is required' })
+  }
+
   if (!body.password) {
     return res.status(400).json({ error: 'Password is required' })
   }
@@ -13,9 +17,10 @@ const createUser = async (req, res) => {
   const passwordHash = await bcrypt.hash(body.password, salt)
 
   const user = new User({
-    username: body.username,
+    email: body.email,
     name: body.name,
-    passwordHash
+    passwordHash,
+    pets: []
   })
 
   const savedUser = await user.save()
@@ -28,4 +33,13 @@ const getAll = async (req, res) => {
   res.json(users)
 }
 
-module.exports = { createUser, getAll }
+const getById = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id)
+    res.json(user)
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
+}
+
+module.exports = { createUser, getAll, getById }

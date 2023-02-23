@@ -2,10 +2,16 @@ const mongoose = require('mongoose')
 const uniqueValidator = require('mongoose-unique-validator')
 
 const userSchema = new mongoose.Schema({
-  username: {
+  email: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
+    validate: {
+      validator: function (v) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)
+      },
+      message: props => `${props.value} no es una dirección de correo electrónico válida!`
+    }
   },
   name: {
     type: String,
@@ -35,6 +41,6 @@ userSchema.set('toJSON', {
   }
 })
 
-const User = mongoose.model('Usuarios', userSchema)
+const User = mongoose.model('Usuario', userSchema, 'usuarios')
 
 module.exports = { User }
