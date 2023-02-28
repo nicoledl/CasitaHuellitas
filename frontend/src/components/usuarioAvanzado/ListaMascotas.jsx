@@ -19,7 +19,6 @@ const ListaMascotas = () => {
     setId(mascotaId)
     setEditar(true)
   }
-  console.log(mascotas)
 
   const onSubmit = async datos => {
     try {

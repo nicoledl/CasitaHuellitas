@@ -10,7 +10,10 @@
     "js-cookie": "^3.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-grid-system": "^8.1.9",
     "react-hook-form": "^7.43.1",
+    "react-responsive": "^9.0.2",
+    "react-router-dom": "^6.8.1",
     "react-scripts": "5.0.1"
   },
   "scripts": {
