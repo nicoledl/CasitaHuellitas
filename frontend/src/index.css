@@ -1,0 +1,211 @@
+* {
+  margin: 0;
+  font-family: sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+
+/* PAGINA DE INGRESO */
+#pag-de-inicio {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url('./assets/wallpaper.jpg');
+  background-position: center;
+  color: #f5f5f5;
+}
+
+#borde-top {
+  top: 0;
+  height: 80px;
+  width: 100%;
+  background-color: #1379bd;
+  position: absolute;
+  --mask:
+    linear-gradient(to top, #0000 51px, #000 0),
+    radial-gradient(51px, #000 98%, #0000) bottom/94.35px 102px;
+  -webkit-mask: var(--mask);
+  mask: var(--mask);
+}
+
+#borde-bot {
+  bottom: 0;
+  height: 80px;
+  width: 100%;
+  background-color: #1379bd;
+  position: absolute;
+  --mask:
+    linear-gradient(to bottom, #0000 51px, #000 0),
+    radial-gradient(51px, #000 98%, #0000) top/94.35px 102px;
+  -webkit-mask: var(--mask);
+  mask: var(--mask);
+}
+
+#boton-conocer {
+  border: none;
+  color: #ffffff;
+  background-color: #1379bd;
+  width: 50%;
+  border-radius: 6px 6px 6px 6px;
+  padding-top: 18px;
+  padding-bottom: 18px;
+  font-size: large;
+  margin-top: 40px;
+  margin-bottom: 50px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.2s, box-shadow
+}
+
+#boton-conocer:hover {
+  background-color: #0e6299;
+}
+
+#boton-conocer:active {
+  background-color: #0e6299;
+  box-shadow: 2px 2px 4px 0px #0220338e inset;
+}
+
+#divisor-l {
+  display: inline;
+  height: 0px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  width: 45%;
+  margin-right: 5%;
+  border: none;
+  border-bottom: solid 2px #f5f5f5;
+  border-radius: 0% 100% 0% 100%;
+}
+
+#divisor-r {
+  display: inline;
+  height: 0px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  width: 45%;
+  margin-left: 5%;
+  border: none;
+  border-bottom: solid 2px #f5f5f5;
+  border-radius: 100% 0% 100% 0%;
+}
+
+#pag-de-inicio h1 {
+  margin-top: 0;
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+#pag-de-inicio h3 {
+  margin-top: 0;
+  text-align: center;
+}
+
+#formulario-login {
+  width: 100%;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+}
+
+#formulario-login input {
+  padding-bottom: 2%;
+  padding-top: 2%;
+  display: block;
+  border: none;
+  border-bottom: 2px solid #1379bd;
+  margin-bottom: 20px;
+  font-size: large;
+  background: none;
+  color: #f5f5f5;
+}
+
+#formulario-login input:focus {
+  outline: solid 2px #f5f5f594;
+  border-radius: 2px 2px 2px 2px;
+}
+
+#formulario-login .error-message {
+  position: relative;
+  height: 40px;
+  width: 100%;
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+#formulario-login button {
+  border: none;
+  width: 80px;
+  display: block;
+  background-color: #1379bd;
+  color: #f5f5f5;
+  padding: 6px;
+  border-radius: 5px 15px 5px 5px;
+  font-size: medium;
+  cursor: pointer;
+  transition: background-color 0.2s
+}
+
+#formulario-login button:hover {
+  background-color: #0e6299;
+}
+
+#formulario-login button:active {
+  background-color: #0e6299;
+  box-shadow: 2px 2px 4px 0px #0220338e inset;
+}
+
+
+/* TERMINA PAGINA DE INGRESO */
+
+/* PAGINA DE INICIO */
+#navbar {
+  position: absolute;
+  top: 0;
+  height: fit-content;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background: #1379bd;
+  display: flex;
+  width: 100vw;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+}
+
+#navbar a {
+  text-decoration: none;
+  color: #ffffff;
+  transition: color 0.1s;
+}
+
+#navbar a:hover {
+  color: #ffffff86;
+}
+
+#navbar a:active {
+  color: #ffffffc0;
+}
+
+/* TERMINA PAGINA DE INICIO */
+
+/* SECCIÓN ADOPTADITOS INICIO */
+.sliderDeAdoptados {
+  height: 80vh;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/* TERMINA SECCIÓN ADOPTADITOS INICIO */
