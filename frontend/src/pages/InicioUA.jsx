@@ -1,7 +1,7 @@
 import ListaMascotas from '../components/usuarioAvanzado/ListaMascotas'
 import FormularioDeMascota from '../components/usuarioAvanzado/FormularioDeMascota'
 
-const InicioUsuario = () => {
+const InicioUA = () => {
   return (
     <>
       <ListaMascotas />
@@ -10,4 +10,4 @@ const InicioUsuario = () => {
   )
 }
 
-export default InicioUsuario
+export default InicioUA

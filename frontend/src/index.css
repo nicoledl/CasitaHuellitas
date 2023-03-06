@@ -199,11 +199,12 @@ code {
 /* TERMINA PAGINA DE INICIO */
 
 /* SECCIÓN ADOPTADITOS INICIO */
-#adoptaditos {
+.sliderDeAdoptados {
+  height: 80vh;
+  text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
 }
 
 

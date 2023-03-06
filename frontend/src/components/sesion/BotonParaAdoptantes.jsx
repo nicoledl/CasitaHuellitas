@@ -15,7 +15,7 @@ const BotonParaAdoptantes = () => {
 
   return (
     <div style={container}>
-      <button id='boton-conocer' onClick={handleClick}>¡Conocer!</button>
+      <button id='boton-conocer' onClick={handleClick}>¡Conocelos!</button>
     </div>
   )
 }
