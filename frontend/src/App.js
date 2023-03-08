@@ -1,17 +1,28 @@
+import React, { createContext, useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Ingreso from './pages/Ingreso'
-import Inicio from './pages/InicioUB'
 import InicioUA from './pages/InicioUA'
+import InicioUB from './pages/InicioUB'
+
+export const GlobalContext = createContext(null)
 
 const App = () => {
+  const [valor, setValor] = useState(null)
+
+  const handleChange = (valor) => {
+    setValor(valor)
+  }
+
   return (
-    <Router>
-      <Routes>
-        <Route path='/' element={<Ingreso />} />
-        <Route path='/inicio' element={<Inicio />} />
-        <Route path='/inicio-usuario' element={<InicioUA />} />
-      </Routes>
-    </Router>
+    <GlobalContext.Provider value={{ valor, handleChange }}>
+      <Router>
+        <Routes>
+          <Route path='/' element={<Ingreso />} />
+          <Route path='/administracion' element={<InicioUA valor={{ valor, handleChange }} />} />
+          <Route path='/inicio' element={<InicioUB />} />
+        </Routes>
+      </Router>
+    </GlobalContext.Provider>
   )
 }
 

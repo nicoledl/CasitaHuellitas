@@ -166,7 +166,7 @@ code {
 
 /* TERMINA PAGINA DE INGRESO */
 
-/* PAGINA DE INICIO */
+/* NAVBAR */
 #navbar {
   position: absolute;
   top: 0;
@@ -196,16 +196,4 @@ code {
   color: #ffffffc0;
 }
 
-/* TERMINA PAGINA DE INICIO */
-
-/* SECCIÓN ADOPTADITOS INICIO */
-.sliderDeAdoptados {
-  height: 80vh;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-
-/* TERMINA SECCIÓN ADOPTADITOS INICIO */
+/* TERMINA NAVBAR */

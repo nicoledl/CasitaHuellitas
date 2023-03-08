@@ -13,7 +13,7 @@ const Adoptaditos = () => {
           arr.map((url, i) => {
             return (
               <Col key={i} sm={12} md={4} style={estiloCol}>
-                <div className='example'>
+                <div className='cartel'>
                   <img alt={`foto${i}`} src={url} style={fotoEstilo} />
                 </div>
               </Col>
@@ -25,7 +25,8 @@ const Adoptaditos = () => {
   }
 
   return (
-    <Container fluid>
+    <Container fluid id='container-adoptados' style={{ textAlign: 'center' }}>
+      <h1>Huellitas adoptadas</h1>
       {mostrarFotos(arrFotos)}
       {mostrarFotos(arrFotos)}
     </Container>

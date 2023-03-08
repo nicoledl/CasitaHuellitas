@@ -1,5 +1,11 @@
 const bcrypt = require('bcrypt')
 const { User } = require('../models/usuario')
+const { client } = require('../mongo')
+const { ObjectId } = require('mongodb')
+const jwt = require('jsonwebtoken')
+
+const db = client.db('CasitaHuellitas_DB')
+const collectionUser = db.collection('usuarios')
 
 const createUser = async (req, res) => {
   const body = req.body
@@ -29,17 +35,33 @@ const createUser = async (req, res) => {
 }
 
 const getAll = async (req, res) => {
-  const users = await User.find({})
+  const users = await collectionUser.find({})
   res.json(users)
 }
 
 const getById = async (req, res) => {
   try {
-    const user = await User.findById(req.params.id)
-    res.json(user)
+    const user = await collectionUser.findOne({ _id: ObjectId(req.params.id) })
+    res.send(user)
   } catch (error) {
     res.status(500).json({ error: error.message })
   }
 }
 
-module.exports = { createUser, getAll, getById }
+const getIdToken = async (req, res) => {
+  try {
+    const authHeader = req.headers.authorization
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      return res.status(401).json({ message: 'No se proporcionó un token de autenticación' })
+    }
+    const token = authHeader.split(' ')[1]
+    const decoded = jwt.verify(token, process.env.JWT_SECRET)
+    const userId = decoded._id
+    res.send(userId)
+  } catch (error) {
+    console.error(error)
+    res.status(401).json({ message: 'Token inválido' })
+  }
+}
+
+module.exports = { createUser, getAll, getById, getIdToken }

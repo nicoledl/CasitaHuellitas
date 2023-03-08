@@ -2,6 +2,7 @@ import Navbar from '../components/commons/Navbar'
 import Banner from '../components/usuarioBasico/Banner'
 import imgBanner from '../assets/banner1.jpg'
 import Adoptaditos from '../components/usuarioBasico/Adoptaditos'
+import ListaMascotas from '../components/usuarioBasico/ListaMascotas'
 
 const estiloInicio = {
   backgroundImage: `url('${imgBanner}')`,
@@ -27,6 +28,7 @@ const Inicio = () => {
       <div style={estiloAdoptaditos}>
         <Adoptaditos />
       </div>
+      <ListaMascotas />
     </>
   )
 }

@@ -53,7 +53,41 @@
     }
 }
 
-/* CARTEL ADOPTADOS */
+/* CARTELES ADOPTADOS */
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+#container-adoptados h1 {
+    font-family: 'Pacifico', cursive;
+    font-size: clamp(1.5rem, 8vw - 2rem, 3rem);
+}
+
+@keyframes bg-color {
+    0% {
+        background-color: #2dc5a4;
+    }
+
+    20% {
+        background-color: #1379BD;
+    }
+
+    40% {
+        background-color: #2dc5a4;
+    }
+
+    60% {
+        background-color: #1379BD;
+    }
+
+    80% {
+        background-color: #23b0d3;
+    }
+
+    100% {
+        background-color: #2dc5a4;
+    }
+}
+
+
 @keyframes sway {
     0% {
         transform: rotate(0);
@@ -100,58 +134,58 @@
     }
 }
 
-.example img{
-    border-radius: 10px 10px 10px 10px ;
+.cartel img {
+    border-radius: 10px 10px 10px 10px;
 }
 
-.example {
+.cartel {
     position: relative;
     display: inline-block;
     font-family: 'Spicy Rice', cursive;
     padding: 15px 15px;
     margin: 64px 0;
-    animation: sway 5s linear infinite;
+    animation: sway 5s linear infinite, bg-color 10s infinite;
     transform-origin: 50% -32px;
-    background: #1379BD;
+    /* background: #1379BD; */
     border-radius: 10px 10px 10px 10px;
     background-size: 3px 3px,
-      3px 3px,
-      3px 3px,
-      3px 3px,
-      16px 16px,
-      16px 16px,
-      16px 16px,
-      16px 16px,
-      calc(100% - 32px + 4px) 16px,
-      calc(100% - 32px + 4px) 16px,
-      16px calc(50% - 32px),
-      16px calc(50% - 32px),
-      16px calc(50% - 32px),
-      16px calc(50% - 32px),
-      32px 32px,
-      32px 32px,
-      calc(100% - 32px + 4px) calc(100% - 32px);
+        3px 3px,
+        3px 3px,
+        3px 3px,
+        16px 16px,
+        16px 16px,
+        16px 16px,
+        16px 16px,
+        calc(100% - 32px + 4px) 16px,
+        calc(100% - 32px + 4px) 16px,
+        16px calc(50% - 32px),
+        16px calc(50% - 32px),
+        16px calc(50% - 32px),
+        16px calc(50% - 32px),
+        32px 32px,
+        32px 32px,
+        calc(100% - 32px + 4px) calc(100% - 32px);
     background-position: 0 calc(50% - 16px),
-      100% calc(50% - 16px),
-      0 calc(50% + 16px),
-      100% calc(50% + 16px),
-      0 0,
-      100% 0,
-      100% 100%,
-      0 100%,
-      calc(16px - 1px) 0,
-      calc(16px - 1px) 100%,
-      0 16px,
-      0 calc(100% - 16px),
-      100% 16px,
-      100% calc(100% - 16px),
-      0 50%,
-      100% 50%,
-      calc(16px - 1px) 16px;
+        100% calc(50% - 16px),
+        0 calc(50% + 16px),
+        100% calc(50% + 16px),
+        0 0,
+        100% 0,
+        100% 100%,
+        0 100%,
+        calc(16px - 1px) 0,
+        calc(16px - 1px) 100%,
+        0 16px,
+        0 calc(100% - 16px),
+        100% 16px,
+        100% calc(100% - 16px),
+        0 50%,
+        100% 50%,
+        calc(16px - 1px) 16px;
     background-repeat: no-repeat;
-  }
+}
 
-.example::before {
+.cartel::before {
     content: '';
     height: 2px;
     width: 51%;
@@ -163,7 +197,7 @@
     background: linear-gradient(to right, transparent 0%, transparent 13%, #555555 15%, #5a5a5a 17%, #c0c0c0 100%);
 }
 
-.example::after {
+.cartel::after {
     content: '';
     height: 2px;
     width: 51%;

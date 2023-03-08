@@ -1,10 +1,10 @@
 const express = require('express')
-const { login } = require('../controllers/sesion')
+const { login, logout } = require('../controllers/sesion')
 const router = express.Router()
 
 router.use(express.json())
 
 router.post('/login', login)
-router.post('/logout', login)
+router.post('/logout', logout)
 
 module.exports = router

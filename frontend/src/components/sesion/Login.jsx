@@ -14,7 +14,7 @@ const Login = () => {
     try {
       const response = await axios.post(`${baseUrl}/api/login`, datos)
       Cookies.set('token', response.data.token)
-      navigate('/usuario')
+      navigate('/administracion')
     } catch (error) {
       if (error.response.data.message === 'Contraseña incorrecta' || error.response.data.message === 'Usuario no encontrado') {
         setErrorMessage('El correo o la contraseña son incorrectos')
