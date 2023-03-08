@@ -15,16 +15,18 @@ const createPet = async (req, res) => {
     if (!token) {
       return res.status(401).json({ message: 'Debe iniciar sesión para crear una mascota' })
     }
+    console.log('ESTO ES TOKEN ' + token)
 
     // Decodificar el token para obtener el ID del usuario
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET)
-    const userId = decodedToken._id
+    const userId = decodedToken._id._id
 
     // Buscar el usuario en la base de datos
     const user = await collectionUser.findOne({ _id: ObjectId(userId) })
     if (!user) {
       return res.status(400).json({ message: 'El usuario no existe' })
     }
+    console.log('ESTO ES USER  ' + user)
 
     // Crear la mascota con el ID del usuario
     const pet = new Pet({
@@ -35,8 +37,10 @@ const createPet = async (req, res) => {
       important: req.body.important === undefined ? false : req.body.important,
       user: ObjectId(userId)
     })
+    console.log(pet)
 
     const savedPet = await collectionPet.insertOne(pet)
+    console.log(savedPet.insertedId)
 
     // Actualizar la lista de mascotas del usuario
     await collectionUser.updateOne(
@@ -62,13 +66,16 @@ const getAll = async (req, res) => {
 
 const updateInfo = async (req, res) => {
   try {
-    const pet = await Pet.findOneAndUpdate(
+    const pet = await collectionPet.findOneAndUpdate(
       { _id: ObjectId(req.params.id) },
       {
-        animal: req.body.animal,
-        name: req.body.name,
-        note: req.body.note,
-        important: req.body.important
+        $set:
+        {
+          animal: req.body.animal,
+          name: req.body.name,
+          note: req.body.note,
+          important: req.body.important
+        }
       },
       { new: true }
     )
@@ -79,15 +86,18 @@ const updateInfo = async (req, res) => {
 }
 
 const deletePet = async (req, res) => {
-  Pet.findByIdAndRemove(req.params.id)
-    .then(() => {
-      res.status(204).end()
-      console.log('Mascota eliminada.')
-    })
-    .catch(error => {
-      console.log(error)
-      res.status(400).send({ error: 'malformatted id' })
-    })
+  try {
+    const pet = await collectionPet.findOneAndDelete({ _id: ObjectId(req.params.id) })
+    console.log(pet)
+    if (!pet) {
+      return res.status(404).json({ error: 'Pet not found' })
+    }
+    res.status(204).end()
+    console.log('Mascota eliminada.')
+  } catch (error) {
+    console.log(error)
+    res.status(400).json({ error: 'malformatted id' })
+  }
 }
 
 const getById = async (req, res) => {

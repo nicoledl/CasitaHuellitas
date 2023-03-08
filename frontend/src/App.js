@@ -1,5 +1,6 @@
 import React, { createContext, useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import Contacto from './pages/Contacto'
 import Ingreso from './pages/Ingreso'
 import InicioUA from './pages/InicioUA'
 import InicioUB from './pages/InicioUB'
@@ -20,6 +21,7 @@ const App = () => {
           <Route path='/' element={<Ingreso />} />
           <Route path='/administracion' element={<InicioUA valor={{ valor, handleChange }} />} />
           <Route path='/inicio' element={<InicioUB />} />
+          <Route path='/contact' element={<Contacto />} />
         </Routes>
       </Router>
     </GlobalContext.Provider>

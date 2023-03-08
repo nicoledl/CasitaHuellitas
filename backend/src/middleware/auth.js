@@ -1,27 +1,14 @@
-const jwt = require('jsonwebtoken')
-const Usuario = require('../models/usuario')
-require('dotenv').config()
+const { validateToken } = require('../config/token')
 
-const getUserFromToken = async (req, res, next) => {
+function validateAuth (req, res, next) {
   const token = req.cookies.token
-  console.log(req.cookies)
-  if (!token) {
-    return res.status(401).json({ message: 'No se encontró un token de autenticación' })
-  }
+  if (!token) return res.sendStatus(401)
 
-  try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET)
-    const userId = decoded._id
-    const user = await Usuario.findById(userId)
-    if (!user) {
-      return res.status(404).json({ message: 'No se encontró el usuario' })
-    }
+  const { _id } = validateToken(token)
+  if (!_id) return res.sendStatus(401)
 
-    req.user = user
-    next()
-  } catch (error) {
-    return res.status(401).json({ message: 'Token de autenticación inválido' })
-  }
+  req._id = _id
+  next()
 }
 
-module.exports = { getUserFromToken }
+module.exports = { validateAuth }

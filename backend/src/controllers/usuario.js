@@ -2,7 +2,8 @@ const bcrypt = require('bcrypt')
 const { User } = require('../models/usuario')
 const { client } = require('../mongo')
 const { ObjectId } = require('mongodb')
-const jwt = require('jsonwebtoken')
+const { connectToDB } = require('../mongo')
+const { generateToken } = require('../config/token')
 
 const db = client.db('CasitaHuellitas_DB')
 const collectionUser = db.collection('usuarios')
@@ -42,26 +43,51 @@ const getAll = async (req, res) => {
 const getById = async (req, res) => {
   try {
     const user = await collectionUser.findOne({ _id: ObjectId(req.params.id) })
-    res.send(user)
+    res.json(user)
   } catch (error) {
     res.status(500).json({ error: error.message })
   }
 }
 
-const getIdToken = async (req, res) => {
+const login = async (req, res) => {
   try {
-    const authHeader = req.headers.authorization
-    if (!authHeader || !authHeader.startsWith('Bearer ')) {
-      return res.status(401).json({ message: 'No se proporcionó un token de autenticación' })
+    const db = await connectToDB()
+    const collection = db.collection('usuarios')
+
+    // Buscar el usuario en la base de datos
+    const user = await collection.findOne({ email: req.body.email })
+    if (!user) {
+      return res.status(400).json({ message: 'Usuario no encontrado' })
     }
-    const token = authHeader.split(' ')[1]
-    const decoded = jwt.verify(token, process.env.JWT_SECRET)
-    const userId = decoded._id
-    res.send(userId)
-  } catch (error) {
-    console.error(error)
-    res.status(401).json({ message: 'Token inválido' })
+
+    // Verificar la contraseña
+    const passwordMatch = await bcrypt.compare(req.body.password, user.passwordHash)
+    if (!passwordMatch) {
+      return res.status(400).json({ message: 'Contraseña incorrecta' })
+    }
+
+    const payload = {
+      _id: user._id,
+      email: user.email
+    }
+    const token = generateToken(payload)
+
+    res.cookie('token', token)
+
+    res.json({ payload, token, message: 'Inicio de sesión exitoso' })
+  } catch (err) {
+    return res.status(500).json({ message: 'Error interno del servidor' })
   }
 }
 
-module.exports = { createUser, getAll, getById, getIdToken }
+const getIdToken = async (req, res) => {
+  const userId = req._id._id
+  res.json({ _id: userId, message: 'Acceso autorizado' })
+}
+
+const logout = async (req, res) => {
+  res.clearCookie('token')
+  res.json({ message: 'Cierre de sesión exitoso' })
+}
+
+module.exports = { createUser, getAll, getById, getIdToken, login, logout }

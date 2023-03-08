@@ -1,33 +1,26 @@
-// import axios from 'axios'
-// import Cookies from 'js-cookie'
-// import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
+import Cookies from 'js-cookie'
 
-// const Logout = () => {
-//   const navigate = useNavigate()
-//   const baseUrl = 'http://localhost:3001/api'
+const Logout = () => {
+  const baseUrl = 'http://localhost:3001'
 
-//   const onClick = async () => {
-//     try {
-//       const token = Cookies.get('token') // Obtener token de las cookies
-//       await axios.post(`${baseUrl}/logout`, null, {
-//         headers: {
-//           Authorization: `Bearer ${token}` // Pasar el token en el header
-//         },
-//         withCredentials: true,
-//         credentials: 'include'
-//       })
-//       Cookies.remove('token')
-//       navigate('/')
-//     } catch (error) {
-//       console.log(error)
-//     }
-//   }
+  const handleLogout = async () => {
+    try {
+      // eslint-disable-next-line no-unused-vars
+      const logout = await axios.post(`${baseUrl}/api/usuarios/logout`)
+      Cookies.remove('token')
+      // eslint-disable-next-line no-unused-vars
+      const reload = await window.location.reload()
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
-//   return (
-//     <button onClick={onClick}>
-//       Cerrar Sesion
-//     </button>
-//   )
-// }
+  return (
+    <button onClick={handleLogout}>
+      Cerrar Sesion
+    </button>
+  )
+}
 
-// export default Logout
+export default Logout

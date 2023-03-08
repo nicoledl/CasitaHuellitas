@@ -12,7 +12,7 @@ const Login = () => {
 
   const onSubmit = async datos => {
     try {
-      const response = await axios.post(`${baseUrl}/api/login`, datos)
+      const response = await axios.post(`${baseUrl}/api/usuarios/login`, datos)
       Cookies.set('token', response.data.token)
       navigate('/administracion')
     } catch (error) {
