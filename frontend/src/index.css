@@ -197,3 +197,63 @@ code {
 }
 
 /* TERMINA NAVBAR */
+
+/* LISTA DE MASCOTAS USUARIO AVANZADO */
+#container-mascotas {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+#display-de-mascota {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+}
+
+#carta-mascota {
+  margin: 20px;
+  height: 360px;
+  width: 300px;
+  background: rgb(255, 255, 255);
+  background: radial-gradient(circle, rgba(226, 226, 226, 0) 52%, rgba(221, 221, 221, 0.349) 100%);
+  border: solid 1px #e2e2e2;
+  border-radius: 8px 8px 8px 8px;
+  box-shadow: 0px 4px 10px -1px rgba(0, 0, 0, 0.35);
+  -webkit-box-shadow: 0px 4px 10px -1px rgba(0, 0, 0, 0.35);
+  -moz-box-shadow: 0px 4px 10px -1px rgba(0, 0, 0, 0.35);
+}
+
+#carta-mascota p {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+}
+
+#display-de-mascota button,
+input,
+select,
+textarea,
+p {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  resize: none;
+  font-size: medium;
+}
+
+#display-de-mascota p {
+  font-size: medium;
+  height: max-content;
+}
+
+#display-de-mascota textarea {
+  font-size: medium;
+  height: 100px
+}
+
+#display-de-mascota button {
+  margin: 4px;
+}
+
+/* TERMINA LISTA DE MASCOTAS UA */

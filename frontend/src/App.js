@@ -21,7 +21,7 @@ const App = () => {
           <Route path='/' element={<Ingreso />} />
           <Route path='/administracion' element={<InicioUA valor={{ valor, handleChange }} />} />
           <Route path='/inicio' element={<InicioUB />} />
-          <Route path='/contact' element={<Contacto />} />
+          <Route path='/contacto' element={<Contacto />} />
         </Routes>
       </Router>
     </GlobalContext.Provider>

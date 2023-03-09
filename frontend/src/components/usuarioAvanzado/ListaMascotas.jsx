@@ -1,6 +1,11 @@
 import { useForm } from 'react-hook-form'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
+import { Col, Container, Row } from 'react-grid-system'
+
+const fotoEstilo = { height: '40%', width: '100%', backgroundImage: 'url("https://www.losandes.com.ar/resizer/y0Wk3IFldMN3a3cWckXfWteP7UI=/1023x1364/smart/cloudfront-us-east-1.images.arcpublishing.com/grupoclarin/UOWLL6J6LBFLNI6CU7RNBZSYCE.jpg")', backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundPosition: 'center', borderRadius: '8px 8px 0px 0px' }
+
+const botonera = { backgroundColor: '#1379bd', height: '20%', borderRadius: '0px 0px 8px 8px', margin: 0, color: '#f5f5f5' }
 
 const ListaMascotas = () => {
   const [mascotas, setMascotas] = useState([])
@@ -36,16 +41,23 @@ const ListaMascotas = () => {
       .catch((error) => console.error(error))
   }
 
+  if (mascotas.length === 0) {
+    return <p>Cargando mascotas...</p>
+  }
+
   return (
-    <>
-      {mascotas.length === 0
-        ? <p>Cargando mascotas...</p>
-        : mascotas.map((mascota) => {
+    <Container id='container-mascotas'>
+      <Row>
+        {mascotas.map((mascota) => {
+          const fecha = new Date(mascota.date)
+          const fechaISO = fecha.toISOString().substring(0, 10)
+
           return (
-            <div key={mascota._id}>
+            <Col id='display-de-mascota' xs={12} sm={6} md={4} xl={3} key={mascota._id}>
+
               {editar && id === mascota._id
                 ? (
-                  <>
+                  <div id='carta-mascota'>
                     <form onSubmit={handleSubmit(onSubmit)}>
                       <select defaultValue={mascota.animal} {...register('animal')}>
                         <option value='Perro'>Perro</option>
@@ -54,7 +66,7 @@ const ListaMascotas = () => {
                         <option value='Ruedor'>Ruedor</option>
                       </select>
                       <input type='text' placeholder='Nombre' defaultValue={mascota.name} {...register('name', { required: false, maxLength: 100 })} />
-                      <input
+                      <textarea
                         type='text'
                         placeholder='Nota'
                         defaultValue={mascota.note}
@@ -69,34 +81,55 @@ const ListaMascotas = () => {
                           {...register('important', {})}
                         />
                       </label>
-                      <button>Modificar</button>
+                      <div>
+                        <button>Modificar</button>
+                        <button onClick={() => setEditar(!editar)}>Cancelar</button>
+                      </div>
                     </form>
-                    <button onClick={() => setEditar(!editar)}>Cancelar</button>
-                  </>
-                  )
-                : (
-                  <div>
-                    <p>{mascota.animal}</p>
-                    {mascota.name === undefined ? 'No se le asignó un nombre.' : <p>{mascota.name}</p>}
-                    <p>{mascota.note}</p>
-                    {mascota.important
-                      ? (
-                        <p>Situacion de importancia.</p>
-                        )
-                      : (
-                          false
-                        )}
-                    <p>{mascota.date}</p>
-                    <button onClick={() => borrarMascota(mascota._id)}>
-                      Eliminar
-                    </button>
-                    <button onClick={() => onEdit(mascota._id)}>Editar</button>
                   </div>
+                  )
+
+                : (
+
+                  <div id='carta-mascota'>
+
+                    <div style={fotoEstilo} />
+
+                    <div style={{ height: '40%' }}>
+                      <p style={{ height: '10%' }}>Animal: {mascota.animal}</p>
+                      {mascota.name === undefined ? 'No se le asignó un nombre.' : <p style={{ height: '10%' }}>Nombre: {mascota.name}</p>}
+                      <label>
+                        Nota:
+                        <p style={{ height: '30%' }}>{mascota.note}</p>
+                        {mascota.important
+                          ? (
+                            <p style={{ height: '15%' }}>Situacion de importancia.</p>
+                            )
+                          : (
+                              false
+                            )}
+                      </label>
+                      <p style={{ height: '8%' }}>Ingreso: {fechaISO}</p>
+                    </div>
+
+                    <Row style={botonera}>
+                      <Col onClick={() => borrarMascota(mascota._id)} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+                        Eliminar
+                      </Col>
+                      <Col onClick={() => onEdit(mascota._id)} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+                        Editar
+                      </Col>
+                    </Row>
+
+                  </div>
+
                   )}
-            </div>
+
+            </Col>
           )
         })}
-    </>
+      </Row>
+    </Container>
   )
 }
 

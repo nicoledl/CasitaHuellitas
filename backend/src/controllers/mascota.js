@@ -15,7 +15,6 @@ const createPet = async (req, res) => {
     if (!token) {
       return res.status(401).json({ message: 'Debe iniciar sesión para crear una mascota' })
     }
-    console.log('ESTO ES TOKEN ' + token)
 
     // Decodificar el token para obtener el ID del usuario
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET)
@@ -26,7 +25,6 @@ const createPet = async (req, res) => {
     if (!user) {
       return res.status(400).json({ message: 'El usuario no existe' })
     }
-    console.log('ESTO ES USER  ' + user)
 
     // Crear la mascota con el ID del usuario
     const pet = new Pet({
@@ -37,10 +35,8 @@ const createPet = async (req, res) => {
       important: req.body.important === undefined ? false : req.body.important,
       user: ObjectId(userId)
     })
-    console.log(pet)
 
     const savedPet = await collectionPet.insertOne(pet)
-    console.log(savedPet.insertedId)
 
     // Actualizar la lista de mascotas del usuario
     await collectionUser.updateOne(

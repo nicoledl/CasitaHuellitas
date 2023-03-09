@@ -25,10 +25,10 @@ const Navbar = () => {
             <Link to='/'>Ingreso</Link>
           </Col>
           <Col sm={4} md={4} style={columna}>
-            <Link to='/about'>Sobre</Link>
+            <Link to='/huellitas'>Huellitas</Link>
           </Col>
           <Col sm={4} md={4} style={columna}>
-            <Link to='/contact'>Contacto</Link>
+            <Link to='/contacto'>Contacto</Link>
           </Col>
         </Row>
       )}
