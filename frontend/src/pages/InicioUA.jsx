@@ -1,5 +1,4 @@
 import ListaMascotas from '../components/usuarioAvanzado/ListaMascotas'
-import FormularioDeMascota from '../components/usuarioAvanzado/FormularioDeMascota'
 import Navbar from '../components/commons/Navbar'
 import { useContext, useEffect, useState } from 'react'
 import axios from 'axios'
@@ -69,7 +68,6 @@ const InicioUA = () => {
     <>
       <Navbar />
       <ListaMascotas />
-      <FormularioDeMascota />
       <Logout />
     </>
   )

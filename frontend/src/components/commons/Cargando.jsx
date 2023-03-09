@@ -13,7 +13,7 @@ const Cargando = () => {
         <div className='shadow' />
         <div className='shadow' />
         <div className='shadow' />
-        <span>Loading</span>
+        <span>Cargando</span>
       </div>
     </Container>
   )

@@ -1,5 +1,6 @@
 import { useForm } from 'react-hook-form'
 import axios from 'axios'
+import Modal from '../commons/Modal'
 
 const Formulario = () => {
   const { register, handleSubmit } = useForm()
@@ -13,26 +14,31 @@ const Formulario = () => {
   }
   const date = new Date().toLocaleString()
 
-  return (
-    <>
-      <form onSubmit={handleSubmit(onSubmit)}>
+  const formulario = () => {
+    return (
+      <form id='formulario' onSubmit={handleSubmit(onSubmit)}>
+        <h1>Ingresar nueva huellita</h1>
         <select {...register('animal')}>
           <option value='Perro'>Perro</option>
           <option value='Gato'>Gato</option>
-          <option value='Ave'>Ave</option>
-          <option value='Ruedor'>Ruedor</option>
         </select>
         <input type='text' placeholder='Nombre' {...register('name', { required: false, maxLength: 100 })} />
-        <input type='text' placeholder='Nota' {...register('note', { required: false, maxLength: 100 })} />
+        <textarea type='text' placeholder='Nota' {...register('note', { required: false, maxLength: 100 })} />
         <label>
-          Importante:
+          *Importante:
           <input type='checkbox' placeholder='Importante' defaultChecked={false} {...register('important', {})} />
+          <p style={{ fontSize: '10px' }}>*Si el animal se encuentra en una situción critica.</p>
         </label>
         <input type='hidden' value={date} {...register('date', {})} />
         <button>AGREGAR</button>
       </form>
-      <button onClick={() => window.location.reload()}>Actualizar</button>
-    </>
+    )
+  }
+
+  return (
+    <div id='carta-mascota'>
+      <Modal contenido={formulario()} textoDelBoton='+' />
+    </div>
   )
 }
 

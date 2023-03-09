@@ -2,14 +2,20 @@ import { useForm } from 'react-hook-form'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { Col, Container, Row } from 'react-grid-system'
+import imagenPerro from '../../assets/perro-default.jpg'
+import imagenGato from '../../assets/gato-default.jpg'
+import Modal from '../commons/Modal'
+import Formulario from './FormularioDeMascota'
 
-const fotoEstilo = { height: '40%', width: '100%', backgroundImage: 'url("https://www.losandes.com.ar/resizer/y0Wk3IFldMN3a3cWckXfWteP7UI=/1023x1364/smart/cloudfront-us-east-1.images.arcpublishing.com/grupoclarin/UOWLL6J6LBFLNI6CU7RNBZSYCE.jpg")', backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundPosition: 'center', borderRadius: '8px 8px 0px 0px' }
+const imagenEstilo = { height: '50%', width: '100%', borderRadius: '8px 8px 0px 0px', objectFit: 'cover' }
 
 const botonera = { backgroundColor: '#1379bd', height: '20%', borderRadius: '0px 0px 8px 8px', margin: 0, color: '#f5f5f5' }
+const botones = { display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', cursor: 'pointer', margin: 0 }
 
 const ListaMascotas = () => {
   const [mascotas, setMascotas] = useState([])
   const [editar, setEditar] = useState(false)
+  const [imagen, setImagen] = useState(false)
   const [id, setId] = useState('')
   const { register, handleSubmit } = useForm()
   const baseUrl = 'http://localhost:3001'
@@ -41,89 +47,97 @@ const ListaMascotas = () => {
       .catch((error) => console.error(error))
   }
 
+  const handleChange = (event) => {
+    const file = event.target.files[0]
+    setImagen(file)
+  }
+
   if (mascotas.length === 0) {
     return <p>Cargando mascotas...</p>
+  }
+
+  const listaDeMascotas = (mascota) => {
+    return (
+      <div id='carta-mascota'>
+        <input
+          type='file'
+          accept='.jpg,.png,.jpeg'
+          name='upload-imagen'
+          id='imagen'
+          onChange={handleChange}
+        />
+        <form id='formulario-editar' onSubmit={handleSubmit(onSubmit)}>
+          <select defaultValue={mascota.animal} {...register('animal')}>
+            <option value='Perro'>Perro</option>
+            <option value='Gato'>Gato</option>
+          </select>
+          <input type='text' placeholder='Nombre' defaultValue={mascota.name} {...register('name', { required: false, maxLength: 100 })} />
+          <textarea
+            type='text'
+            placeholder='Nota'
+            defaultValue={mascota.note}
+            {...register('note', { maxLength: 100 })}
+          />
+          <label>
+            Importante:
+            <input
+              type='checkbox'
+              placeholder='Importante'
+              defaultChecked={mascota.important ? 'true' : false}
+              {...register('important', {})}
+            />
+          </label>
+          <div>
+            <button>Modificar</button>
+            <button onClick={() => setEditar(!editar)}>Cancelar</button>
+          </div>
+        </form>
+      </div>
+    )
   }
 
   return (
     <Container id='container-mascotas'>
       <Row>
+        <Col id='display-de-mascota'>
+          <Formulario />
+        </Col>
         {mascotas.map((mascota) => {
           const fecha = new Date(mascota.date)
           const fechaISO = fecha.toISOString().substring(0, 10)
 
           return (
-            <Col id='display-de-mascota' xs={12} sm={6} md={4} xl={3} key={mascota._id}>
+            <Col id='display-de-mascota' xs={12} sm={6} md={6} xl={3} key={mascota._id}>
 
               {editar && id === mascota._id
                 ? (
-                  <div id='carta-mascota'>
-                    <form onSubmit={handleSubmit(onSubmit)}>
-                      <select defaultValue={mascota.animal} {...register('animal')}>
-                        <option value='Perro'>Perro</option>
-                        <option value='Gato'>Gato</option>
-                        <option value='Ave'>Ave</option>
-                        <option value='Ruedor'>Ruedor</option>
-                      </select>
-                      <input type='text' placeholder='Nombre' defaultValue={mascota.name} {...register('name', { required: false, maxLength: 100 })} />
-                      <textarea
-                        type='text'
-                        placeholder='Nota'
-                        defaultValue={mascota.note}
-                        {...register('note', { maxLength: 100 })}
-                      />
-                      <label>
-                        Importante:
-                        <input
-                          type='checkbox'
-                          placeholder='Importante'
-                          defaultChecked={mascota.important ? 'true' : false}
-                          {...register('important', {})}
-                        />
-                      </label>
-                      <div>
-                        <button>Modificar</button>
-                        <button onClick={() => setEditar(!editar)}>Cancelar</button>
-                      </div>
-                    </form>
-                  </div>
+                    listaDeMascotas(mascota)
                   )
-
                 : (
-
                   <div id='carta-mascota'>
 
-                    <div style={fotoEstilo} />
-
-                    <div style={{ height: '40%' }}>
-                      <p style={{ height: '10%' }}>Animal: {mascota.animal}</p>
-                      {mascota.name === undefined ? 'No se le asignó un nombre.' : <p style={{ height: '10%' }}>Nombre: {mascota.name}</p>}
-                      <label>
-                        Nota:
-                        <p style={{ height: '30%' }}>{mascota.note}</p>
-                        {mascota.important
-                          ? (
-                            <p style={{ height: '15%' }}>Situacion de importancia.</p>
-                            )
-                          : (
-                              false
-                            )}
-                      </label>
-                      <p style={{ height: '8%' }}>Ingreso: {fechaISO}</p>
+                    <img alt={mascota.name} src={mascota.animal === 'Perro' ? imagenPerro : mascota.animal === 'Gato' ? imagenGato : imagen.name} style={imagenEstilo} />
+                    <div style={{ height: '30%' }}>
+                      <p>Animal: {mascota.animal}</p>
+                      {mascota.name === undefined ? 'No se le asignó un nombre.' : <p>Nombre: {mascota.name}</p>}
+                      {mascota.important
+                        ? (<p>Situacion de importancia.</p>)
+                        : (false)}
+                      <p>Ingreso: {fechaISO}</p>
                     </div>
-
                     <Row style={botonera}>
-                      <Col onClick={() => borrarMascota(mascota._id)} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
-                        Eliminar
+                      <Col>
+                        <p onClick={() => borrarMascota(mascota._id)} style={botones}>Eliminar</p>
                       </Col>
-                      <Col onClick={() => onEdit(mascota._id)} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
-                        Editar
+                      <Col>
+                        <Modal Titulo='NOTA' contenido={mascota.note} textoDelBoton='Nota' />
+                      </Col>
+                      <Col>
+                        <p onClick={() => onEdit(mascota._id)} style={botones}>Editar</p>
                       </Col>
                     </Row>
 
-                  </div>
-
-                  )}
+                  </div>)}
 
             </Col>
           )
