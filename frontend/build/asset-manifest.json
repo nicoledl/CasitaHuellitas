@@ -1,15 +1,17 @@
 {
   "files": {
-    "main.css": "/static/css/main.bcac0af3.css",
-    "main.js": "/static/js/main.cb99b19d.js",
+    "main.css": "/static/css/main.1758b652.css",
+    "main.js": "/static/js/main.c41c013f.js",
     "static/media/banner1.jpg": "/static/media/banner1.cffd6eb46ff04507ab76.jpg",
     "static/media/wallpaper.jpg": "/static/media/wallpaper.3c15d46c564b03c87156.jpg",
+    "static/media/perro-default.jpg": "/static/media/perro-default.2b89d9bea4d39975aed8.jpg",
+    "static/media/gato-default.jpg": "/static/media/gato-default.8b0065977da6ec181c98.jpg",
     "index.html": "/index.html",
-    "main.bcac0af3.css.map": "/static/css/main.bcac0af3.css.map",
-    "main.cb99b19d.js.map": "/static/js/main.cb99b19d.js.map"
+    "main.1758b652.css.map": "/static/css/main.1758b652.css.map",
+    "main.c41c013f.js.map": "/static/js/main.c41c013f.js.map"
   },
   "entrypoints": [
-    "static/css/main.bcac0af3.css",
-    "static/js/main.cb99b19d.js"
+    "static/css/main.1758b652.css",
+    "static/js/main.c41c013f.js"
   ]
 }
