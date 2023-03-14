@@ -1,14 +1,11 @@
 import { Sidebar, Menu, MenuItem, useProSidebar, SubMenu } from 'react-pro-sidebar'
 import { Link } from 'react-router-dom'
-import { FaEllipsisH, FaRegTimesCircle, FaDog, FaPeopleCarry, FaEnvelope, FaRegCalendarAlt, FaMinus, FaHome } from 'react-icons/fa'
+import { FaAngleRight, FaAngleLeft, FaDog, FaPeopleCarry, FaEnvelope, FaRegCalendarAlt, FaMinus, FaHome } from 'react-icons/fa'
 import Logout from '../sesion/Logout'
 
 export const SideNav = () => {
-  const { toggleSidebar, broken, collapsed } = useProSidebar()
+  const { collapsed } = useProSidebar()
   const { collapseSidebar } = useProSidebar()
-
-  const sidenavStyle = { border: 'none', boxShadow: '-2px 0px 20px 4px rgba(0,0,0,0.81)' }
-
   const menuItemStyles = {
     root: {
       fontSize: '13px',
@@ -19,68 +16,90 @@ export const SideNav = () => {
     })
   }
 
+  const contenidoGeneral = [
+    {
+      id: 'item-menu',
+      component: <Link to='/administracion' />,
+      content: collapsed ? <FaHome size={25} /> : <p>Inicio</p>
+    },
+    {
+      id: 'item-menu',
+      label: collapsed ? <FaDog size={25} /> : <p>Mascotas</p>,
+      submenu: [
+        {
+          className: 'menuitem',
+          component: <Link to='/mascotas' />,
+          content: 'Lista de Mascotas',
+          id: 'listaDeMascotas'
+        },
+        {
+          className: 'menuitem',
+          component: <Link to='/adoptados' />,
+          content: 'Registros Adoptados',
+          id: 'registrosAdoptados'
+        }
+      ]
+    },
+    {
+      id: 'item-menu',
+      component: <Link to='/voluntarios' />,
+      content: collapsed ? <FaPeopleCarry size={25} /> : <p>Voluntarios</p>
+    },
+    {
+      id: 'item-menu',
+      component: <Link to='/mensajes' />,
+      content: collapsed ? <FaEnvelope size={25} /> : <p>Mensajes</p>
+    }
+  ]
+
   return (
     <div id='sidebar' style={{ position: 'absolute' }}>
       <div style={{ position: 'sticky', display: 'flex', height: '100vh', zIndex: '2' }}>
-
-        <main style={{ position: 'absolute' }}>
-          <div style={{ padding: '16px 24px', color: '#44596e' }}>
-            <div style={{ marginBottom: '16px' }}>
-              {broken && (
-                <FaEllipsisH size={25} className='sb-button' onClick={() => toggleSidebar()} style={{ position: 'fixed', zIndex: '2', cursor: 'pointer' }} />
-              )}
-            </div>
-          </div>
-        </main>
-
-        <Sidebar breakPoint='lg' backgroundColor='#1379bd' style={collapsed ? { border: 'none' } : sidenavStyle}>
-          <main>
-            <div style={{ padding: '16px 24px', color: '#44596e' }}>
-              <div style={{ marginBottom: '16px' }}>
-                {broken && (
-                  <FaRegTimesCircle size={25} className='sb-button' onClick={() => toggleSidebar()} style={{ position: 'fixed', zIndex: '2', cursor: 'pointer' }} />
-                )}
-              </div>
-            </div>
-
-            <main>
-              <div style={{ position: 'absolute', top: 0 }}>
-                {collapsed
-                  ? <FaEllipsisH size={25} className='sb-button' onClick={() => collapseSidebar()} style={{ position: 'fixed', zIndex: '2', cursor: 'pointer', marginLeft: 25, marginTop: 10 }} />
-                  : <FaRegTimesCircle size={25} className='sb-button' onClick={() => collapseSidebar()} style={{ position: 'fixed', zIndex: '2', cursor: 'pointer', marginLeft: 15, marginTop: 10 }} />}
-              </div>
-            </main>
-
-            <main component={<Link to='/mascotas' />} style={{ display: 'flex', justifyContent: 'center', marginTop: 10, marginBottom: 30 }}>
-              {collapsed ? <h3>C.H.</h3> : <h3>CASITA HUELLITAS</h3>}
-            </main>
-          </main>
+        <Sidebar backgroundColor='#1379bdd4' style={{ border: 'none' }}>
 
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <div style={{ flex: 1, marginBottom: '32px' }}>
+              <div style={{ display: 'flex', justifyContent: 'flex-end', margin: 20 }}>
+                {collapsed
+                  ? <FaAngleRight size={25} className='sb-button' onClick={() => collapseSidebar()} style={{ cursor: 'pointer', marginRight: 9 }} />
+                  : <FaAngleLeft size={25} className='sb-button' onClick={() => collapseSidebar()} style={{ cursor: 'pointer' }} />}
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 10, marginBottom: 30 }}>
+                {collapsed ? <h3>C.H.</h3> : <h3>CASITA HUELLITAS</h3>}
+              </div>
               <div style={{ padding: '0 24px', marginBottom: '8px' }}>
                 {collapsed ? <FaMinus size={25} /> : <h4>General</h4>}
               </div>
               <Menu menuItemStyles={menuItemStyles}>
-                <MenuItem id='item-menu' component={<Link to='/administracion' />}>
-                  {collapsed ? <FaHome size={25} /> : <p>Inicio</p>}
-                </MenuItem>
-                <SubMenu id='item-menu' label={collapsed ? <FaDog size={25} /> : <p>Mascotas</p>}>
-                  <MenuItem className='menuitem' component={<Link to='/mascotas' />}>
-                    Lista de Mascotas
-                  </MenuItem>
-                  <MenuItem className='menuitem' component={<Link to='/adoptados' />}>
-                    Registros Adoptados
-                  </MenuItem>
-                </SubMenu>
-                <MenuItem id='item-menu' component={<Link to='/voluntarios' />}>
-                  {collapsed ? <FaPeopleCarry size={25} /> : <p>Voluntarios</p>}
-                </MenuItem>
-                <MenuItem id='item-menu' component={<Link to='/mensajes' />}>
-                  {collapsed ? <FaEnvelope size={25} /> : <p>Mensajes</p>}
-                </MenuItem>
+                {contenidoGeneral.map((item, i) => {
+                  if (item.submenu) {
+                    return (
+                      <SubMenu key={i} id={item.id} label={item.label}>
+                        {item.submenu.map((subitem) => (
+                          <MenuItem
+                            className={subitem.className}
+                            component={subitem.component}
+                            key={subitem.id}
+                          >
+                            {subitem.content}
+                          </MenuItem>
+                        ))}
+                      </SubMenu>
+                    )
+                  } else {
+                    return (
+                      <MenuItem
+                        id={item.id}
+                        component={item.component}
+                        key={i}
+                      >
+                        {item.content}
+                      </MenuItem>
+                    )
+                  }
+                }
+                )}
               </Menu>
-
               <div style={{ padding: '0 24px', marginBottom: '8px', marginTop: '32px' }}>
                 {collapsed ? <FaMinus size={25} /> : <h4>Extra</h4>}
               </div>

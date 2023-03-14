@@ -1,5 +1,5 @@
 import { Col, Container, Row } from 'react-grid-system'
-import './estilosUBInicio.css'
+import './cartelAdoptaditos.css'
 
 const Banner = () => {
   return (

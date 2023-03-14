@@ -28,7 +28,9 @@ const Mascotas = () => {
   return (
     <>
       <SideNav />
-      <ListaMascotas />
+      <div style={{ paddingTop: 50 }}>
+        <ListaMascotas />
+      </div>
     </>
   )
 }

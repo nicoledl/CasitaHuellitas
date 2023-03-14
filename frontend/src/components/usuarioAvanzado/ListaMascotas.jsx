@@ -70,7 +70,8 @@ const ListaMascotas = () => {
     return (
       <div id='carta-mascota'>
         <input
-          type='file'
+          type='hidden'
+          // type='file'
           accept='.jpg,.png,.jpeg'
           name='upload-imagen'
           id='imagen'
@@ -109,7 +110,7 @@ const ListaMascotas = () => {
   return (
     <Container id='container-mascotas'>
       <Row>
-        <Col id='display-de-mascota' xs={12} sm={6} md={6} xl={3}>
+        <Col id='display-de-mascota' sm={12} md={6} xl={4} xxl={3}>
           <Formulario />
         </Col>
         {mascotas.map((mascota) => {
@@ -117,7 +118,7 @@ const ListaMascotas = () => {
           const fechaISO = fecha.toISOString().substring(0, 10)
 
           return (
-            <Col id='display-de-mascota' xs={12} sm={6} md={6} xl={3} key={mascota._id}>
+            <Col id='display-de-mascota' sm={12} md={6} xl={4} xxl={3} key={mascota._id}>
 
               {editar && id === mascota._id
                 ? (listaDeMascotas(mascota))
