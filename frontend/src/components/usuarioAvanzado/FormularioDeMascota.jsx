@@ -14,6 +14,8 @@ const Formulario = () => {
   }
   const date = new Date().toLocaleString()
 
+  const boton = <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '380px' }}><span style={{ backgroundColor: '#ddddddc0', borderRadius: '100% 100% 100% 100%', height: '50px', width: '50px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}><p style={{ fontSize: '50px', color: '#f5f5f5' }}>+</p></span></div>
+
   const formulario = () => {
     return (
       <form id='formulario' onSubmit={handleSubmit(onSubmit)}>
@@ -37,7 +39,7 @@ const Formulario = () => {
 
   return (
     <div id='carta-mascota'>
-      <Modal contenido={formulario()} textoDelBoton='+' />
+      <Modal contenido={formulario()} textoDelBoton={boton} />
     </div>
   )
 }

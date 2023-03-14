@@ -1,34 +1,19 @@
 import Navbar from '../components/commons/Navbar'
 import Banner from '../components/usuarioBasico/Banner'
-import imgBanner from '../assets/banner1.jpg'
 import Adoptaditos from '../components/usuarioBasico/Adoptaditos'
-import ListaMascotas from '../components/usuarioBasico/ListaMascotas'
-
-const estiloInicio = {
-  backgroundImage: `url('${imgBanner}')`,
-  backgroundSize: 'cover',
-  backgroundPosition: 'center',
-  height: '100vh'
-}
-
-const estiloAdoptaditos = {
-  height: '100vh',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center'
-}
+import Mision from '../components/usuarioBasico/Mision'
 
 const Inicio = () => {
   return (
     <>
-      <div style={estiloInicio}>
+      <div id='container-header-ub'>
         <Navbar />
         <Banner />
       </div>
-      <div style={estiloAdoptaditos}>
+      <Mision />
+      <div id='tabla-adoptaditos'>
         <Adoptaditos />
       </div>
-      <ListaMascotas />
     </>
   )
 }

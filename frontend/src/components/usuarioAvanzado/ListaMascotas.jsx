@@ -8,8 +8,8 @@ import Modal from '../commons/Modal'
 import Formulario from './FormularioDeMascota'
 
 const imagenEstilo = { height: '50%', width: '100%', borderRadius: '8px 8px 0px 0px', objectFit: 'cover' }
-
-const botonera = { backgroundColor: '#1379bd', height: '20%', borderRadius: '0px 0px 8px 8px', margin: 0, color: '#f5f5f5' }
+const containerTarjeta = { height: '33%', display: 'grid', justifyContent: 'center', alignItems: 'center' }
+const botonera = { backgroundColor: '#1379bd', height: '16.4%', borderRadius: '0px 0px 8px 8px', margin: 0, color: '#f5f5f5' }
 const botones = { display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', cursor: 'pointer', margin: 0 }
 
 const ListaMascotas = () => {
@@ -53,7 +53,17 @@ const ListaMascotas = () => {
   }
 
   if (mascotas.length === 0) {
-    return <p>Cargando mascotas...</p>
+    return (
+      <Container id='container-mascotas'>
+        <Row>
+          <Col id='display-de-mascota' xs={12} sm={6} md={6} xl={3}>
+            <div style={{ width: '330px', height: '380px' }}>
+              <Formulario />
+            </div>
+          </Col>
+        </Row>
+      </Container>
+    )
   }
 
   const listaDeMascotas = (mascota) => {
@@ -99,7 +109,7 @@ const ListaMascotas = () => {
   return (
     <Container id='container-mascotas'>
       <Row>
-        <Col id='display-de-mascota'>
+        <Col id='display-de-mascota' xs={12} sm={6} md={6} xl={3}>
           <Formulario />
         </Col>
         {mascotas.map((mascota) => {
@@ -110,14 +120,12 @@ const ListaMascotas = () => {
             <Col id='display-de-mascota' xs={12} sm={6} md={6} xl={3} key={mascota._id}>
 
               {editar && id === mascota._id
-                ? (
-                    listaDeMascotas(mascota)
-                  )
+                ? (listaDeMascotas(mascota))
                 : (
                   <div id='carta-mascota'>
 
                     <img alt={mascota.name} src={mascota.animal === 'Perro' ? imagenPerro : mascota.animal === 'Gato' ? imagenGato : imagen.name} style={imagenEstilo} />
-                    <div style={{ height: '30%' }}>
+                    <div style={containerTarjeta}>
                       <p>Animal: {mascota.animal}</p>
                       {mascota.name === undefined ? 'No se le asignó un nombre.' : <p>Nombre: {mascota.name}</p>}
                       {mascota.important
@@ -127,13 +135,13 @@ const ListaMascotas = () => {
                     </div>
                     <Row style={botonera}>
                       <Col>
-                        <p onClick={() => borrarMascota(mascota._id)} style={botones}>Eliminar</p>
+                        <p onClick={() => borrarMascota(mascota._id)} style={botones}>ELIMINAR</p>
+                      </Col>
+                      <Col style={botones}>
+                        <Modal Titulo='NOTA' contenido={mascota.note} textoDelBoton='NOTA' />
                       </Col>
                       <Col>
-                        <Modal Titulo='NOTA' contenido={mascota.note} textoDelBoton='Nota' />
-                      </Col>
-                      <Col>
-                        <p onClick={() => onEdit(mascota._id)} style={botones}>Editar</p>
+                        <p onClick={() => onEdit(mascota._id)} style={botones}>EDITAR</p>
                       </Col>
                     </Row>
 

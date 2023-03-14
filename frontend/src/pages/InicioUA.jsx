@@ -1,12 +1,10 @@
-import ListaMascotas from '../components/usuarioAvanzado/ListaMascotas'
-import Navbar from '../components/commons/Navbar'
+import Sidebar from '../components/commons/Sidebar'
 import { useContext, useEffect, useState } from 'react'
 import axios from 'axios'
 import Cookies from 'js-cookie'
 import { GlobalContext } from '../App'
 import Cargando from '../components/commons/Cargando'
 import { useNavigate } from 'react-router-dom'
-import Logout from '../components/sesion/Logout'
 
 const InicioUA = () => {
   const navigate = useNavigate()
@@ -66,9 +64,7 @@ const InicioUA = () => {
 
   return (
     <>
-      <Navbar />
-      <ListaMascotas />
-      <Logout />
+      <Sidebar />
     </>
   )
 }

@@ -7,7 +7,7 @@ const Modal = ({ titulo, contenido, textoDelBoton }) => {
 
   return (
     <div id='modal'>
-      <p onClick={() => setIsOpen(true)} style={{ cursor: 'pointer' }}>{textoDelBoton}</p>
+      <span onClick={() => setIsOpen(true)} style={{ cursor: 'pointer' }}>{textoDelBoton}</span>
       {isOpen &&
         <div className='modal'>
           <div className='modal-content'>

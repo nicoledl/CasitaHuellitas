@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Tilt+Warp&display=swap');
 
 #containerBanner {
-    height: 85vh;
+    height: 95vh;
     display: grid;
     justify-content: center;
     align-items: center;
