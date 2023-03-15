@@ -30,7 +30,7 @@ const Login = () => {
         {errorMessage && <span className='error-message'>{errorMessage}</span>}
         <input type='text' placeholder='Mail' {...register('email', { required: true })} />
         <input type='text' placeholder='Contraseña' {...register('password', { required: true })} />
-        <button>Ingresar</button>
+        <button boton-submit>Ingresar</button>
       </form>
     </>
   )

@@ -8,6 +8,9 @@
 body {
   background-image: url('./assets/wallpaper-adm.jpg');
 }
+body input:focus, textarea:focus{
+  outline: none;
+}
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
@@ -147,7 +150,7 @@ code {
   margin-top: 5px;
 }
 
-#formulario-login button {
+.boton-submit {
   border: none;
   width: 80px;
   display: block;
@@ -160,17 +163,17 @@ code {
   transition: background-color 0.2s
 }
 
-#formulario-login button:hover {
+.boton-submit:hover {
   background-color: #0e6299;
 }
 
-#formulario-login button:active {
+.boton-submit:active {
   background-color: #0e6299;
   box-shadow: 2px 2px 4px 0px #0220338e inset;
 }
 
 
-/* TERMINA PAGINA DE INGRESO */
+/* */
 
 /* NAVBAR */
 #navbar {
@@ -202,7 +205,7 @@ code {
   color: #ffffffc0;
 }
 
-/* TERMINA NAVBAR */
+/* */
 
 /* SIDEBAR */
 #sidebar {
@@ -222,27 +225,28 @@ code {
   color: #2e2e2e;
 }
 
-/* TERMINA SIDEBAR */
+/* */
 
 /* LISTA DE MASCOTAS USUARIO AVANZADO */
 @import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
 
-#formulario {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  font-size: medium;
-  width: 100%;
+#formulario-mascota * {
+  margin-bottom: 8px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-#formulario input,
-select {
-  height: 25px;
-  font-size: medium;
-  width: 100%;
+#formulario-mascota h1{
+  margin-bottom: 20px;
 }
 
-#formulario textarea {
+#formulario-mascota input, select {
+  font-size: medium;
+  background: none;
+  border: none;
+  border-bottom: solid 1px rgb(0, 0, 0)
+}
+
+#formulario-mascota textarea {
   resize: none;
   height: 300px;
   width: 100%;
@@ -273,12 +277,6 @@ select {
   text-align: center;
 }
 
-#carta-mascota p {
-  font-size: large;
-  height: max-content;
-  font-family: 'Questrial', sans-serif;
-}
-
 #carta-mascota {
   width: 100%;
   margin: 20px;
@@ -297,7 +295,7 @@ select {
   align-items: center;
 }
 
-/* TERMINA LISTA DE MASCOTAS UA */
+/* */
 
 /* MODAL */
 .modal {
@@ -311,13 +309,18 @@ select {
   display: flex;
   justify-content: center;
   align-items: center;
+  color: #000;
 }
 
 .modal-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   background-color: white;
-  width: 80vw;
-  height: 80vh;
-  padding: 20px;
+  width: max-content;
+  height: max-content;
+  padding: 50px;
   border-radius: 5px;
   max-width: 600px;
   max-height: 80%;
@@ -335,7 +338,30 @@ select {
   cursor: pointer;
 }
 
-/* TERMINA MODAL */
+/* */
+
+/* FORMULARIO ADOPTANTE */
+#formulario-adoptante * {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+}
+
+#formulario-adoptante h3 {
+  margin-top: 50px;
+  text-align: left;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: x-large
+}
+
+#formulario-adoptante input {
+  font-size: medium;
+  border: none;
+  border-bottom: solid 1px rgb(0, 0, 0)
+}
+
+/* */
 
 /* INICIO UB */
 @import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
@@ -376,4 +402,4 @@ select {
 }
 
 
-/* TERMINA INICIO UB */
+/* */

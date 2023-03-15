@@ -33,6 +33,7 @@ const createPet = async (req, res) => {
       note: req.body.note,
       date: new Date(),
       important: req.body.important === undefined ? false : req.body.important,
+      adopted: req.body.adopted === undefined ? false : req.body.adopted,
       user: ObjectId(userId)
     })
 
@@ -70,7 +71,8 @@ const updateInfo = async (req, res) => {
           animal: req.body.animal,
           name: req.body.name,
           note: req.body.note,
-          important: req.body.important
+          important: req.body.important,
+          adopted: req.body.adopted
         }
       },
       { new: true }

@@ -6,11 +6,12 @@ import imagenPerro from '../../assets/perro-default.jpg'
 import imagenGato from '../../assets/gato-default.jpg'
 import Modal from '../commons/Modal'
 import Formulario from './FormularioDeMascota'
+import FormularioDeAdoptantes from './FormularioDeAdoptantes'
 
 const imagenEstilo = { height: '50%', width: '100%', borderRadius: '8px 8px 0px 0px', objectFit: 'cover' }
-const containerTarjeta = { height: '33%', display: 'grid', justifyContent: 'center', alignItems: 'center' }
-const botonera = { backgroundColor: '#1379bd', height: '16.4%', borderRadius: '0px 0px 8px 8px', margin: 0, color: '#f5f5f5' }
-const botones = { display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', cursor: 'pointer', margin: 0 }
+const containerTarjeta = { height: '25%', display: 'grid', justifyContent: 'center', alignItems: 'center', paddingBottom: 8 }
+const botonera = { backgroundColor: '#1379bd', height: '22%', borderRadius: '0px 0px 8px 8px', margin: 0, color: '#f5f5f5' }
+const estiloBoton = { display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', cursor: 'pointer', margin: 0, background: 'none', border: 'none', color: '#f5f5f5', fontSize: 'large', fontFamily: "'Questrial', sans-serif" }
 
 const ListaMascotas = () => {
   const [mascotas, setMascotas] = useState([])
@@ -124,25 +125,27 @@ const ListaMascotas = () => {
                 ? (listaDeMascotas(mascota))
                 : (
                   <div id='carta-mascota'>
-
                     <img alt={mascota.name} src={mascota.animal === 'Perro' ? imagenPerro : mascota.animal === 'Gato' ? imagenGato : imagen.name} style={imagenEstilo} />
                     <div style={containerTarjeta}>
                       <p>Animal: {mascota.animal}</p>
-                      {mascota.name === undefined ? 'No se le asignó un nombre.' : <p>Nombre: {mascota.name}</p>}
+                      {mascota.name === null ? <p>No se le asignó un nombre.</p> : <p>Nombre: {mascota.name}</p>}
                       {mascota.important
                         ? (<p>Situacion de importancia.</p>)
                         : (false)}
                       <p>Ingreso: {fechaISO}</p>
                     </div>
                     <Row style={botonera}>
-                      <Col>
-                        <p onClick={() => borrarMascota(mascota._id)} style={botones}>ELIMINAR</p>
+                      <Col sm={4}>
+                        <p onClick={() => borrarMascota(mascota._id)} style={estiloBoton}>ELIMINAR</p>
                       </Col>
-                      <Col style={botones}>
-                        <Modal Titulo='NOTA' contenido={mascota.note} textoDelBoton='NOTA' />
+                      <Col sm={4} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                        <Modal titulo='NOTA' contenido={mascota._id ? mascota.note : <p>No hay nota...</p>} textoDelBoton='NOTA' estiloDelBoton={estiloBoton} />
                       </Col>
-                      <Col>
-                        <p onClick={() => onEdit(mascota._id)} style={botones}>EDITAR</p>
+                      <Col sm={4}>
+                        <div onClick={() => onEdit(mascota._id)} style={estiloBoton}>EDITAR</div>
+                      </Col>
+                      <Col sm={12} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', borderTop: 'solid 2px #0e6299', borderRadius: '0 0 8px 8px', backgroundColor: '#2dc5a4' }}>
+                        <FormularioDeAdoptantes estiloDeBoton={estiloBoton} />
                       </Col>
                     </Row>
 
