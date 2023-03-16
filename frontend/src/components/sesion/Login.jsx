@@ -28,9 +28,9 @@ const Login = () => {
     <>
       <form id='formulario-login' onSubmit={handleSubmit(onSubmit)}>
         {errorMessage && <span className='error-message'>{errorMessage}</span>}
-        <input type='text' placeholder='Mail' {...register('email', { required: true })} />
-        <input type='text' placeholder='Contraseña' {...register('password', { required: true })} />
-        <button boton-submit>Ingresar</button>
+        <input type='email' placeholder='Mail' {...register('email', { required: true })} />
+        <input type='password' placeholder='Contraseña' {...register('password', { required: true })} />
+        <button className='boton-submit'>Ingresar</button>
       </form>
     </>
   )

@@ -4,24 +4,37 @@ const { ObjectId } = require('mongodb')
 
 const db = client.db('CasitaHuellitas_DB')
 const collectionAdopter = db.collection('adoptantes')
+const collectionPet = db.collection('mascotas')
 
 const createAdopter = async (req, res) => {
-  const body = req.body
+  try {
+    const body = req.body
 
-  const adopter = new Adopter({
-    email: body.email,
-    name: body.name,
-    lastname: body.lastname,
-    dni: body.dni,
-    phone: body.phone,
-    address: body.address,
-    pet: body.pet,
-    date: new Date()
-  })
+    const pet = await collectionPet.findOne({ _id: ObjectId(body.pet) })
+    const petObj = {
+      name: pet.name,
+      date: pet.date,
+      id: pet._id
+    }
 
-  const savedAdopter = await adopter.save()
+    const adopter = new Adopter({
+      email: body.email,
+      name: body.name,
+      lastname: body.lastname,
+      dni: body.dni,
+      phone: body.phone,
+      address: body.address,
+      pet: petObj,
+      date: new Date()
+    })
 
-  res.json(savedAdopter)
+    const savedAdopter = collectionAdopter.insertOne(adopter)
+
+    res.json(savedAdopter)
+    console.log('Carga exitosa!')
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
 }
 
 const getAll = async (req, res) => {

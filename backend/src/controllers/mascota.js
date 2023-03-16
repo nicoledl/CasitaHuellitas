@@ -86,7 +86,6 @@ const updateInfo = async (req, res) => {
 const deletePet = async (req, res) => {
   try {
     const pet = await collectionPet.findOneAndDelete({ _id: ObjectId(req.params.id) })
-    console.log(pet)
     if (!pet) {
       return res.status(404).json({ error: 'Pet not found' })
     }

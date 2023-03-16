@@ -14,8 +14,7 @@ const Formulario = () => {
     }
   }
   const date = new Date().toLocaleString()
-
-  const boton = <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '380px' }}><span style={{ backgroundColor: '#ddddddc0', borderRadius: '100% 100% 100% 100%', height: '50px', width: '50px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}><p style={{ fontSize: '50px', color: '#f5f5f5' }}>+</p></span></div>
+  const estiloBoton = { backgroundColor: '#c8c8c8', border: 'none', borderRadius: '50px 50px 50px 50px', padding: 5, width: '65px', height: '65px', color: '#f5f5f5', fontSize: '40px', margin: 0, cursor: 'pointer' }
 
   const formularioMascota = () => {
     return (
@@ -36,7 +35,7 @@ const Formulario = () => {
             <input type='text' placeholder='Nombre' {...register('name', { required: false, maxLength: 100 })} />
           </Col>
           <Col sm={12}>
-            <textarea type='text' placeholder='Nota' {...register('note', { required: false, maxLength: 1000 })} />
+            <textarea type='text' placeholder='Nota' {...register('note', { required: false })} />
           </Col>
           <Col sm={6}>
             <label>
@@ -64,8 +63,8 @@ const Formulario = () => {
   }
 
   return (
-    <div id='carta-mascota'>
-      <Modal contenido={formularioMascota()} textoDelBoton={boton} />
+    <div id='carta-mascota-nueva'>
+      <Modal contenido={formularioMascota()} textoDelBoton='+' estiloDelBoton={estiloBoton} />
     </div>
   )
 }

@@ -3,14 +3,20 @@ import axios from 'axios'
 import Modal from '../commons/Modal'
 import { Col, Row } from 'react-grid-system'
 
-const titulo = <h1 style={{ fontFamily: "'Pacifico', cursive", fontSize: '(2.1rem, -5.9vw + 4.7rem, 1rem)', color: '#2dc5a4' }}>¡Es hoy, es hoy!</h1>
+const titulo = <span style={{ fontFamily: "'Pacifico', cursive", fontSize: 'clamp(3rem, -5.3vw + 5.3rem, 2rem)', color: '#2dc5a4' }}>¡Es hoy, es hoy!</span>
 
-const FormularioDeAdoptantes = ({ estiloDeBoton }) => {
+const FormularioDeAdoptantes = ({ estiloDeBoton, mascota }) => {
   const { register, handleSubmit } = useForm()
+
   const onSubmit = async datos => {
     try {
-      await axios.post('http://localhost:3001/api/adoptantes', datos, { withCredentials: true })
-      console.log('Datos enviados exitosamente')
+      const response = await axios.post('http://localhost:3001/api/adoptantes', datos, { withCredentials: true })
+      if (response.status === 200) {
+        await axios.delete(`http://localhost:3001/api/mascotas/${mascota._id}`)
+        console.log('Datos enviados y mascota eliminada exitosamente')
+      } else {
+        console.error('Error al enviar los datos:', response.data)
+      }
     } catch (error) {
       console.error('Error al enviar los datos:', error)
     }
@@ -41,6 +47,7 @@ const FormularioDeAdoptantes = ({ estiloDeBoton }) => {
             <input type='text' placeholder='Direccion' {...register('address', { required: false, maxLength: 100 })} />
           </Col>
           <input type='hidden' value={date} {...register('date', {})} />
+          <input type='hidden' value={mascota._id} {...register('pet', {})} />
           <Col sm={12}>
             <button className='boton-submit'>Enviar</button>
           </Col>
@@ -50,7 +57,7 @@ const FormularioDeAdoptantes = ({ estiloDeBoton }) => {
   }
 
   return (
-    <Modal titulo={titulo} contenido={formularioAdoptate()} textoDelBoton='ADOPTADO' estiloDelBoton={estiloDeBoton} />
+    <Modal titulo={titulo} contenido={formularioAdoptate()} textoDelBoton='ADOPTAR' estiloDelBoton={estiloDeBoton} />
   )
 }
 

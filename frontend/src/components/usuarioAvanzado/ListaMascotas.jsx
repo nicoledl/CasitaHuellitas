@@ -78,32 +78,45 @@ const ListaMascotas = () => {
           id='imagen'
           onChange={handleChange}
         />
-        <form id='formulario-editar' onSubmit={handleSubmit(onSubmit)}>
-          <select defaultValue={mascota.animal} {...register('animal')}>
-            <option value='Perro'>Perro</option>
-            <option value='Gato'>Gato</option>
-          </select>
-          <input type='text' placeholder='Nombre' defaultValue={mascota.name} {...register('name', { required: false, maxLength: 100 })} />
-          <textarea
-            type='text'
-            placeholder='Nota'
-            defaultValue={mascota.note}
-            {...register('note', { maxLength: 100 })}
-          />
-          <label>
-            Importante:
-            <input
-              type='checkbox'
-              placeholder='Importante'
-              defaultChecked={mascota.important ? 'true' : false}
-              {...register('important', {})}
-            />
-          </label>
-          <div>
-            <button>Modificar</button>
-            <button onClick={() => setEditar(!editar)}>Cancelar</button>
-          </div>
-        </form>
+        <div className='container-formulario-editar'>
+          <Row>
+            <form className='formulario-editar' onSubmit={handleSubmit(onSubmit)}>
+              <h1 style={{ color: '#2dc5a4', fontSize: '20px' }}>EDITAR</h1>
+              <Col md={12}>
+                <p>Animal: </p>
+                <select defaultValue={mascota.animal} {...register('animal')}>
+                  <option value='Perro'>Perro</option>
+                  <option value='Gato'>Gato</option>
+                </select>
+              </Col>
+              <Col md={12} style={{ flexFlow: 'column' }}>
+                <p style={{ margin: 0, justifyContent: 'initial', display: 'flex' }}>Nombre:</p>
+                <input type='text' placeholder='Nombre' defaultValue={mascota.name} {...register('name', { required: false, maxLength: 100 })} />
+              </Col>
+              <Col>
+                <textarea
+                  type='text'
+                  placeholder='Nota'
+                  defaultValue={mascota.note}
+                  {...register('note')}
+                />
+              </Col>
+              <Col style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '8px' }}>
+                <label>Importante:</label>
+                <input
+                  type='checkbox'
+                  placeholder='Importante'
+                  defaultChecked={mascota.important ? 'true' : false}
+                  {...register('important', {})}
+                />
+              </Col>
+              <Col style={{ gap: 20 }}>
+                <button className='boton-submit'>Editar</button>
+                <button className='boton-submit' style={{ backgroundColor: '#d70000' }} onClick={() => setEditar(!editar)}>Cancelar</button>
+              </Col>
+            </form>
+          </Row>
+        </div>
       </div>
     )
   }
@@ -129,9 +142,7 @@ const ListaMascotas = () => {
                     <div style={containerTarjeta}>
                       <p>Animal: {mascota.animal}</p>
                       {mascota.name === null ? <p>No se le asignó un nombre.</p> : <p>Nombre: {mascota.name}</p>}
-                      {mascota.important
-                        ? (<p>Situacion de importancia.</p>)
-                        : (false)}
+                      {mascota.important && <p style={{ color: '#d70000' }}>Situación delicada.</p>}
                       <p>Ingreso: {fechaISO}</p>
                     </div>
                     <Row style={botonera}>
@@ -139,16 +150,15 @@ const ListaMascotas = () => {
                         <p onClick={() => borrarMascota(mascota._id)} style={estiloBoton}>ELIMINAR</p>
                       </Col>
                       <Col sm={4} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                        <Modal titulo='NOTA' contenido={mascota._id ? mascota.note : <p>No hay nota...</p>} textoDelBoton='NOTA' estiloDelBoton={estiloBoton} />
+                        <Modal titulo='NOTA:' contenido={mascota._id ? mascota.note : <p>No hay nota...</p>} textoDelBoton='NOTA' estiloDelBoton={estiloBoton} />
                       </Col>
                       <Col sm={4}>
                         <div onClick={() => onEdit(mascota._id)} style={estiloBoton}>EDITAR</div>
                       </Col>
                       <Col sm={12} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', borderTop: 'solid 2px #0e6299', borderRadius: '0 0 8px 8px', backgroundColor: '#2dc5a4' }}>
-                        <FormularioDeAdoptantes estiloDeBoton={estiloBoton} />
+                        {mascota.important ? <p style={estiloBoton}>Aún no se puede adoptar</p> : <FormularioDeAdoptantes estiloDeBoton={estiloBoton} mascota={mascota} />}
                       </Col>
                     </Row>
-
                   </div>)}
 
             </Col>
