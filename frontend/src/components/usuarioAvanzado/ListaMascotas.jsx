@@ -17,6 +17,7 @@ const ListaMascotas = () => {
   const [mascotas, setMascotas] = useState([])
   const [editar, setEditar] = useState(false)
   const [imagen, setImagen] = useState(false)
+  const [actualizacion, setActualizacion] = useState(false)
   const [id, setId] = useState('')
   const { register, handleSubmit } = useForm()
   const baseUrl = 'http://localhost:3001'
@@ -25,7 +26,7 @@ const ListaMascotas = () => {
     axios.get(`${baseUrl}/api/mascotas`)
       .then((res) => setMascotas(res.data))
       .catch((error) => console.error(error))
-  }, [])
+  }, [actualizacion])
 
   const onEdit = (mascotaId) => {
     setId(mascotaId)
@@ -35,8 +36,8 @@ const ListaMascotas = () => {
   const onSubmit = async datos => {
     try {
       await axios.put(`${baseUrl}/api/mascotas/${id}`, datos)
-      console.log('Datos modificados exitosamente', datos)
       setEditar(!editar)
+      setActualizacion(!actualizacion)
     } catch (error) {
       console.error('Error al modificar los datos:', error)
     }
@@ -44,7 +45,7 @@ const ListaMascotas = () => {
 
   const borrarMascota = (id) => {
     axios.delete(`${baseUrl}/api/mascotas/${id}`)
-      .then((res) => console.log('Mascota eliminada'))
+      .then(() => setActualizacion(!actualizacion))
       .catch((error) => console.error(error))
   }
 
@@ -125,7 +126,7 @@ const ListaMascotas = () => {
     <Container id='container-mascotas'>
       <Row>
         <Col id='display-de-mascota' sm={12} md={6} xl={4} xxl={3}>
-          <Formulario />
+          <Formulario setActualizacion={setActualizacion} actualizacion={actualizacion} />
         </Col>
         {mascotas.map((mascota) => {
           const fecha = new Date(mascota.date)

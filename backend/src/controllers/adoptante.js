@@ -38,8 +38,12 @@ const createAdopter = async (req, res) => {
 }
 
 const getAll = async (req, res) => {
-  const adopters = await collectionAdopter.find({})
-  res.json(adopters)
+  try {
+    const adoptantes = await collectionAdopter.find().toArray()
+    res.json(adoptantes)
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
 }
 
 const getById = async (req, res) => {

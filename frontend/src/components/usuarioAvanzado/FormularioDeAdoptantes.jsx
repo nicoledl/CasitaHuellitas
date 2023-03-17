@@ -57,7 +57,7 @@ const FormularioDeAdoptantes = ({ estiloDeBoton, mascota }) => {
   }
 
   return (
-    <Modal titulo={titulo} contenido={formularioAdoptate()} textoDelBoton='ADOPTAR' estiloDelBoton={estiloDeBoton} />
+    <Modal titulo={titulo} contenido={formularioAdoptate()} textoDelBoton='Apto para adoptar' estiloDelBoton={estiloDeBoton} />
   )
 }
 

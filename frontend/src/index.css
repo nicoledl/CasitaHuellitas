@@ -1,12 +1,12 @@
 * {
   margin: 0;
-  font-family: sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  background-image: url('./assets/wallpaper-adm.jpg');
+  /* background-image: url('./assets/wallpaper-adm.jpg'); */
 }
 
 body input:focus,
@@ -211,7 +211,25 @@ code {
 
 /* SIDEBAR */
 #sidebar {
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
   color: #f5f5f5;
+  z-index: 8;
+}
+
+.ps-sidebar-root {
+  height: 100vh;
+}
+
+.ps-submenu-content li {
+  background-color: #0f68a3;
+  color: #f5f5f5;
+}
+
+.ps-submenu-content li:hover {
+  background-color: #0e6299;
 }
 
 #item-menu {
@@ -228,6 +246,40 @@ code {
 }
 
 /* */
+
+/* BANNER BIENVENIDA ADM */
+#banner-bienvenida-adm {
+  padding-top: 80px;
+  height: max-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#banner-bienvenida-adm * {
+  margin-bottom: 20px;
+}
+
+#banner-bienvenida-adm .row {
+  gap: 80px;
+}
+
+#banner-bienvenida-adm .col p {
+  font-family: 'Questrial', sans-serif;
+  font-size: clamp(1rem, 2.7vw - 0.2rem, 1.5rem);
+  color: #0e6299;
+  text-align: center;
+}
+
+#banner-bienvenida-adm .col h1 {
+  font-family: 'Pacifico', cursive;
+  font-size: clamp(2rem, 5.3vw - 0.3rem, 3rem);
+  color: #2dc5a4;
+  text-align: center;
+}
+
+/*  */
 
 /* LISTA DE MASCOTAS USUARIO AVANZADO */
 @import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
@@ -291,12 +343,8 @@ select {
   width: 100%;
   margin: 20px;
   height: 380px;
-  background: rgb(255, 255, 255);
-  background: radial-gradient(circle, rgb(255, 255, 255) 52%, rgb(238, 238, 238) 100%);
-  border-radius: 8px 8px 8px 8px;
-  box-shadow: 0px 4px 10px -1px rgba(0, 0, 0, 0.35);
-  -webkit-box-shadow: 0px 4px 10px -1px rgba(0, 0, 0, 0.35);
-  -moz-box-shadow: 0px 4px 10px -1px rgba(0, 0, 0, 0.35);
+  background: #f8f8f8;
+  border-radius: 4px 4px 4px 4px;
 }
 
 #carta-mascota p {
@@ -312,12 +360,8 @@ select {
   width: 100%;
   margin: 20px;
   height: 380px;
-  background: rgb(255, 255, 255);
-  background: radial-gradient(circle, rgb(255, 255, 255) 52%, rgb(238, 238, 238) 100%);
+  background: rgb(228, 228, 228);
   border-radius: 8px 8px 8px 8px;
-  box-shadow: 0px 4px 10px -1px rgba(0, 0, 0, 0.35);
-  -webkit-box-shadow: 0px 4px 10px -1px rgba(0, 0, 0, 0.35);
-  -moz-box-shadow: 0px 4px 10px -1px rgba(0, 0, 0, 0.35);
 }
 
 /* */
@@ -329,7 +373,7 @@ select {
 
 .modal {
   opacity: 0;
-  z-index: 2;
+  z-index: 10;
   position: fixed;
   top: 0;
   left: 0;
@@ -404,6 +448,55 @@ select {
 }
 
 /* */
+
+/* REGISTRO ADOPCIONES */
+#container-adopciones {
+  padding-top: 70px;
+}
+
+#container-adopciones p {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.container-registros {
+  background-color: #f5f5f5;
+  width: 100%;
+  padding-top: 0;
+  height: min-content;
+  padding-bottom: 35px;
+}
+
+.fila-datos {
+  border-radius: 5px 5px 0 0;
+  text-align: left;
+  background-color: #1379bd;
+  font-weight: 600;
+  color: #f5f5f5;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.fila-registro {
+  text-align: left;
+  border-bottom: solid 1px #c9c9c954;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: small;
+}
+
+.fila-registro:hover {
+  background-color: #ececec82
+}
+
+.container-wrap-datos {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 12px;
+}
+
+/*  */
 
 /* INICIO UB */
 @import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');

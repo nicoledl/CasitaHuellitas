@@ -2,19 +2,25 @@ import { useForm } from 'react-hook-form'
 import axios from 'axios'
 import Modal from '../commons/Modal'
 import { Col, Row } from 'react-grid-system'
+import { useState } from 'react'
 
-const Formulario = () => {
+const Formulario = (setActualizacion, actualizacion) => {
   const { register, handleSubmit } = useForm()
+  const [cerrarModal, setCerrarModal] = useState(false)
   const onSubmit = async datos => {
     try {
       await axios.post('http://localhost:3001/api/mascotas', datos, { withCredentials: true })
       console.log('Datos enviados exitosamente')
+      setActualizacion(!actualizacion)
     } catch (error) {
       console.error('Error al enviar los datos:', error)
     }
   }
+  const handleClose = () => {
+    setCerrarModal()
+  }
   const date = new Date().toLocaleString()
-  const estiloBoton = { backgroundColor: '#c8c8c8', border: 'none', borderRadius: '50px 50px 50px 50px', padding: 5, width: '65px', height: '65px', color: '#f5f5f5', fontSize: '40px', margin: 0, cursor: 'pointer' }
+  const estiloBoton = { backgroundColor: '#2dc5a4', border: 'none', borderRadius: '50px 50px 50px 50px', padding: 5, width: '65px', height: '65px', color: '#f5f5f5', fontSize: '40px', margin: 0, cursor: 'pointer' }
 
   const formularioMascota = () => {
     return (
@@ -55,7 +61,7 @@ const Formulario = () => {
             <input type='hidden' value={date} {...register('date', {})} />
           </Col>
           <Col sm={12}>
-            <button className='boton-submit'>Agregar</button>
+            <button className='boton-submit' onClick={handleClose}>Agregar</button>
           </Col>
         </Row>
       </form>
@@ -64,7 +70,7 @@ const Formulario = () => {
 
   return (
     <div id='carta-mascota-nueva'>
-      <Modal contenido={formularioMascota()} textoDelBoton='+' estiloDelBoton={estiloBoton} />
+      <Modal contenido={formularioMascota()} textoDelBoton='+' estiloDelBoton={estiloBoton} estadoModal={cerrarModal} />
     </div>
   )
 }

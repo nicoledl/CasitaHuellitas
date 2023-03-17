@@ -1,11 +1,12 @@
 import { Sidebar, Menu, MenuItem, useProSidebar, SubMenu } from 'react-pro-sidebar'
 import { Link } from 'react-router-dom'
-import { FaAngleRight, FaAngleLeft, FaDog, FaPeopleCarry, FaEnvelope, FaRegCalendarAlt, FaMinus, FaHome } from 'react-icons/fa'
+import { FaAngleRight, FaAngleLeft, FaDog, FaPeopleCarry, FaWpforms, FaRegCalendarAlt, FaMinus, FaHome } from 'react-icons/fa'
 import Logout from '../sesion/Logout'
 
+const estiloItem = { display: 'flex', alignItems: 'center', gap: '10px' }
+
 export const SideNav = () => {
-  const { collapsed } = useProSidebar()
-  const { collapseSidebar } = useProSidebar()
+  const { collapsed, collapseSidebar } = useProSidebar()
   const menuItemStyles = {
     root: {
       fontSize: '13px',
@@ -20,11 +21,11 @@ export const SideNav = () => {
     {
       id: 'item-menu',
       component: <Link to='/administracion' />,
-      content: collapsed ? <FaHome size={25} /> : <p>Inicio</p>
+      content: collapsed ? <FaHome size={25} /> : <span style={estiloItem}><FaHome size={18} /><p>Inicio</p></span>
     },
     {
       id: 'item-menu',
-      label: collapsed ? <FaDog size={25} /> : <p>Mascotas</p>,
+      label: collapsed ? <FaDog size={25} /> : <span style={estiloItem}><FaDog size={18} /><p>Mascotas</p></span>,
       submenu: [
         {
           className: 'menuitem',
@@ -43,84 +44,77 @@ export const SideNav = () => {
     {
       id: 'item-menu',
       component: <Link to='/voluntarios' />,
-      content: collapsed ? <FaPeopleCarry size={25} /> : <p>Voluntarios</p>
+      content: collapsed ? <FaPeopleCarry size={25} /> : <span style={estiloItem}><FaPeopleCarry size={18} /><p>Voluntarios</p></span>
     },
     {
       id: 'item-menu',
       component: <Link to='/mensajes' />,
-      content: collapsed ? <FaEnvelope size={25} /> : <p>Mensajes</p>
+      content: collapsed ? <FaWpforms size={25} /> : <span style={estiloItem}><FaWpforms size={18} /><p>Formularios</p></span>
     }
   ]
 
   return (
-    <div id='sidebar' style={{ position: 'absolute' }}>
-      <div style={{ position: 'sticky', display: 'flex', height: '100vh', zIndex: '2' }}>
-        <Sidebar backgroundColor='#1379bdd4' style={{ border: 'none' }}>
-
-          <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <div style={{ flex: 1, marginBottom: '32px' }}>
-              <div style={{ display: 'flex', justifyContent: 'flex-end', margin: 20 }}>
-                {collapsed
-                  ? <FaAngleRight size={25} className='sb-button' onClick={() => collapseSidebar()} style={{ cursor: 'pointer', marginRight: 9 }} />
-                  : <FaAngleLeft size={25} className='sb-button' onClick={() => collapseSidebar()} style={{ cursor: 'pointer' }} />}
-              </div>
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 10, marginBottom: 30 }}>
-                {collapsed ? <h3>C.H.</h3> : <h3>CASITA HUELLITAS</h3>}
-              </div>
-              <div style={{ padding: '0 24px', marginBottom: '8px' }}>
-                {collapsed ? <FaMinus size={25} /> : <h4>General</h4>}
-              </div>
-              <Menu menuItemStyles={menuItemStyles}>
-                {contenidoGeneral.map((item, i) => {
-                  if (item.submenu) {
-                    return (
-                      <SubMenu key={i} id={item.id} label={item.label}>
-                        {item.submenu.map((subitem) => (
-                          <MenuItem
-                            className={subitem.className}
-                            component={subitem.component}
-                            key={subitem.id}
-                          >
-                            {subitem.content}
-                          </MenuItem>
-                        ))}
-                      </SubMenu>
-                    )
-                  } else {
-                    return (
-                      <MenuItem
-                        id={item.id}
-                        component={item.component}
-                        key={i}
-                      >
-                        {item.content}
-                      </MenuItem>
-                    )
-                  }
-                }
-                )}
-              </Menu>
-              <div style={{ padding: '0 24px', marginBottom: '8px', marginTop: '32px' }}>
-                {collapsed ? <FaMinus size={25} /> : <h4>Extra</h4>}
-              </div>
-              <Menu menuItemStyles={menuItemStyles}>
-                <MenuItem id='item-menu'>
-                  {collapsed ? <FaRegCalendarAlt size={25} /> : <p>Calendario</p>}
+    <div id='sidebar'>
+      <Sidebar backgroundColor='#1379bdd4' style={{ border: 'none' }}>
+        <div style={{ display: 'flex', justifyContent: 'flex-end', margin: 20 }}>
+          {collapsed
+            ? <FaAngleRight size={25} className='sb-button' onClick={() => collapseSidebar()} style={{ cursor: 'pointer', marginRight: 9 }} />
+            : <FaAngleLeft size={25} className='sb-button' onClick={() => collapseSidebar()} style={{ cursor: 'pointer' }} />}
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 10, marginBottom: 30 }}>
+          {collapsed ? <h2 style={{ fontFamily: "'Pacifico', cursive" }}>C.H.</h2> : <h2 style={{ fontFamily: "'Pacifico', cursive" }}>Casita Huellitas</h2>}
+        </div>
+        <div style={{ padding: '0 24px', marginBottom: '8px' }}>
+          {collapsed ? null : <h4>General</h4>}
+        </div>
+        <Menu menuItemStyles={menuItemStyles}>
+          {contenidoGeneral.map((item, i) => {
+            if (item.submenu) {
+              return (
+                <SubMenu key={i} id={item.id} label={item.label}>
+                  {item.submenu.map((subitem) => (
+                    <MenuItem
+                      className={subitem.className}
+                      component={subitem.component}
+                      key={subitem.id}
+                    >
+                      {subitem.content}
+                    </MenuItem>
+                  ))}
+                </SubMenu>
+              )
+            } else {
+              return (
+                <MenuItem
+                  id={item.id}
+                  component={item.component}
+                  key={i}
+                >
+                  {item.content}
                 </MenuItem>
-              </Menu>
+              )
+            }
+          }
+          )}
+        </Menu>
+        <div style={{ padding: '0 24px', marginBottom: '8px', marginTop: '32px' }}>
+          {collapsed ? <FaMinus size={25} /> : <h4>Extra</h4>}
+        </div>
+        <Menu menuItemStyles={menuItemStyles}>
+          <MenuItem id='item-menu'>
+            {collapsed ? <FaRegCalendarAlt size={25} /> : <span style={estiloItem}><FaRegCalendarAlt size={18} /><p>Calendario</p></span>}
+          </MenuItem>
+        </Menu>
 
-              <div style={{ padding: '0 24px', marginBottom: '8px', marginTop: '32px' }}>
-                <FaMinus size={20} />
-              </div>
-              <Menu menuItemStyles={menuItemStyles}>
-                <MenuItem id='item-menu'>
-                  {collapsed ? <Logout /> : <Logout />}
-                </MenuItem>
-              </Menu>
-            </div>
-          </div>
-        </Sidebar>
-      </div>
+        <div style={{ padding: '0 24px', marginBottom: '8px', marginTop: '32px' }}>
+          <FaMinus size={20} />
+        </div>
+        <Menu menuItemStyles={menuItemStyles}>
+          <MenuItem id='item-menu'>
+            {collapsed ? <Logout collapsed /> : <Logout collapsed={false} />}
+          </MenuItem>
+        </Menu>
+      </Sidebar>
     </div>
   )
 }

@@ -1,9 +1,5 @@
 import BotonParaAdoptantes from '../components/sesion/BotonParaAdoptantes'
 import Login from '../components/sesion/Login'
-import { useContext, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { GlobalContext } from '../App'
-import Cargando from '../components/commons/Cargando'
 
 const styleDiv = {
   marginLeft: '5%',
@@ -21,20 +17,6 @@ const styleDivisor = {
 }
 
 const Ingreso = () => {
-  const navigate = useNavigate()
-  const { valor } = useContext(GlobalContext)
-
-  useEffect(() => {
-    if (valor !== null) {
-      navigate('/administracion')
-    }
-    // eslint-disable-next-line
-  }, [valor])
-
-  if (valor !== null) {
-    return <Cargando />
-  }
-
   return (
     <div id='pag-de-inicio'>
       <span id='borde-top' />

@@ -1,11 +1,8 @@
-import React, { useContext } from 'react'
-import { GlobalContext } from '../App'
+import React from 'react'
 
 function Contacto (props) {
-  const { valor } = useContext(GlobalContext)
-
   return (
-    <div>{valor} </div>
+    <div>dsfdsf </div>
   )
 }
 

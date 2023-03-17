@@ -1,9 +1,8 @@
 import { useState } from 'react'
 
-const Modal = ({ titulo, contenido, textoDelBoton, estiloDelBoton }) => {
+const Modal = ({ titulo, contenido, textoDelBoton, estiloDelBoton, estadoModal }) => {
   const [isOpen, setIsOpen] = useState(false)
   const handleClose = () => setIsOpen(false)
-
   const boton = (texto, estilo) => {
     return (
       <>
@@ -11,10 +10,11 @@ const Modal = ({ titulo, contenido, textoDelBoton, estiloDelBoton }) => {
       </>
     )
   }
-
+  console.log(estadoModal)
   return (
     <div id='modal'>
       <span onClick={() => setIsOpen(true)} style={{ cursor: 'pointer' }}>{boton(textoDelBoton, estiloDelBoton)}</span>
+      {estadoModal && handleClose()}
       {isOpen &&
         <div className='modal'>
           <div className='modal-content'>
