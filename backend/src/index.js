@@ -3,7 +3,7 @@ const app = express()
 const cors = require('cors')
 const usuariosRouter = require('./routes/usuario')
 const mascotasRouter = require('./routes/mascota')
-const adoptantesRouter = require('./routes/adoptante')
+const solicitudAdopcionRouter = require('./routes/solicitudAdopcion')
 const cookieParser = require('cookie-parser')
 
 app.use(express.json())
@@ -16,7 +16,7 @@ app.use(cors({
 
 app.use('/api/mascotas', mascotasRouter)
 app.use('/api/usuarios', usuariosRouter)
-app.use('/api/adoptantes', adoptantesRouter)
+app.use('/api/solicitudes', solicitudAdopcionRouter)
 app.use(express.static('build'))
 
 const PORT = process.env.PORT || 3001

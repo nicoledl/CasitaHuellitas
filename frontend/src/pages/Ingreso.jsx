@@ -18,7 +18,7 @@ const styleDivisor = {
 
 const Ingreso = () => {
   return (
-    <div id='pag-de-inicio'>
+    <div id='ingreso'>
       <span id='borde-top' />
       <div style={styleDiv}>
         <h1><span style={{ transform: 'scaleX(-1)', display: 'inline-block' }}>🐈</span> Conocé nuestras huellitas 🐕</h1>

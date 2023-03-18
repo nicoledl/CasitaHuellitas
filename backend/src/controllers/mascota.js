@@ -33,7 +33,7 @@ const createPet = async (req, res) => {
       note: req.body.note,
       date: new Date(),
       important: req.body.important === undefined ? false : req.body.important,
-      adopted: req.body.adopted === undefined ? false : req.body.adopted,
+      inAdoption: req.body.inAdoption === undefined ? false : req.body.inAdoption,
       user: ObjectId(userId)
     })
 
@@ -61,6 +61,15 @@ const getAll = async (req, res) => {
   }
 }
 
+const getByInAdoption = async (req, res) => {
+  try {
+    const mascotas = await collectionPet.find({ inAdoption: true }).toArray()
+    res.json(mascotas)
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
+}
+
 const updateInfo = async (req, res) => {
   try {
     const pet = await collectionPet.findOneAndUpdate(
@@ -72,7 +81,7 @@ const updateInfo = async (req, res) => {
           name: req.body.name,
           note: req.body.note,
           important: req.body.important,
-          adopted: req.body.adopted
+          inAdoption: req.body.inAdoption
         }
       },
       { new: true }
@@ -99,11 +108,11 @@ const deletePet = async (req, res) => {
 
 const getById = async (req, res) => {
   try {
-    const mascotas = await Pet.findById(req.params.id)
+    const mascotas = await collectionPet.findById(req.params.id)
     res.json(mascotas)
   } catch (error) {
     res.status(500).json({ error: error.message })
   }
 }
 
-module.exports = { createPet, getAll, updateInfo, deletePet, getById }
+module.exports = { createPet, getAll, getByInAdoption, updateInfo, deletePet, getById }

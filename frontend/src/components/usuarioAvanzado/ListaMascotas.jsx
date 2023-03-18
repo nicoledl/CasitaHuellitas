@@ -1,12 +1,12 @@
-import { useForm } from 'react-hook-form'
 import axios from 'axios'
-import { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { useContext, useEffect, useState } from 'react'
 import { Col, Container, Row } from 'react-grid-system'
+import { AppContext } from '../../App'
 import imagenPerro from '../../assets/perro-default.jpg'
 import imagenGato from '../../assets/gato-default.jpg'
 import Modal from '../commons/Modal'
 import Formulario from './FormularioDeMascota'
-import FormularioDeAdoptantes from './FormularioDeAdoptantes'
 
 const imagenEstilo = { height: '50%', width: '100%', borderRadius: '8px 8px 0px 0px', objectFit: 'cover' }
 const containerTarjeta = { height: '25%', display: 'grid', justifyContent: 'center', alignItems: 'center', paddingBottom: 8 }
@@ -14,19 +14,25 @@ const botonera = { backgroundColor: '#1379bd', height: '22%', borderRadius: '0px
 const estiloBoton = { display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', cursor: 'pointer', margin: 0, background: 'none', border: 'none', color: '#f5f5f5', fontSize: 'large', fontFamily: "'Questrial', sans-serif" }
 
 const ListaMascotas = () => {
+  const { estado, cambiarEstado } = useContext(AppContext)
   const [mascotas, setMascotas] = useState([])
   const [editar, setEditar] = useState(false)
   const [imagen, setImagen] = useState(false)
-  const [actualizacion, setActualizacion] = useState(false)
   const [id, setId] = useState('')
   const { register, handleSubmit } = useForm()
   const baseUrl = 'http://localhost:3001'
 
   useEffect(() => {
-    axios.get(`${baseUrl}/api/mascotas`)
-      .then((res) => setMascotas(res.data))
-      .catch((error) => console.error(error))
-  }, [actualizacion])
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${baseUrl}/api/mascotas`)
+        setMascotas(response.data)
+      } catch (error) {
+        console.error(error)
+      }
+    }
+    fetchData()
+  }, [estado])
 
   const onEdit = (mascotaId) => {
     setId(mascotaId)
@@ -37,7 +43,7 @@ const ListaMascotas = () => {
     try {
       await axios.put(`${baseUrl}/api/mascotas/${id}`, datos)
       setEditar(!editar)
-      setActualizacion(!actualizacion)
+      cambiarEstado(!estado)
     } catch (error) {
       console.error('Error al modificar los datos:', error)
     }
@@ -45,7 +51,7 @@ const ListaMascotas = () => {
 
   const borrarMascota = (id) => {
     axios.delete(`${baseUrl}/api/mascotas/${id}`)
-      .then(() => setActualizacion(!actualizacion))
+      .then(() => cambiarEstado(!estado))
       .catch((error) => console.error(error))
   }
 
@@ -103,13 +109,25 @@ const ListaMascotas = () => {
                 />
               </Col>
               <Col style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '8px' }}>
-                <label>Importante:</label>
-                <input
-                  type='checkbox'
-                  placeholder='Importante'
-                  defaultChecked={mascota.important ? 'true' : false}
-                  {...register('important', {})}
-                />
+                <label>Importante:
+                  <input
+                    type='checkbox'
+                    placeholder='Importante'
+                    defaultChecked={mascota.important ? 'true' : false}
+                    {...register('important', {})}
+                  />
+                </label>
+              </Col>
+              <Col sm={6}>
+                <label>
+                  *Apto para adopción:
+                  <input
+                    type='checkbox'
+                    placeholder='EnAdopcion'
+                    defaultChecked={mascota.inAdoption ? 'true' : false}
+                    {...register('inAdoption', {})}
+                  />
+                </label>
               </Col>
               <Col style={{ gap: 20 }}>
                 <button className='boton-submit'>Editar</button>
@@ -126,7 +144,7 @@ const ListaMascotas = () => {
     <Container id='container-mascotas'>
       <Row>
         <Col id='display-de-mascota' sm={12} md={6} xl={4} xxl={3}>
-          <Formulario setActualizacion={setActualizacion} actualizacion={actualizacion} />
+          <Formulario />
         </Col>
         {mascotas.map((mascota) => {
           const fecha = new Date(mascota.date)
@@ -155,9 +173,6 @@ const ListaMascotas = () => {
                       </Col>
                       <Col sm={4}>
                         <div onClick={() => onEdit(mascota._id)} style={estiloBoton}>EDITAR</div>
-                      </Col>
-                      <Col sm={12} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', borderTop: 'solid 2px #0e6299', borderRadius: '0 0 8px 8px', backgroundColor: '#2dc5a4' }}>
-                        {mascota.important ? <p style={estiloBoton}>Aún no se puede adoptar</p> : <FormularioDeAdoptantes estiloDeBoton={estiloBoton} mascota={mascota} />}
                       </Col>
                     </Row>
                   </div>)}

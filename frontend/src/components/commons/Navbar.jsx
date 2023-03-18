@@ -20,15 +20,18 @@ const Navbar = () => {
   return (
     <Container id='navbar' fluid>
       {pantallaEscritorio && (
-        <Row style={{ width: '60%' }}>
-          <Col sm={4} md={4} style={columna}>
-            <Link to='/'>Ingreso</Link>
+        <Row style={{ width: '70%' }}>
+          <Col sm={3} md={3} style={columna}>
+            <Link to='/inicio'>Inicio</Link>
           </Col>
-          <Col sm={4} md={4} style={columna}>
-            <Link to='/huellitas'>Huellitas</Link>
+          <Col sm={3} md={3} style={columna}>
+            <Link to='/mascotas-en-adopcion'>Huellitas</Link>
           </Col>
-          <Col sm={4} md={4} style={columna}>
+          <Col sm={3} md={3} style={columna}>
             <Link to='/contacto'>Contacto</Link>
+          </Col>
+          <Col sm={3} md={3} style={columna}>
+            <Link to='/'>Ingreso</Link>
           </Col>
         </Row>
       )}

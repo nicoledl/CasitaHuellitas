@@ -1,3 +1,5 @@
+/* Colores: 2dc5a4, 00a682, FFCC4E */
+
 * {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
@@ -5,8 +7,8 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-body {
-  /* background-image: url('./assets/wallpaper-adm.jpg'); */
+body h1 {
+  font-family: 'Pacifico', cursive;
 }
 
 body input:focus,
@@ -23,21 +25,25 @@ code {
 /* PAGINA DE INGRESO */
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
-#pag-de-inicio {
+#ingreso{
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url('./assets/wallpaper.jpg');
-  background-position: center;
-  color: #f5f5f5;
+  background: rgb(45,197,164);
+  background: radial-gradient(circle, rgba(45,197,164,1) 10%, rgba(0,150,118,1) 100%); 
+  color: #fff;
+}
+
+#ingresoh1 {
+  font-size: clamp(2rem, 5.3vw - 0.3rem, 3rem);
 }
 
 #borde-top {
   top: 0;
   height: 80px;
   width: 100%;
-  background-color: #1379bd;
+  background-color: #FFCC4E;
   position: absolute;
   --mask:
     linear-gradient(to top, #0000 51px, #000 0),
@@ -50,7 +56,7 @@ code {
   bottom: 0;
   height: 80px;
   width: 100%;
-  background-color: #1379bd;
+  background-color: #FFCC4E;
   position: absolute;
   --mask:
     linear-gradient(to bottom, #0000 51px, #000 0),
@@ -62,12 +68,13 @@ code {
 #boton-conocer {
   border: none;
   color: #ffffff;
-  background-color: #1379bd;
+  background-color: #FFCC4E;
   width: 50%;
   border-radius: 6px 6px 6px 6px;
   padding-top: 18px;
   padding-bottom: 18px;
-  font-size: large;
+  font-weight: 600;
+  font-size: x-large;
   margin-top: 40px;
   margin-bottom: 50px;
   text-transform: uppercase;
@@ -76,11 +83,11 @@ code {
 }
 
 #boton-conocer:hover {
-  background-color: #0e6299;
+  background-color: #e0a000;
 }
 
 #boton-conocer:active {
-  background-color: #0e6299;
+  background-color: #e0a000;
   box-shadow: 2px 2px 4px 0px #0220338e inset;
 }
 
@@ -108,13 +115,13 @@ code {
   border-radius: 100% 0% 100% 0%;
 }
 
-#pag-de-inicio h1 {
+#ingresoh1 {
   margin-top: 0;
   margin-bottom: 50px;
   text-align: center;
 }
 
-#pag-de-inicio h3 {
+#ingresoh3 {
   margin-top: 0;
   text-align: center;
 }
@@ -131,7 +138,7 @@ code {
   padding-top: 2%;
   display: block;
   border: none;
-  border-bottom: 2px solid #1379bd;
+  border-bottom: 2px solid #FFCC4E;
   margin-bottom: 20px;
   font-size: large;
   background: none;
@@ -156,21 +163,22 @@ code {
   border: none;
   width: 80px;
   display: block;
-  background-color: #1379bd;
+  background-color: #FFCC4E;
   color: #f5f5f5;
   padding: 6px;
   border-radius: 5px 15px 5px 5px;
+  font-weight: 600;
   font-size: medium;
   cursor: pointer;
   transition: background-color 0.2s
 }
 
 .boton-submit:hover {
-  background-color: #0e6299;
+  background-color: #e0a000;
 }
 
 .boton-submit:active {
-  background-color: #0e6299;
+  background-color: #e0a000;
   box-shadow: 2px 2px 4px 0px #0220338e inset;
 }
 
@@ -184,7 +192,7 @@ code {
   height: fit-content;
   padding-top: 10px;
   padding-bottom: 10px;
-  background: #1379BD;
+  background: #FFCC4E;
   display: flex;
   width: 100vw;
   text-align: center;
@@ -224,12 +232,12 @@ code {
 }
 
 .ps-submenu-content li {
-  background-color: #0f68a3;
+  background-color: #FFCC4E;
   color: #f5f5f5;
 }
 
 .ps-submenu-content li:hover {
-  background-color: #0e6299;
+  background-color: #e0a000;
 }
 
 #item-menu {
@@ -237,7 +245,7 @@ code {
 }
 
 #item-menu:hover {
-  background-color: #0e6299;
+  background-color: #e0a000;
 }
 
 .menuitem {
@@ -268,7 +276,7 @@ code {
 #banner-bienvenida-adm .col p {
   font-family: 'Questrial', sans-serif;
   font-size: clamp(1rem, 2.7vw - 0.2rem, 1.5rem);
-  color: #0e6299;
+  color: #e0a000;
   text-align: center;
 }
 
@@ -281,7 +289,7 @@ code {
 
 /*  */
 
-/* LISTA DE MASCOTAS USUARIO AVANZADO */
+/* LISTA DE MASCOTAS */
 @import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
 
 #formulario-mascota * {
@@ -364,6 +372,25 @@ select {
   border-radius: 8px 8px 8px 8px;
 }
 
+.boton-adoptar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle, rgba(45,197,164,1) 0%, rgba(0,166,130,1) 100%);
+  height: 13%;
+  border-radius: 0px 0px 8px 8px;
+  margin: 0;
+  color: #f5f5f5;
+  cursor: pointer;
+  font-size: large;
+  transition: background-color 0.1s, font-size 0.4s;
+}
+
+.boton-adoptar:hover {
+  background-color: #7aead2;
+  font-size: x-large;
+}
+
 /* */
 
 /* MODAL */
@@ -426,25 +453,52 @@ select {
 
 /* */
 
-/* FORMULARIO ADOPTANTE */
-#formulario-adoptante * {
+/* FORMULARIO ADOPCION */
+#formulario-adopcion {
+  margin-top: 50px;
+}
+
+#formulario-adopcion select {
+  max-width: 200px;
+}
+
+#formulario-adopcion * {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   margin-bottom: 20px;
 }
 
-#formulario-adoptante h3 {
-  margin-top: 50px;
+#formulario-adopcion h1 {
+  text-align: center;
+  font-family: 'Pacifico', cursive;
+  font-size: clamp(3rem, -5.3vw + 5.3rem, 2rem);
+  color: #2dc5a4
+}
+
+#formulario-adopcion h3 {
+  margin-top: 30px;
   text-align: left;
   font-family: Arial, Helvetica, sans-serif;
   font-size: x-large
 }
 
-#formulario-adoptante input {
+#formulario-adopcion label {
+  font-size: medium;
+  width: 100%;
+}
+
+#formulario-adopcion input {
   font-size: medium;
   border: none;
   border-bottom: solid 1px rgb(0, 0, 0)
+}
+
+#formulario-adopcion textarea {
+  resize: none;
+  height: 300px;
+  width: 100%;
+  font-size: medium;
 }
 
 /* */
@@ -469,7 +523,7 @@ select {
 .fila-datos {
   border-radius: 5px 5px 0 0;
   text-align: left;
-  background-color: #1379bd;
+  background-color: #FFCC4E;
   font-weight: 600;
   color: #f5f5f5;
   padding-top: 10px;
@@ -509,6 +563,7 @@ select {
 }
 
 #tabla-adoptaditos {
+  background-image: url('assets/pattern.png');
   height: 100vh;
   display: flex;
   justify-content: center;

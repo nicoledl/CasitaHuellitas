@@ -2,23 +2,22 @@ import { useForm } from 'react-hook-form'
 import axios from 'axios'
 import Modal from '../commons/Modal'
 import { Col, Row } from 'react-grid-system'
-import { useState } from 'react'
+import { useContext } from 'react'
+import { AppContext } from '../../App'
 
-const Formulario = (setActualizacion, actualizacion) => {
+const Formulario = () => {
+  const { estado, cambiarEstado } = useContext(AppContext)
   const { register, handleSubmit } = useForm()
-  const [cerrarModal, setCerrarModal] = useState(false)
   const onSubmit = async datos => {
     try {
       await axios.post('http://localhost:3001/api/mascotas', datos, { withCredentials: true })
       console.log('Datos enviados exitosamente')
-      setActualizacion(!actualizacion)
+      cambiarEstado(!estado)
     } catch (error) {
       console.error('Error al enviar los datos:', error)
     }
   }
-  const handleClose = () => {
-    setCerrarModal()
-  }
+
   const date = new Date().toLocaleString()
   const estiloBoton = { backgroundColor: '#2dc5a4', border: 'none', borderRadius: '50px 50px 50px 50px', padding: 5, width: '65px', height: '65px', color: '#f5f5f5', fontSize: '40px', margin: 0, cursor: 'pointer' }
 
@@ -52,16 +51,16 @@ const Formulario = (setActualizacion, actualizacion) => {
           </Col>
           <Col sm={6}>
             <label>
-              *Adoptado:
-              <input type='checkbox' placeholder='Importante' defaultChecked={false} {...register('adopted', {})} />
-              <p style={{ fontSize: '10px' }}>*No marcar si esta mascota no fue adoptada aún.</p>
+              *Apto para adopción:
+              <input type='checkbox' placeholder='EnAdopcion' defaultChecked={false} {...register('inAdoption', {})} />
+              <p style={{ fontSize: '10px' }}>*No marcar si esta mascota no es apta para ser adoptada.</p>
             </label>
           </Col>
           <Col>
             <input type='hidden' value={date} {...register('date', {})} />
           </Col>
           <Col sm={12}>
-            <button className='boton-submit' onClick={handleClose}>Agregar</button>
+            <button type='submit' className='boton-submit'>Agregar</button>
           </Col>
         </Row>
       </form>
@@ -70,7 +69,7 @@ const Formulario = (setActualizacion, actualizacion) => {
 
   return (
     <div id='carta-mascota-nueva'>
-      <Modal contenido={formularioMascota()} textoDelBoton='+' estiloDelBoton={estiloBoton} estadoModal={cerrarModal} />
+      <Modal contenido={formularioMascota()} textoDelBoton='+' estiloDelBoton={estiloBoton} />
     </div>
   )
 }

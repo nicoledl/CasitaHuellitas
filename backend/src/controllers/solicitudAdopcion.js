@@ -1,4 +1,4 @@
-const { Adopter } = require('../models/adoptante')
+const { Adopter } = require('../models/solicitudAdopcion')
 const { client } = require('../mongo')
 const { ObjectId } = require('mongodb')
 
@@ -6,7 +6,7 @@ const db = client.db('CasitaHuellitas_DB')
 const collectionAdopter = db.collection('adoptantes')
 const collectionPet = db.collection('mascotas')
 
-const createAdopter = async (req, res) => {
+const createAdoptionRequest = async (req, res) => {
   try {
     const body = req.body
 
@@ -17,18 +17,21 @@ const createAdopter = async (req, res) => {
       id: pet._id
     }
 
+    const questions = body.questions.map(({ pregunta, respuesta }) => ({ pregunta, respuesta }))
+
     const adopter = new Adopter({
       email: body.email,
-      name: body.name,
-      lastname: body.lastname,
+      name: body.nombre,
+      lastname: body.apellido,
       dni: body.dni,
-      phone: body.phone,
-      address: body.address,
+      phone: body.telefono,
+      address: body.direccion,
       pet: petObj,
-      date: new Date()
+      questions,
+      fechaSolicitud: new Date()
     })
 
-    const savedAdopter = collectionAdopter.insertOne(adopter)
+    const savedAdopter = await collectionAdopter.insertOne(adopter)
 
     res.json(savedAdopter)
     console.log('Carga exitosa!')
@@ -46,13 +49,13 @@ const getAll = async (req, res) => {
   }
 }
 
-const getById = async (req, res) => {
+const getByDni = async (req, res) => {
   try {
-    const adopter = await collectionAdopter.findOne({ _id: ObjectId(req.params.id) })
+    const adopter = await collectionAdopter.findOne({ dni: req.params.dni })
     res.json(adopter)
   } catch (error) {
     res.status(500).json({ error: error.message })
   }
 }
 
-module.exports = { createAdopter, getAll, getById }
+module.exports = { createAdoptionRequest, getAll, getByDni }
