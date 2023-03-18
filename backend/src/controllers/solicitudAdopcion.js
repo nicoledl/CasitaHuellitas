@@ -1,40 +1,30 @@
-const { Adopter } = require('../models/solicitudAdopcion')
+const { AdoptionRequest } = require('../models/solicitudAdopcion')
 const { client } = require('../mongo')
 const { ObjectId } = require('mongodb')
 
 const db = client.db('CasitaHuellitas_DB')
-const collectionAdopter = db.collection('adoptantes')
-const collectionPet = db.collection('mascotas')
+const collectionAdoptionRequest = db.collection('solicitudesAdopcion')
 
 const createAdoptionRequest = async (req, res) => {
   try {
     const body = req.body
 
-    const pet = await collectionPet.findOne({ _id: ObjectId(body.pet) })
-    const petObj = {
-      name: pet.name,
-      date: pet.date,
-      id: pet._id
-    }
-
-    const questions = body.questions.map(({ pregunta, respuesta }) => ({ pregunta, respuesta }))
-
-    const adopter = new Adopter({
-      email: body.email,
-      name: body.nombre,
-      lastname: body.apellido,
+    const adoptionRequest = new AdoptionRequest({
+      name: body.name,
+      lastname: body.lastname,
       dni: body.dni,
-      phone: body.telefono,
-      address: body.direccion,
-      pet: petObj,
-      questions,
-      fechaSolicitud: new Date()
+      phone: body.phone,
+      address: body.address,
+      email: body.email,
+      date: new Date(),
+      questions: body.questions,
+      pet: ObjectId(body.pet)
     })
 
-    const savedAdopter = await collectionAdopter.insertOne(adopter)
+    const savedAdoptionRequest = await collectionAdoptionRequest.insertOne(adoptionRequest)
 
-    res.json(savedAdopter)
-    console.log('Carga exitosa!')
+    res.json(savedAdoptionRequest)
+    console.log('Envío de formulario exitoso!')
   } catch (error) {
     res.status(500).json({ error: error.message })
   }
@@ -42,7 +32,7 @@ const createAdoptionRequest = async (req, res) => {
 
 const getAll = async (req, res) => {
   try {
-    const adoptantes = await collectionAdopter.find().toArray()
+    const adoptantes = await collectionAdoptionRequest.find().toArray()
     res.json(adoptantes)
   } catch (error) {
     res.status(500).json({ error: error.message })
@@ -51,7 +41,7 @@ const getAll = async (req, res) => {
 
 const getByDni = async (req, res) => {
   try {
-    const adopter = await collectionAdopter.findOne({ dni: req.params.dni })
+    const adopter = await collectionAdoptionRequest.findOne({ dni: req.params.dni })
     res.json(adopter)
   } catch (error) {
     res.status(500).json({ error: error.message })

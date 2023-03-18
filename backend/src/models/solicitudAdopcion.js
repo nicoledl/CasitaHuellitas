@@ -1,7 +1,19 @@
 const mongoose = require('mongoose')
 
-const solicitudAdopcionSchema = new mongoose.Schema({
-  nombre: {
+const adoptionRequestSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true
+  },
+  lastname: {
+    type: String,
+    required: true
+  },
+  dni: {
+    type: String,
+    required: true
+  },
+  phone: {
     type: String,
     required: true
   },
@@ -15,39 +27,27 @@ const solicitudAdopcionSchema = new mongoose.Schema({
       message: props => `${props.value} no es una dirección de correo electrónico válida!`
     }
   },
-  telefono: {
+  address: {
     type: String,
     required: true
-  },
-  animal: {
-    type: String,
-    required: true
-  },
-  nombre_animal: {
-    type: String,
-    required: true
-  },
-  edad_animal: {
-    type: Number,
-    required: true
-  },
-  notas: {
-    type: String
   },
   questions: {
     type: [
       {
-        pregunta: String,
-        respuesta: String
+        question: String,
+        answer: String
       }
     ]
   },
-  fecha_solicitud: {
-    type: Date,
-    default: Date.now
+  date: {
+    type: Date
+  },
+  pet: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Pet'
   }
 })
 
-const SolicitudAdopcion = mongoose.model('SolicitudAdopcion', solicitudAdopcionSchema, 'solicitudesAdopcion')
+const AdoptionRequest = mongoose.model('SolicitudAdopcion', adoptionRequestSchema, 'solicitudesAdopcion')
 
-module.exports = { SolicitudAdopcion }
+module.exports = { AdoptionRequest }

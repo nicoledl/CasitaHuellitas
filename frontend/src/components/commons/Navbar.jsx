@@ -28,7 +28,7 @@ const Navbar = () => {
             <Link to='/mascotas-en-adopcion'>Huellitas</Link>
           </Col>
           <Col sm={3} md={3} style={columna}>
-            <Link to='/contacto'>Contacto</Link>
+            <Link to='/info-pre-adopcion'>Información Pre-adopción</Link>
           </Col>
           <Col sm={3} md={3} style={columna}>
             <Link to='/'>Ingreso</Link>

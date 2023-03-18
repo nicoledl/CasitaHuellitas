@@ -1,4 +1,4 @@
-/* Colores: 2dc5a4, 00a682, FFCC4E */
+/* Colores: 2dc5a4, 00a682, FFCC4E, 292929 */
 
 * {
   margin: 0;
@@ -25,13 +25,13 @@ code {
 /* PAGINA DE INGRESO */
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
-#ingreso{
+#ingreso {
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgb(45,197,164);
-  background: radial-gradient(circle, rgba(45,197,164,1) 10%, rgba(0,150,118,1) 100%); 
+  background: rgb(45, 197, 164);
+  background: radial-gradient(circle, rgba(45, 197, 164, 1) 10%, rgba(0, 150, 118, 1) 100%);
   color: #fff;
 }
 
@@ -43,7 +43,7 @@ code {
   top: 0;
   height: 80px;
   width: 100%;
-  background-color: #FFCC4E;
+  background-color: #292929;
   position: absolute;
   --mask:
     linear-gradient(to top, #0000 51px, #000 0),
@@ -56,7 +56,7 @@ code {
   bottom: 0;
   height: 80px;
   width: 100%;
-  background-color: #FFCC4E;
+  background-color: #292929;
   position: absolute;
   --mask:
     linear-gradient(to bottom, #0000 51px, #000 0),
@@ -192,7 +192,7 @@ code {
   height: fit-content;
   padding-top: 10px;
   padding-bottom: 10px;
-  background: #FFCC4E;
+  background: #292929;
   display: flex;
   width: 100vw;
   text-align: center;
@@ -209,6 +209,7 @@ code {
 
 #navbar a:hover {
   color: #ffffff86;
+  border-bottom: solid 5px #FFCC4E;
 }
 
 #navbar a:active {
@@ -223,7 +224,7 @@ code {
   position: fixed;
   top: 0;
   left: 0;
-  color: #f5f5f5;
+  color: rgb(255, 255, 255);
   z-index: 8;
 }
 
@@ -233,19 +234,24 @@ code {
 
 .ps-submenu-content li {
   background-color: #FFCC4E;
-  color: #f5f5f5;
+  font-size: small;
+  font-weight: 600;
+  color: #000000;
 }
 
 .ps-submenu-content li:hover {
-  background-color: #e0a000;
+  background-color: #e4b338;
 }
 
 #item-menu {
-  transition: background-color 0.5s;
+  transition: background-color 0.5s, color 0.1s;
+  font-size: large;
 }
 
 #item-menu:hover {
-  background-color: #e0a000;
+  background-color: #1a1a1a;
+  color: #fff;
+  border-left: solid 7px #FFCC4E;
 }
 
 .menuitem {
@@ -253,11 +259,20 @@ code {
   color: #2e2e2e;
 }
 
+.boton-logout {
+  color: #ffffff;
+  border: none;
+  background: none;
+  transition: color 0.1s;
+}
+
+
 /* */
 
 /* BANNER BIENVENIDA ADM */
 #banner-bienvenida-adm {
-  padding-top: 80px;
+  max-width: 1000px;
+  padding-top: 50px;
   height: max-content;
   display: flex;
   flex-direction: column;
@@ -266,19 +281,34 @@ code {
 }
 
 #banner-bienvenida-adm * {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 #banner-bienvenida-adm .row {
-  gap: 80px;
+  gap: 30px;
 }
 
 #banner-bienvenida-adm .col p {
   font-family: 'Questrial', sans-serif;
   font-size: clamp(1rem, 2.7vw - 0.2rem, 1.5rem);
-  color: #e0a000;
+  color: #ffffff;
   text-align: center;
+  border: solid 4px;
+  border-radius: 70px 70px 0 70px;
+  border-color: #292929;
+  background-color: #292929;
+  padding: 35px;
+  transition: background-color 0.2s;
 }
+
+#banner-bienvenida-adm .col p:hover {
+  background-color: #2dc5a4;
+}
+
+#banner-bienvenida-adm .col p:active {
+  background-color: #2dc5a4;
+}
+
 
 #banner-bienvenida-adm .col h1 {
   font-family: 'Pacifico', cursive;
@@ -376,18 +406,18 @@ select {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: radial-gradient(circle, rgba(45,197,164,1) 0%, rgba(0,166,130,1) 100%);
+  background-color: #292929;
   height: 13%;
   border-radius: 0px 0px 8px 8px;
   margin: 0;
   color: #f5f5f5;
   cursor: pointer;
   font-size: large;
-  transition: background-color 0.1s, font-size 0.4s;
+  transition: background-color 0.2s, font-size 0.4s;
 }
 
 .boton-adoptar:hover {
-  background-color: #7aead2;
+  background-color: #2dc5a4;
   font-size: x-large;
 }
 
@@ -548,6 +578,13 @@ select {
   flex-direction: column;
   justify-content: center;
   padding-left: 12px;
+}
+
+#resgitro-adoptados-cargando {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center
 }
 
 /*  */

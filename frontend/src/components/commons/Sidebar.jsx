@@ -21,11 +21,11 @@ export const SideNav = () => {
     {
       id: 'item-menu',
       component: <Link to='/administracion' />,
-      content: collapsed ? <FaHome size={25} /> : <span style={estiloItem}><FaHome size={18} /><p>Inicio</p></span>
+      content: collapsed ? <FaHome size={25} /> : <span style={estiloItem}><FaHome size={25} /><p>Inicio</p></span>
     },
     {
       id: 'item-menu',
-      label: collapsed ? <FaDog size={25} /> : <span style={estiloItem}><FaDog size={18} /><p>Mascotas</p></span>,
+      label: collapsed ? <FaDog size={25} /> : <span style={estiloItem}><FaDog size={25} /><p>Mascotas</p></span>,
       submenu: [
         {
           className: 'menuitem',
@@ -43,19 +43,19 @@ export const SideNav = () => {
     },
     {
       id: 'item-menu',
-      component: <Link to='/voluntarios' />,
-      content: collapsed ? <FaPeopleCarry size={25} /> : <span style={estiloItem}><FaPeopleCarry size={18} /><p>Voluntarios</p></span>
+      component: <Link to='/contactos-voluntarios' />,
+      content: collapsed ? <FaPeopleCarry size={25} /> : <span style={estiloItem}><FaPeopleCarry size={25} /><p>Voluntarios</p></span>
     },
     {
       id: 'item-menu',
-      component: <Link to='/mensajes' />,
-      content: collapsed ? <FaWpforms size={25} /> : <span style={estiloItem}><FaWpforms size={18} /><p>Formularios</p></span>
+      component: <Link to='/solicitudes' />,
+      content: collapsed ? <FaWpforms size={25} /> : <span style={estiloItem}><FaWpforms size={25} /><p>Formularios</p></span>
     }
   ]
 
   return (
     <div id='sidebar'>
-      <Sidebar backgroundColor='#1379bdd4' style={{ border: 'none' }}>
+      <Sidebar backgroundColor='#292929'>
         <div style={{ display: 'flex', justifyContent: 'flex-end', margin: 20 }}>
           {collapsed
             ? <FaAngleRight size={25} className='sb-button' onClick={() => collapseSidebar()} style={{ cursor: 'pointer', marginRight: 9 }} />
@@ -102,7 +102,7 @@ export const SideNav = () => {
         </div>
         <Menu menuItemStyles={menuItemStyles}>
           <MenuItem id='item-menu'>
-            {collapsed ? <FaRegCalendarAlt size={25} /> : <span style={estiloItem}><FaRegCalendarAlt size={18} /><p>Calendario</p></span>}
+            {collapsed ? <FaRegCalendarAlt size={25} /> : <span style={estiloItem}><FaRegCalendarAlt size={25} /><p>Calendario</p></span>}
           </MenuItem>
         </Menu>
 

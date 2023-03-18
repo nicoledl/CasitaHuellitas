@@ -3,8 +3,8 @@ import { useContext, useEffect, useState } from 'react'
 import { Col, Container, Row } from 'react-grid-system'
 import { useNavigate } from 'react-router-dom'
 import { AppContext } from '../../App'
-import imagenPerro from '../../assets/perro-default.jpg'
-import imagenGato from '../../assets/gato-default.jpg'
+import imagenPerro from '../../assets/perro-default.png'
+import imagenGato from '../../assets/gato-default.png'
 import { Oval } from 'react-loader-spinner'
 
 const imagenEstilo = { height: '50%', width: '100%', borderRadius: '8px 8px 0px 0px', objectFit: 'cover' }
@@ -39,12 +39,12 @@ const ListaMascotas = () => {
         <Oval
           height={100}
           width={100}
-          color='#1379BD'
+          color='#FFCC4E'
           wrapperStyle={{}}
           wrapperClass=''
           visible
           ariaLabel='oval-loading'
-          secondaryColor='#1379BD'
+          secondaryColor='#FFCC4E'
           strokeWidth={2}
           strokeWidthSecondary={2}
         />
@@ -65,7 +65,7 @@ const ListaMascotas = () => {
                 <div id='carta-mascota'>
                   <img alt={mascota.name} src={mascota.animal === 'Perro' ? imagenPerro : imagenGato} style={imagenEstilo} />
                   <div style={containerTarjeta}>
-                    {mascota.name === null ? <p style={{ fontSize: 'x-large' }}>No se le asignó un nombre.</p> : <p style={{ fontSize: 'x-large' }}>Nombre: {mascota.name}</p>}
+                    {mascota.name === undefined ? <p style={{ fontSize: 'x-large' }}>No se le asignó un nombre.</p> : <p style={{ fontSize: 'x-large' }}>Nombre: {mascota.name}</p>}
                     <p>Ingreso: {fechaISO}</p>
                   </div>
                   <div className='boton-adoptar' onClick={() => hanldeClick(mascota)}>

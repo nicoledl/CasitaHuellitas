@@ -16,7 +16,7 @@ app.use(cors({
 
 app.use('/api/mascotas', mascotasRouter)
 app.use('/api/usuarios', usuariosRouter)
-app.use('/api/solicitudes', solicitudAdopcionRouter)
+app.use('/api/solicitudes-de-adopcion', solicitudAdopcionRouter)
 app.use(express.static('build'))
 
 const PORT = process.env.PORT || 3001

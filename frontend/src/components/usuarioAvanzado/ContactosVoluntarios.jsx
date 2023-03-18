@@ -13,7 +13,7 @@ const breakpoints = {
   xl: 1200
 }
 
-const RegistroAdopciones = () => {
+const ContactosVoluntarios = () => {
   const [adoptantes, setAdoptantes] = useState(null)
   const [estados, setEstados] = useState({})
   const [showContent, setShowContent] = useState(false)
@@ -105,7 +105,7 @@ const RegistroAdopciones = () => {
     return (
       <Container id='resgitro-adoptados-cargando'>
         {showContent
-          ? <p>No hay registro de adopciones aún...</p>
+          ? <p>No hay contactos aún...</p>
           : (
             <FallingLines
               color='#FFCC4E'
@@ -180,4 +180,4 @@ const RegistroAdopciones = () => {
   )
 }
 
-export default RegistroAdopciones
+export default ContactosVoluntarios

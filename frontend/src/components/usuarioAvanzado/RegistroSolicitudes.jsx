@@ -1,8 +1,9 @@
 import axios from 'axios'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Col, Container, Row } from 'react-grid-system'
 import { FallingLines } from 'react-loader-spinner'
 import { useMediaQuery } from 'react-responsive'
+import { AppContext } from '../../App'
 
 const estiloCentrar = { display: 'flex', justifyContent: 'center', alignContent: 'center' }
 
@@ -13,8 +14,10 @@ const breakpoints = {
   xl: 1200
 }
 
-const RegistroAdopciones = () => {
-  const [adoptantes, setAdoptantes] = useState(null)
+const RegistroSolicitudes = () => {
+  // eslint-disable-next-line no-unused-vars
+  const { estado, cambiarEstado } = useContext(AppContext)
+  const [solicitudes, setSolicitudes] = useState(null)
   const [estados, setEstados] = useState({})
   const [showContent, setShowContent] = useState(false)
   const pantallaCelular = useMediaQuery({ maxWidth: breakpoints.lg })
@@ -23,14 +26,16 @@ const RegistroAdopciones = () => {
   useEffect(() => {
     async function fetchData () {
       try {
-        const response = await axios.get(`${baseUrl}/api/adoptantes`)
-        setAdoptantes(response.data)
+        const responseSolicitudes = await axios.get(`${baseUrl}/api/solicitudes-de-adopcion`)
+        setSolicitudes(responseSolicitudes.data)
+        console.log(responseSolicitudes)
       } catch (error) {
         console.error('Error al cargar registro', error)
       }
     }
 
     fetchData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   setTimeout(() => {
@@ -50,33 +55,33 @@ const RegistroAdopciones = () => {
     return fechaISO
   }
 
-  const registro = (persona) => {
-    if (!persona) {
+  const registro = (solicitud) => {
+    if (!solicitud) {
       return null
     }
 
     return (
-      <Row key={persona._id} className='fila-registro'>
+      <Row key={solicitud._id} className='fila-registro'>
         <Col>
-          <p>{persona.name} {persona.lastname}</p>
+          <p>{solicitud.name} {solicitud.lastname}</p>
         </Col>
         <Col>
-          <p>{persona.dni}</p>
+          <p>{solicitud.dni}</p>
         </Col>
         <Col sm={2} md={2}>
-          <p>{persona.email}</p>
+          <p>{solicitud.email}</p>
         </Col>
         <Col>
-          <p>{persona.phone}</p>
+          <p>{solicitud.phone}</p>
         </Col>
         <Col sm={2} md={2}>
-          <p>{persona.address}</p>
+          <p>{solicitud.address}</p>
         </Col>
         <Col>
-          <p>{persona.pet.name}</p>
+          {/* <p>{mascota.name}</p> */}
         </Col>
         <Col>
-          <p>{fecha(persona.pet.date)} / {fecha(persona.date)}</p>
+          <p>{fecha(solicitud.date)} / </p>
         </Col>
       </Row>
     )
@@ -94,18 +99,18 @@ const RegistroAdopciones = () => {
           </Col>
           <Col>
             <p><b>Ingreso/Egreso:</b></p>
-            <p>{fecha(datos.pet.date)} / {fecha(datos.date)}</p>
+            {/* <p>{fecha(datos.pet.date)} / {fecha(datos.date)}</p> */}
           </Col>
         </Row>
       </>
     )
   }
 
-  if (adoptantes == null) {
+  if (solicitudes == null) {
     return (
       <Container id='resgitro-adoptados-cargando'>
         {showContent
-          ? <p>No hay registro de adopciones aún...</p>
+          ? <p>No hay solicitudes de adopción aún...</p>
           : (
             <FallingLines
               color='#FFCC4E'
@@ -130,21 +135,21 @@ const RegistroAdopciones = () => {
                 <p>Mascota</p>
               </Col>
             </Row>
-            {adoptantes.map((persona, _i) => {
-              const id = persona._id
+            {solicitudes.map((solicitud, _i) => {
+              const id = solicitud._id
               const mostrarDatos = estados[id] || false
 
               return (
                 <div key={id} style={{ padding: 0 }}>
                   <Row onClick={() => handleClick(id)} className='fila-registro'>
                     <Col>
-                      <p>{persona.name} {persona.lastname}</p>
+                      <p>{solicitud.name} {solicitud.lastname}</p>
                     </Col>
                     <Col>
-                      <p>{persona.pet.name}</p>
+                      {/* <p>{solicitud.pet.name}</p> */}
                     </Col>
                   </Row>
-                  {mostrarDatos && wrapData(persona)}
+                  {mostrarDatos && wrapData(solicitud)}
                 </div>
               )
             })}
@@ -174,10 +179,10 @@ const RegistroAdopciones = () => {
                 <p>Ingreso/Egreso</p>
               </Col>
             </Row>
-            {adoptantes.map((persona) => registro(persona))}
+            {solicitudes.map((solicitud) => registro(solicitud))}
           </Container>)}
     </Container>
   )
 }
 
-export default RegistroAdopciones
+export default RegistroSolicitudes

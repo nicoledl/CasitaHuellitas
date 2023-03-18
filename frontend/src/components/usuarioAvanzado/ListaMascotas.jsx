@@ -3,15 +3,15 @@ import { useForm } from 'react-hook-form'
 import { useContext, useEffect, useState } from 'react'
 import { Col, Container, Row } from 'react-grid-system'
 import { AppContext } from '../../App'
-import imagenPerro from '../../assets/perro-default.jpg'
-import imagenGato from '../../assets/gato-default.jpg'
+import imagenPerro from '../../assets/perro-default.png'
+import imagenGato from '../../assets/gato-default.png'
 import Modal from '../commons/Modal'
 import Formulario from './FormularioDeMascota'
 
 const imagenEstilo = { height: '50%', width: '100%', borderRadius: '8px 8px 0px 0px', objectFit: 'cover' }
 const containerTarjeta = { height: '25%', display: 'grid', justifyContent: 'center', alignItems: 'center', paddingBottom: 8 }
-const botonera = { backgroundColor: '#1379bd', height: '22%', borderRadius: '0px 0px 8px 8px', margin: 0, color: '#f5f5f5' }
-const estiloBoton = { display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', cursor: 'pointer', margin: 0, background: 'none', border: 'none', color: '#f5f5f5', fontSize: 'large', fontFamily: "'Questrial', sans-serif" }
+const botonera = { backgroundColor: '#292929', height: '22%', borderRadius: '0px 0px 8px 8px', margin: 0, color: '#f5f5f5', fontWeight: '600' }
+const estiloBoton = { display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', fontWeight: '600', cursor: 'pointer', margin: 0, background: 'none', border: 'none', color: '#f5f5f5', fontSize: 'large', fontFamily: "'Questrial', sans-serif" }
 
 const ListaMascotas = () => {
   const { estado, cambiarEstado } = useContext(AppContext)
