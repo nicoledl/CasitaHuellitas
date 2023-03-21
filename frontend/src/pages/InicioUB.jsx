@@ -10,19 +10,15 @@ const Inicio = () => {
 
   useEffect(() => {
     dataMascota({})
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
     <>
-      <div id='container-header-ub'>
-        <Navbar />
-        <Banner />
-      </div>
+      <Navbar />
+      <Banner />
       <Mision />
-      <div id='tabla-adoptaditos'>
-        <Adoptaditos />
-      </div>
+      <Adoptaditos />
     </>
   )
 }

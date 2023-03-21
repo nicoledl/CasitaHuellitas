@@ -1,10 +1,12 @@
 import axios from 'axios'
 import Cookies from 'js-cookie'
 import { FaDoorOpen } from 'react-icons/fa'
+import { useNavigate } from 'react-router-dom'
 
 const estiloItem = { display: 'flex', alignItems: 'center', gap: '10px' }
 
 const Logout = ({ collapsed }) => {
+  const navigate = useNavigate()
   const baseUrl = 'http://localhost:3001'
 
   const handleLogout = async () => {
@@ -12,8 +14,8 @@ const Logout = ({ collapsed }) => {
       // eslint-disable-next-line no-unused-vars
       const logout = await axios.post(`${baseUrl}/api/usuarios/logout`)
       Cookies.remove('token')
+      return navigate('/')
       // eslint-disable-next-line no-unused-vars
-      const reload = await window.location.reload()
     } catch (error) {
       console.log(error)
     }

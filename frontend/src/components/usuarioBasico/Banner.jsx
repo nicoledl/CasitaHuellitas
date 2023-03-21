@@ -1,17 +1,12 @@
-import { Col, Container, Row } from 'react-grid-system'
-import './cartelAdoptaditos.css'
+import { Container } from 'react-grid-system'
 
 const Banner = () => {
   return (
-    <Container id='containerBanner'>
-      <Row align='start'>
-        <Col md={12}>
-          <h1>Conocé nuestras huellitas en busca de una casita.</h1>
-        </Col>
-        <Col md={12}>
-          <p>y dejá su huellita marcada en tú corazón...</p>
-        </Col>
-      </Row>
+    <Container fluid id='container-banner'>
+      <div className='contenido-banner'>
+        <h1>Conocé nuestras huellitas en busca de una casita...</h1>
+        <p>...y dejá que marquen tú corazón.</p>
+      </div>
     </Container>
   )
 }

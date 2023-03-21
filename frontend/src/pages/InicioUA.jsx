@@ -28,7 +28,7 @@ const InicioUA = () => {
         })
         setUsuario(responseUser.data)
       } catch (error) {
-        console.error('Error al cargar registro', error)
+        console.error(error)
       }
     }
 

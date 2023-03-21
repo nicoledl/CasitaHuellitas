@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-closing-tag-location */
 import React, { createContext, useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Ingreso from './pages/Ingreso'
@@ -15,12 +16,15 @@ import InfoPreAdopcion from './pages/InfoPreAdopcion'
 export const AppContext = createContext({
   estado: false,
   cambiarEstado: () => { },
+  token: undefined,
+  obtenerToken: () => { },
   mascota: {},
   dataMascota: () => { }
 })
 
 const App = () => {
   const [estado, setEstado] = useState(false)
+  const [token, setToken] = useState(false)
   const [mascota, setDataMascota] = useState({})
 
   const cambiarEstado = (nuevoEstado) => {
@@ -29,9 +33,12 @@ const App = () => {
   const dataMascota = (nuevoEstado) => {
     setDataMascota(nuevoEstado)
   }
+  const obtenerToken = (nuevoEstado) => {
+    setToken(nuevoEstado)
+  }
 
   return (
-    <AppContext.Provider value={{ estado, cambiarEstado, mascota, dataMascota }}>
+    <AppContext.Provider value={{ estado, cambiarEstado, token, obtenerToken, mascota, dataMascota }}>
       <Router>
         <Routes>
           <Route path='/' element={<Ingreso />} />

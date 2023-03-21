@@ -26,7 +26,7 @@ const ContactosVoluntarios = () => {
         const response = await axios.get(`${baseUrl}/api/adoptantes`)
         setAdoptantes(response.data)
       } catch (error) {
-        console.error('Error al cargar registro', error)
+        console.error('Aún no hay registros de voluntarios', error)
       }
     }
 
