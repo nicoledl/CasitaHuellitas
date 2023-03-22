@@ -47,16 +47,19 @@ const FormularioDeAdopcion = () => {
 
   useEffect(() => {
     if (!mascota.name) {
-      navigate('/mascotas-en-adopcion')
+      navigate('/adoptar')
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
-    <Container id='formulario-adopcion' style={{ maxWidth: '1000px' }}>
+    <Container id='formulario-adopcion' style={{ maxWidth: '1200px' }}>
       <h1>¡Es hoy, es hoy!</h1>
+      <hr style={{ border: 'solid 1px #29292923', marginTop: '50px', marginBottom: '50px' }} />
+      <h3>Completá el siguente formulario de adopción para {mascota.name}.</h3>
+      <p>El objetivo del siguiente cuestionario es encontrar la combinación óptima entre adoptado y adoptante de manera que ambos sean felices para siempre.<br />Por favor, lea todas las preguntas y los requisitos de adopción y, de estar de acuerdo, responda el cuestionario con la mayor claridad posible.<br />Las adopciones se limitan geográficamente a Capital Federal y Gran Buenos Aires, Argentina (sujeto a consideración)</p>
+      <hr style={{ border: 'solid 1px #29292923', marginTop: '50px', marginBottom: '50px' }} />
       <form onSubmit={handleSubmit(onSubmit)}>
-        <h3>Completá el siguente formulario de adopción para {mascota.name}.</h3>
         <Row>
           <Col sm={6}>
             <input type='text' placeholder='Nombre' {...register('name', { required: true, maxLength: 100 })} />

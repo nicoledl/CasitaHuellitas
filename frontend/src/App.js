@@ -12,6 +12,7 @@ import MascotasEnAdopcion from './pages/MascotasEnAdopcion'
 import FormularioAdopcion from './pages/FormularioAdopcion'
 import Solicitudes from './pages/Solicitudes'
 import InfoPreAdopcion from './pages/InfoPreAdopcion'
+import Donaciones from './pages/Donaciones'
 
 export const AppContext = createContext({
   estado: false,
@@ -46,12 +47,13 @@ const App = () => {
           <Route path='/administracion' element={<InicioUA />} />
           <Route path='/mascotas' element={<Mascotas />} />
           <Route path='/adoptados' element={<Adoptados />} />
-          <Route path='/contactos-voluntarios' element={<ContactosVoluntarios />} />
+          <Route path='/contactosvoluntarios' element={<ContactosVoluntarios />} />
           <Route path='/solicitudes' element={<Solicitudes />} />
           <Route path='/calendario' element={<Calendario />} />
           {/* RUTAS DEL CLIENTE */}
           <Route path='/inicio' element={<InicioUB />} />
-          <Route path='/mascotas-en-adopcion' element={<MascotasEnAdopcion />} />
+          <Route path='/adoptar' element={<MascotasEnAdopcion />} />
+          <Route path='/donaciones' element={<Donaciones />} />
           <Route path='/info-pre-adopcion' element={<InfoPreAdopcion />} />
           <Route path='/formulario-adopcion' element={<FormularioAdopcion />} />
         </Routes>

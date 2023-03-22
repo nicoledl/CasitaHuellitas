@@ -43,7 +43,7 @@ export const SideNav = () => {
     },
     {
       id: 'item-menu',
-      component: <Link to='/contactos-voluntarios' />,
+      component: <Link to='/contactosvoluntarios' />,
       content: collapsed ? <FaPeopleCarry size={25} /> : <span style={estiloItem}><FaPeopleCarry size={25} /><p>Voluntarios</p></span>
     },
     {

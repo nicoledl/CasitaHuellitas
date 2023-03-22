@@ -30,15 +30,16 @@ const Navbar = () => {
       {pantallaEscritorio
         ? (
           <Container id='navbar' fluid>
+            <Link className='boton-ch' to='/inicio' style={{ color: '#fff' }}>C.H.</Link>
             <Row className='navbar' style={{ width: '70%' }}>
-              <Col className='col' sm={3} md={3} style={columna}>
+              <Col className='col' sm={2} md={2} style={columna}>
                 <Link to='/inicio'>Inicio</Link>
               </Col>
               <Col className='col' sm={3} md={3} style={columna}>
-                <Link to='/mascotas-en-adopcion'>Huellitas</Link>
+                <Link to='/adoptar'>Huellitas</Link>
               </Col>
-              <Col className='col' sm={3} md={3} style={columna}>
-                <Link to='/info-pre-adopcion'>Información Pre-adopción</Link>
+              <Col className='col' sm={4} md={4} style={columna}>
+                <Link to='/info-pre-adopcion'>Información<br />Pre-adopción</Link>
               </Col>
               <Col className='col' sm={3} md={3} style={columna}>
                 <Link to='/'>Ingreso</Link>
@@ -47,13 +48,13 @@ const Navbar = () => {
           </Container>)
         : (<div id='navbar-horizontal'>
           <div className='navbar-horizontal-content'>
-            <h1 style={{ color: '#fff', paddingLeft: '30px' }}>C.H.</h1>
+            <h1 style={{ color: '#fff', paddingLeft: '30px', fontSize: 'x-large' }}>C.H.</h1>
             <button onClick={handleClick}><FaChevronUp className={menuHorizontal ? 'boton-onclick' : 'boton'} /></button>
           </div>
           {menuHorizontal && (
             <div className='menu-horizontal'>
               <Link to='/inicio'>Inicio</Link>
-              <Link to='/mascotas-en-adopcion'>Huellitas</Link>
+              <Link to='/adoptar'>Huellitas</Link>
               <Link to='/info-pre-adopcion'>Información Pre-adopción</Link>
               <Link to='/'>Ingreso</Link>
             </div>

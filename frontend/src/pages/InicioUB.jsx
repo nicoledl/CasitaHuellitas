@@ -1,9 +1,11 @@
+import { AppContext } from '../App'
+import { useContext, useEffect } from 'react'
 import Navbar from '../components/commons/Navbar'
 import Banner from '../components/usuarioBasico/Banner'
 import Adoptaditos from '../components/usuarioBasico/Adoptaditos'
 import Mision from '../components/usuarioBasico/Mision'
-import { AppContext } from '../App'
-import { useContext, useEffect } from 'react'
+import BotoneraDeAcciones from '../components/usuarioBasico/BotoneraDeAcciones'
+import Footer from '../components/commons/Footer'
 
 const Inicio = () => {
   const { dataMascota } = useContext(AppContext)
@@ -19,6 +21,8 @@ const Inicio = () => {
       <Banner />
       <Mision />
       <Adoptaditos />
+      <BotoneraDeAcciones />
+      <Footer />
     </>
   )
 }
