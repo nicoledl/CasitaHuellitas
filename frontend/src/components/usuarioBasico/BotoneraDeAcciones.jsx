@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import imagen from '../../assets/banner2.jpg'
 
 const BotoneraDeAcciones = () => {
-  const imagenHogar = 'https://www.zooplus.es/magazine/wp-content/uploads/2019/10/2-4-1024x609.jpg'
+  const imagenHogar = 'https://resizer.glanacion.com/resizer/nxQ2S7e-Y0eemPKm-ASvm_lC2jc=/1200x800/filters:format(webp):quality(80)/cloudfront-us-east-1.images.arcpublishing.com/lanacionar/3EP2T2RDLRGD5LPWUXNNZRKITU.jpg'
   const imagenDonacion = 'https://media.istockphoto.com/id/1250318540/es/foto/doberman-dobermann-pata-de-perro-en-la-palma-de-una-mano-humana-de-cerca-sobre-un-fondo-de.jpg?s=612x612&w=0&k=20&c=lQvxgQLYhGW-zufjZUQxWd-DEcTJK-gLIMzqjwlVo4s='
   const fondoBoton = (url) => {
     return { backgroundImage: `url('${url}')` }

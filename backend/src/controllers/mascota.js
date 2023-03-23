@@ -29,6 +29,8 @@ const createPet = async (req, res) => {
     // Crear la mascota con el ID del usuario
     const pet = new Pet({
       animal: req.body.animal,
+      size: req.body.size,
+      breed: req.body.breed,
       name: req.body.name,
       note: req.body.note,
       date: new Date(),

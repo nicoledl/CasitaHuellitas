@@ -42,8 +42,8 @@ const App = () => {
     <AppContext.Provider value={{ estado, cambiarEstado, token, obtenerToken, mascota, dataMascota }}>
       <Router>
         <Routes>
-          <Route path='/' element={<Ingreso />} />
           {/* RUTAS DEL SERVIDOR */}
+          <Route path='/ingreso' element={<Ingreso />} />
           <Route path='/administracion' element={<InicioUA />} />
           <Route path='/mascotas' element={<Mascotas />} />
           <Route path='/adoptados' element={<Adoptados />} />
@@ -51,7 +51,7 @@ const App = () => {
           <Route path='/solicitudes' element={<Solicitudes />} />
           <Route path='/calendario' element={<Calendario />} />
           {/* RUTAS DEL CLIENTE */}
-          <Route path='/inicio' element={<InicioUB />} />
+          <Route path='/' element={<InicioUB />} />
           <Route path='/adoptar' element={<MascotasEnAdopcion />} />
           <Route path='/donaciones' element={<Donaciones />} />
           <Route path='/info-pre-adopcion' element={<InfoPreAdopcion />} />

@@ -5,7 +5,6 @@ import { Col, Container, Row } from 'react-grid-system'
 import { AppContext } from '../../App'
 import imagenPerro from '../../assets/perro-default.png'
 import imagenGato from '../../assets/gato-default.png'
-import Modal from '../commons/Modal'
 import Formulario from './FormularioDeMascota'
 
 const imagenEstilo = { height: '50%', width: '100%', borderRadius: '8px 8px 0px 0px', objectFit: 'cover' }
@@ -13,13 +12,14 @@ const containerTarjeta = { height: '25%', display: 'grid', justifyContent: 'cent
 const botonera = { backgroundColor: '#292929', height: '22%', borderRadius: '0px 0px 8px 8px', margin: 0, color: '#f5f5f5', fontWeight: '600' }
 const estiloBoton = { display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', fontWeight: '600', cursor: 'pointer', margin: 0, background: 'none', border: 'none', color: '#f5f5f5', fontSize: 'large', fontFamily: "'Questrial', sans-serif" }
 
-const ListaMascotas = () => {
-  const { estado, cambiarEstado } = useContext(AppContext)
+const ListaMascotas = ({ onClose }) => {
+  const { estado, cambiarEstado, mascota, dataMascota } = useContext(AppContext)
   const [mascotas, setMascotas] = useState([])
-  const [editar, setEditar] = useState(false)
   const [imagen, setImagen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
+  // eslint-disable-next-line no-unused-vars
   const [id, setId] = useState('')
-  const { register, handleSubmit } = useForm()
+  const { register, handleSubmit, reset } = useForm()
   const baseUrl = 'http://localhost:3001'
 
   useEffect(() => {
@@ -34,16 +34,11 @@ const ListaMascotas = () => {
     fetchData()
   }, [estado])
 
-  const onEdit = (mascotaId) => {
-    setId(mascotaId)
-    setEditar(true)
-  }
-
   const onSubmit = async datos => {
     try {
       await axios.put(`${baseUrl}/api/mascotas/${id}`, datos)
-      setEditar(!editar)
       cambiarEstado(!estado)
+      reset()
     } catch (error) {
       console.error('Error al modificar los datos:', error)
     }
@@ -55,6 +50,20 @@ const ListaMascotas = () => {
       .catch((error) => console.error(error))
   }
 
+  const handleClick = (mascota) => {
+    dataMascota(mascota)
+    setId(mascota._id)
+    setIsOpen(true)
+  }
+
+  // eslint-disable-next-line no-unused-vars
+  const handleClose = () => {
+    dataMascota({})
+    setIsOpen(false)
+    reset()
+  }
+
+  // eslint-disable-next-line no-unused-vars
   const handleChange = (event) => {
     const file = event.target.files[0]
     setImagen(file)
@@ -74,67 +83,73 @@ const ListaMascotas = () => {
     )
   }
 
-  const listaDeMascotas = (mascota) => {
+  const editarMascota = () => {
     return (
-      <div id='carta-mascota'>
-        <input
-          type='hidden'
-          // type='file'
-          accept='.jpg,.png,.jpeg'
-          name='upload-imagen'
-          id='imagen'
-          onChange={handleChange}
-        />
-        <div className='container-formulario-editar'>
-          <Row>
-            <form className='formulario-editar' onSubmit={handleSubmit(onSubmit)}>
-              <h1 style={{ color: '#2dc5a4', fontSize: '20px' }}>EDITAR</h1>
-              <Col md={12}>
-                <p>Animal: </p>
-                <select defaultValue={mascota.animal} {...register('animal')}>
-                  <option value='Perro'>Perro</option>
-                  <option value='Gato'>Gato</option>
-                </select>
-              </Col>
-              <Col md={12} style={{ flexFlow: 'column' }}>
-                <p style={{ margin: 0, justifyContent: 'initial', display: 'flex' }}>Nombre:</p>
-                <input type='text' placeholder='Nombre' defaultValue={mascota.name} {...register('name', { required: false, maxLength: 100 })} />
-              </Col>
-              <Col>
-                <textarea
-                  type='text'
-                  placeholder='Nota'
-                  defaultValue={mascota.note}
-                  {...register('note')}
-                />
-              </Col>
-              <Col style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '8px' }}>
-                <label>Importante:
-                  <input
-                    type='checkbox'
-                    placeholder='Importante'
-                    defaultChecked={mascota.important ? 'true' : false}
-                    {...register('important', {})}
-                  />
-                </label>
-              </Col>
-              <Col sm={6}>
-                <label>
-                  *Apto para adopción:
-                  <input
-                    type='checkbox'
-                    placeholder='EnAdopcion'
-                    defaultChecked={mascota.inAdoption ? 'true' : false}
-                    {...register('inAdoption', {})}
-                  />
-                </label>
-              </Col>
-              <Col style={{ gap: 20 }}>
-                <button className='boton-submit'>Editar</button>
-                <button className='boton-submit' style={{ backgroundColor: '#d70000' }} onClick={() => setEditar(!editar)}>Cancelar</button>
-              </Col>
+      <div id='modal'>
+        <div className='modal'>
+          <div className='modal-content'>
+            <form id='formulario-mascota' onSubmit={handleSubmit(onSubmit)} key={mascota._id}>
+              <Container style={{ maxWidth: '1200px' }}>
+                <h3 style={{ marginBottom: '10px', textAlign: 'center' }}>Editar datos {mascota.name} </h3>
+                <Row style={{ display: 'flex' }}>
+                  <Col xs={12} sm={6} md={6}>
+                    <p>Animal: </p>
+                    <select defaultValue={mascota.animal} {...register('animal')}>
+                      <option value='Perro'>Perro</option>
+                      <option value='Gato'>Gato</option>
+                    </select>
+                  </Col>
+                  <Col xs={12} sm={6} md={6}>
+                    <p>Tamaño estimado: </p>
+                    <select defaultValue={mascota.size} {...register('size')}>
+                      <option value='Grande'>Grande</option>
+                      <option value='Mediano'>Mediano</option>
+                      <option value='Pequeño'>Pequeño</option>
+                    </select>
+                  </Col>
+                </Row>
+
+                <Row style={{ display: 'flex' }}>
+                  <Col xs={12} sm={6} md={6}>
+                    <p>Raza: </p>
+                    <input type='text' placeholder='Raza' defaultValue={mascota.breed} {...register('breed')} />
+                  </Col>
+                  <Col xs={12} sm={6} md={6}>
+                    <p>Nombre: </p>
+                    <input type='text' placeholder='Nombre' defaultValue={mascota.name} {...register('name')} />
+                  </Col>
+                </Row>
+
+                <p>Nota: </p>
+                <textarea type='text' placeholder='Nota' defaultValue={mascota.note} {...register('note')} style={{ width: '100%' }} />
+
+                <Row style={{ display: 'flex' }}>
+                  <Col xs={12} sm={6} md={6}>
+                    <label>
+                      *Importante:
+                      <input type='checkbox' placeholder='Importante' defaultChecked={mascota.important} {...register('important', {})} style={{ marginLeft: '5px' }} />
+                      <p style={{ fontSize: '10px', marginBottom: '10px', color: 'grey' }}>*Si el animal se encuentra en una situción critica.</p>
+                    </label>
+                  </Col>
+                  <Col xs={12} sm={6} md={6}>
+                    <label>
+                      *Apto para adopción:
+                      <input type='checkbox' placeholder='EnAdopcion' defaultChecked={mascota.inAdoption} {...register('inAdoption', {})} style={{ marginLeft: '5px' }} />
+                      <p style={{ fontSize: '10px', marginBottom: '10px', color: 'grey' }}>*No marcar si esta mascota no es apta para ser adoptada.</p>
+                    </label>
+                  </Col>
+                </Row>
+                <Row style={{ display: 'flex' }}>
+                  <Col xs={6} sm={6} md={6}>
+                    <button type='submit' className='boton-submit'>Editar</button>
+                  </Col>
+                  <Col xs={6} sm={6} md={6}>
+                    <button onClick={handleClose} className='boton-cancelar'>Cancelar</button>
+                  </Col>
+                </Row>
+              </Container>
             </form>
-          </Row>
+          </div>
         </div>
       </div>
     )
@@ -146,37 +161,31 @@ const ListaMascotas = () => {
         <Col id='display-de-mascota' sm={12} md={6} xl={4} xxl={3}>
           <Formulario />
         </Col>
-        {mascotas.map((mascota) => {
-          const fecha = new Date(mascota.date)
+        {mascotas.map((mascotaData) => {
+          const { _id, date, animal, name, important } = mascotaData
+          const fecha = new Date(date)
           const fechaISO = fecha.toISOString().substring(0, 10)
 
           return (
-            <Col id='display-de-mascota' sm={12} md={6} xl={4} xxl={3} key={mascota._id}>
-
-              {editar && id === mascota._id
-                ? (listaDeMascotas(mascota))
-                : (
-                  <div id='carta-mascota'>
-                    <img alt={mascota.name} src={mascota.animal === 'Perro' ? imagenPerro : mascota.animal === 'Gato' ? imagenGato : imagen.name} style={imagenEstilo} />
-                    <div style={containerTarjeta}>
-                      <p>Animal: {mascota.animal}</p>
-                      {mascota.name === null ? <p>No se le asignó un nombre.</p> : <p>Nombre: {mascota.name}</p>}
-                      {mascota.important && <p style={{ color: '#d70000' }}>Situación delicada.</p>}
-                      <p>Ingreso: {fechaISO}</p>
-                    </div>
-                    <Row style={botonera}>
-                      <Col sm={4}>
-                        <p onClick={() => borrarMascota(mascota._id)} style={estiloBoton}>ELIMINAR</p>
-                      </Col>
-                      <Col sm={4} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                        <Modal titulo='NOTA:' contenido={mascota._id ? mascota.note : <p>No hay nota...</p>} textoDelBoton='NOTA' estiloDelBoton={estiloBoton} />
-                      </Col>
-                      <Col sm={4}>
-                        <div onClick={() => onEdit(mascota._id)} style={estiloBoton}>EDITAR</div>
-                      </Col>
-                    </Row>
-                  </div>)}
-
+            <Col id='display-de-mascota' sm={12} md={6} xl={4} xxl={3} key={_id}>
+              <div id='carta-mascota'>
+                <img alt={name} src={animal === 'Perro' ? imagenPerro : animal === 'Gato' ? imagenGato : imagen.name} style={imagenEstilo} />
+                <div style={containerTarjeta}>
+                  <p>Animal: {animal}</p>
+                  {name === null ? <p>No se le asignó un nombre.</p> : <p>Nombre: {name}</p>}
+                  {important && <p style={{ color: '#d70000' }}>Situación delicada.</p>}
+                  <p>Ingreso: {fechaISO}</p>
+                </div>
+                <Row style={botonera}>
+                  <Col sm={4}>
+                    <p onClick={() => borrarMascota(_id)} style={estiloBoton}>ELIMINAR</p>
+                  </Col>
+                  <Col sm={4}>
+                    <button onClick={() => handleClick(mascotaData)} style={estiloBoton}>EDITAR</button>
+                    {isOpen && editarMascota()}
+                  </Col>
+                </Row>
+              </div>
             </Col>
           )
         })}

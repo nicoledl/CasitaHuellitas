@@ -1,6 +1,7 @@
 import React from 'react'
 import { Col, Container, Row } from 'react-grid-system'
 import { useMediaQuery } from 'react-responsive'
+import Footer from '../components/commons/Footer'
 import Navbar from '../components/commons/Navbar'
 
 const breakpoints = {
@@ -36,6 +37,7 @@ const Donaciones = () => {
           </Row>
         </Container>
       </Container>
+      <Footer />
     </>
   )
 }

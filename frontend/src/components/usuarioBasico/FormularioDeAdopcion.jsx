@@ -34,7 +34,7 @@ const FormularioDeAdopcion = () => {
       }
 
       await axios.post('http://localhost:3001/api/solicitudes-de-adopcion', datos)
-      navigate('/inicio')
+      navigate('/')
     } catch (error) {
       console.error('Error al enviar los datos:', error)
     }

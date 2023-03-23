@@ -10,7 +10,7 @@ const container = {
 const BotonParaAdoptantes = () => {
   const navigate = useNavigate()
   const handleClick = () => {
-    navigate('/inicio')
+    navigate('/')
   }
 
   return (

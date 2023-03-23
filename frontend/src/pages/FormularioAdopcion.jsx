@@ -1,3 +1,4 @@
+import Footer from '../components/commons/Footer'
 import Navbar from '../components/commons/Navbar'
 import FormularioDeAdopcion from '../components/usuarioBasico/FormularioDeAdopcion'
 
@@ -6,6 +7,7 @@ const FormularioAdopcion = () => {
     <>
       <Navbar />
       <FormularioDeAdopcion />
+      <Footer />
     </>
   )
 }

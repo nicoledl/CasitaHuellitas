@@ -4,7 +4,7 @@ import { FaInstagram, FaFacebookSquare, FaTwitterSquare } from 'react-icons/fa'
 
 const Footer = () => {
   return (
-    <Container id='footer' fluid>
+    <Container id='footer' fluid style={{ position: 'relative', width: '100%', bottom: 0 }}>
       <Container className='footer-content'>
         <Row className='row'>
           <Col className='col' md={4}>

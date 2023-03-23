@@ -183,7 +183,31 @@ code {
 }
 
 .boton-submit:active {
-  background-color: #e0a000;
+  background-color: #cc9200;
+  box-shadow: 2px 2px 4px 0px #0220338e inset;
+}
+
+.boton-cancelar {
+  border: none;
+  width: 80px;
+  display: block;
+  float: right;
+  background-color: #ff301e;
+  color: #f5f5f5;
+  padding: 6px;
+  border-radius: 15px 5px 5px 5px;
+  font-weight: 600;
+  font-size: medium;
+  cursor: pointer;
+  transition: background-color 0.2s
+}
+
+.boton-cancelar:hover {
+  background-color: #d91c0b;
+}
+
+.boton-cancelar:active {
+  background-color: #c11607;
   box-shadow: 2px 2px 4px 0px #0220338e inset;
 }
 
@@ -300,6 +324,7 @@ code {
 }
 
 .menu-horizontal a {
+  margin: 0;
   font-size: large;
   color: #fff;
   text-decoration: none;
@@ -332,11 +357,20 @@ code {
   color: #000000;
 }
 
+.ps-menu-button {
+  margin: 0;
+}
+
+.ps-menu-button:hover {
+  background-color: #cf990f;
+}
+
 .ps-submenu-content li:hover {
   background-color: #e4b338;
 }
 
 #item-menu {
+  margin: 0;
   transition: background-color 0.5s, color 0.1s;
   font-size: large;
 }
@@ -348,6 +382,7 @@ code {
 }
 
 .menuitem {
+  margin: 0;
   background-color: #ffffff;
   color: #2e2e2e;
 }
@@ -415,28 +450,32 @@ code {
 /* LISTA DE MASCOTAS */
 @import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
 
-#formulario-mascota * {
-  margin-bottom: 8px;
-  font-family: Arial, Helvetica, sans-serif;
+#formulario-mascota {
+  display: flex;
+  flex-direction: column;
+  font-size: large;
+  padding: 20px;
+  border-radius: 5px 5px 5px 5px;
+  background-color: #fff;
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
 #formulario-mascota h1 {
-  margin-bottom: 20px;
+  color: #2dc5a4;
+  margin-bottom: 10px;
 }
 
 #formulario-mascota input,
+textarea,
 select {
+  margin-bottom: 10px;
   font-size: medium;
-  background: none;
-  border: none;
-  border-bottom: solid 1px rgb(0, 0, 0)
 }
 
 #formulario-mascota textarea {
-  resize: none;
-  height: 300px;
-  width: 100%;
-  font-size: medium;
+  resize: vertical;
+  height: 250px;
 }
 
 .formulario-editar * {
@@ -447,19 +486,17 @@ select {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+.formulario-editar p {
+  margin: 0;
+  justify-content: initial;
+  display: flex
+}
+
 .formulario-editar textarea {
   resize: none;
   height: 130px;
   font-size: 14px;
   width: 100%;
-}
-
-.container-formulario-editar {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 #display-de-mascota {
@@ -476,12 +513,6 @@ select {
   height: 380px;
   background: #f8f8f8;
   border-radius: 4px 4px 4px 4px;
-}
-
-#carta-mascota p {
-  display: grid;
-  justify-content: center;
-  align-items: center;
 }
 
 #carta-mascota-nueva {
@@ -517,10 +548,6 @@ select {
 /* */
 
 /* MODAL */
-#modal * {
-  margin-bottom: 15px;
-}
-
 .modal {
   opacity: 0;
   z-index: 10;
@@ -553,13 +580,8 @@ select {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: white;
   width: max-content;
   height: max-content;
-  padding: 50px;
-  border-radius: 5px;
-  max-width: 600px;
-  max-height: 80%;
   overflow: auto;
   position: relative;
 }
@@ -773,7 +795,7 @@ select {
   font-family: 'Questrial', sans-serif;
 }
 
-#galeria-adopciones {
+#mural-adoptados {
   background-image: url('./assets/pattern.png');
   height: max-content;
   padding-bottom: 80px;
@@ -801,7 +823,8 @@ select {
 /* */
 
 /* BOTONERA DE ACCIONES */
-#botonera-de-acciones, a {
+#botonera-de-acciones,
+a {
   height: max-content;
   margin-top: 10%;
   margin-bottom: 10%;
@@ -813,6 +836,7 @@ select {
 .botonera-de-acciones-content .row {
   height: 40vh;
   gap: 20px;
+  height: max-content;
 }
 
 .botonera-de-acciones-content .col {
@@ -825,29 +849,38 @@ select {
   background-color: #2dc5a4;
   border-radius: 50px 50px 0 50px;
   margin-bottom: 20px;
-  color: #fff;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
   border: solid 7px #292929;
-  filter: grayscale(100%);
-  transition: background-size 1s, filter 0.2s;
-}
-
-.botonera-de-acciones-content a {
-  text-decoration: none
+  box-shadow: 200px 200px 400px 200px rgba(0, 0, 0, 0.56) inset;
+  -webkit-box-shadow: 200px 200px 400px 200px rgba(0, 0, 0, 0.56) inset;
+  -moz-box-shadow: 200px 200px 400px 200px rgba(0, 0, 0, 0.56) inset;
+  transition: box-shadow 0.2s, border 0.2s;
 }
 
 .botonera-de-acciones-content .col:hover {
-  filter: grayscale(0%);
+  border: solid 7px #20d9b1;
+  box-shadow: 200px 200px 400px 200px rgba(0, 0, 0, 0.19) inset;
+  -webkit-box-shadow: 200px 200px 400px 200px rgba(0, 0, 0, 0.19) inset;
+  -moz-box-shadow: 200px 200px 400px 200px rgba(0, 0, 0, 0.19) inset;
+}
+
+.botonera-de-acciones-content .col:active {
+  box-shadow: 200px 200px 400px 200px rgba(0, 0, 0, 0.56) inset;
+  -webkit-box-shadow: 200px 200px 400px 200px rgba(0, 0, 0, 0.56) inset;
+  -moz-box-shadow: 200px 200px 400px 200px rgba(0, 0, 0, 0.56) inset;
+}
+
+.botonera-de-acciones-content a {
+  text-decoration: none;
 }
 
 .botonera-de-acciones-content .col p {
-  color: #fff;
+  color: #ffffff;
   font-size: clamp(1rem, 1.1vw + 0.5rem, 1.2rem);
-  font-weight: 600;
+  font-weight: bold;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  text-shadow: 0px 0px 5px rgb(0, 0, 0);
 }
 
 /*  */
@@ -919,18 +952,21 @@ select {
 
 /* FOOTER */
 #footer {
+  left: 0;
+  bottom: 0;
   color: #fff;
   justify-content: center;
   background-color: #292929;
   height: max-content;
   padding-top: 20px;
-  padding-bottom: 20px;
-  position: absolute;
-  bottom: 0;
 }
 
 .footer-content h3 {
   color: #2dc5a4;
+}
+
+.footer-content .col {
+  margin-bottom: 20px;
 }
 
 .footer-content .col a {
