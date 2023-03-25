@@ -1,7 +1,8 @@
-const { MongoClient } = require('mongodb').MongoClient
+const { MongoClient } = require('mongodb')
 require('dotenv').config()
 
-const client = new MongoClient(process.env.MONGODB_ATLAS, { useNewUrlParser: true, useUnifiedTopology: true, keepAlive: true })
+const uri = process.env.MONGODB_ATLAS
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, keepAlive: true })
 
 const connectToDB = async () => {
   try {
