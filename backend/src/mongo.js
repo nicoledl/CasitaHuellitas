@@ -1,4 +1,4 @@
-const { MongoClient } = require('mongodb')
+const { MongoClient } = require('mongodb').MongoClient
 require('dotenv').config()
 
 const client = new MongoClient(process.env.MONGODB_ATLAS, { useNewUrlParser: true, useUnifiedTopology: true, keepAlive: true })
