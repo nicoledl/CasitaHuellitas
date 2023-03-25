@@ -36,12 +36,14 @@ const ListaMascotas = ({ onClose }) => {
 
   const onSubmit = async datos => {
     try {
+      console.log(datos)
       await axios.put(`${baseUrl}/api/mascotas/${id}`, datos)
       cambiarEstado(!estado)
-      reset()
+      setIsOpen(false)
     } catch (error) {
       console.error('Error al modificar los datos:', error)
     }
+    reset()
   }
 
   const borrarMascota = (id) => {
@@ -58,7 +60,6 @@ const ListaMascotas = ({ onClose }) => {
 
   // eslint-disable-next-line no-unused-vars
   const handleClose = () => {
-    dataMascota({})
     setIsOpen(false)
     reset()
   }
@@ -127,15 +128,15 @@ const ListaMascotas = ({ onClose }) => {
                   <Col xs={12} sm={6} md={6}>
                     <label>
                       *Importante:
-                      <input type='checkbox' placeholder='Importante' defaultChecked={mascota.important} {...register('important', {})} style={{ marginLeft: '5px' }} />
+                      <input type='radio' placeholder='Importante' defaultValue={mascota.important} {...register('important', {})} style={{ marginLeft: '5px' }} />
                       <p style={{ fontSize: '10px', marginBottom: '10px', color: 'grey' }}>*Si el animal se encuentra en una situción critica.</p>
                     </label>
                   </Col>
                   <Col xs={12} sm={6} md={6}>
                     <label>
                       *Apto para adopción:
-                      <input type='checkbox' placeholder='EnAdopcion' defaultChecked={mascota.inAdoption} {...register('inAdoption', {})} style={{ marginLeft: '5px' }} />
-                      <p style={{ fontSize: '10px', marginBottom: '10px', color: 'grey' }}>*No marcar si esta mascota no es apta para ser adoptada.</p>
+                      <input type='radio' placeholder='EnAdopcion' defaultValue={mascota.inAdoption} {...register('inAdoption', {})} style={{ marginLeft: '5px' }} />
+                      <p style={{ fontSize: '10px', marginBottom: '10px', color: 'grey' }}>*No marcar si este animal no está apto para ser adoptado.</p>
                     </label>
                   </Col>
                 </Row>

@@ -14,6 +14,7 @@ const ListaMascotas = () => {
   const { dataMascota } = useContext(AppContext)
   const navigate = useNavigate()
   const [mascotas, setMascotas] = useState([])
+  const [showContent, setShowContent] = useState(false)
   const baseUrl = 'http://localhost:3001'
 
   useEffect(() => {
@@ -33,21 +34,28 @@ const ListaMascotas = () => {
     navigate('/formulario-adopcion')
   }
 
+  setTimeout(() => {
+    setShowContent(true)
+  }, 3000)
+
   if (mascotas[0] === undefined) {
     return (
       <Container style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-        <Oval
-          height={100}
-          width={100}
-          color='#FFCC4E'
-          wrapperStyle={{}}
-          wrapperClass=''
-          visible
-          ariaLabel='oval-loading'
-          secondaryColor='#FFCC4E'
-          strokeWidth={2}
-          strokeWidthSecondary={2}
-        />
+        {showContent
+          ? <p>Aún no hay huellitas en adopción...</p>
+          : (
+            <Oval
+              height={100}
+              width={100}
+              color='#FFCC4E'
+              wrapperStyle={{}}
+              wrapperClass=''
+              visible
+              ariaLabel='oval-loading'
+              secondaryColor='#FFCC4E'
+              strokeWidth={2}
+              strokeWidthSecondary={2}
+            />)}
       </Container>
     )
   }
