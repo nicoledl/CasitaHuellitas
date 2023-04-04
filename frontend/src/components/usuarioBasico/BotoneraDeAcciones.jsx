@@ -15,11 +15,11 @@ const BotoneraDeAcciones = () => {
       <Container className='botonera-de-acciones-content'>
         <Row className='row' justify='center'>
           <Col sm={12} md={5} lg={3} className='col' style={fondoBoton(imagenHogar)}>
-            <Link to='/hogardetransito' style={{ width: '100%', height: '100%' }}>
-              <div>
-                <p>¿Querés ser hogar de transito?<br />Haz click para más información</p>
-              </div>
-            </Link>
+            {/* <Link to='/hogardetransito' style={{ width: '100%', height: '100%' }}> */}
+            <div>
+              <p>¿Querés ser hogar de transito?<br />Haz click para más información</p>
+            </div>
+            {/* </Link> */}
           </Col>
           <Col sm={12} md={5} lg={3} className='col' style={fondoBoton(imagen)}>
             <Link to='/adoptar' style={{ width: '100%', height: '100%' }}>

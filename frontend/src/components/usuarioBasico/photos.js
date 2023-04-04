@@ -11,7 +11,7 @@ const fotos = [
   { src: 'https://buenosaires.gob.ar/sites/default/files/styles/full_width/public/media/image/2022/09/30/e888f884cdfba3e4757d7c9206872e88071070f4.jpg?itok=He7UUpt1' }
 ]
 
-export const obtenerTamanoImagen = () => {
+export default function obtenerTamanoImagen () {
   function obtenerDimensiones (fotosUrl) {
     return fotosUrl.map((imagen) => {
       const img = new Image()
@@ -20,10 +20,12 @@ export const obtenerTamanoImagen = () => {
       return {
         src: imagen.src,
         width: img.width,
-        height: img.height
+        height: img.height,
+        isVisible: false
       }
     })
   }
   const fotosConDimensiones = obtenerDimensiones(fotos)
+
   return fotosConDimensiones
 }

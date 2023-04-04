@@ -128,7 +128,11 @@ const ListaMascotas = ({ onClose }) => {
                   <Col xs={12} sm={6} md={6}>
                     <label>
                       *Importante:
-                      <input type='radio' placeholder='Importante' defaultValue={mascota.important} {...register('important', {})} style={{ marginLeft: '5px' }} />
+                      {/* <input type='radio' placeholder='Importante' defaultValue={mascota.important} {...register('important', {})} style={{ marginLeft: '5px' }} /> */}
+                      <select defaultValue={mascota.important} {...register('important', {})} style={{ marginLeft: '5px' }}>
+                        <option value='true'>Perro</option>
+                        <option value='false'>Gato</option>
+                      </select>
                       <p style={{ fontSize: '10px', marginBottom: '10px', color: 'grey' }}>*Si el animal se encuentra en una situción critica.</p>
                     </label>
                   </Col>

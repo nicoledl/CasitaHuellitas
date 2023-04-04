@@ -21,7 +21,7 @@ const createPet = async (req, res) => {
     const userId = decodedToken._id._id
 
     // Buscar el usuario en la base de datos
-    const user = await collectionUser.findOne({ _id: ObjectId(userId) })
+    const user = await collectionUser.findOne({ _id: new ObjectId(userId) })
     if (!user) {
       return res.status(400).json({ message: 'El usuario no existe' })
     }
@@ -36,14 +36,14 @@ const createPet = async (req, res) => {
       date: new Date(),
       important: req.body.important,
       inAdoption: req.body.inAdoption,
-      user: ObjectId(userId)
+      user: new ObjectId(userId)
     })
 
     const savedPet = await collectionPet.insertOne(pet)
 
     // Actualizar la lista de mascotas del usuario
     await collectionUser.updateOne(
-      { _id: ObjectId(userId) },
+      { _id: new ObjectId(userId) },
       { $push: { pets: savedPet.insertedId } }
     )
 
@@ -75,7 +75,7 @@ const getByInAdoption = async (req, res) => {
 const updateInfo = async (req, res) => {
   try {
     const pet = await collectionPet.findOneAndUpdate(
-      { _id: ObjectId(req.params.id) },
+      { _id: new ObjectId(req.params.id) },
       {
         $set:
         {
@@ -98,7 +98,7 @@ const updateInfo = async (req, res) => {
 
 const deletePet = async (req, res) => {
   try {
-    const pet = await collectionPet.findOneAndDelete({ _id: ObjectId(req.params.id) })
+    const pet = await collectionPet.findOneAndDelete({ _id: new ObjectId(req.params.id) })
     if (!pet) {
       return res.status(404).json({ error: 'Pet not found' })
     }

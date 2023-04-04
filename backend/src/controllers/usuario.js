@@ -42,7 +42,7 @@ const getAll = async (req, res) => {
 
 const getById = async (req, res) => {
   try {
-    const user = await collectionUser.findOne({ _id: ObjectId(req.params.id) })
+    const user = await collectionUser.findOne({ _id: new ObjectId(req.params.id) })
     res.json(user)
   } catch (error) {
     res.status(500).json({ error: error.message })
