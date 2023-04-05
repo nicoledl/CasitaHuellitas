@@ -25,7 +25,7 @@ const petSchema = new mongoose.Schema({
     type: Boolean
   },
   inAdoption: {
-    type: Boolean
+    type: String
   },
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
 })

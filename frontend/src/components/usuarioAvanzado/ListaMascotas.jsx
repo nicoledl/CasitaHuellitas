@@ -130,8 +130,8 @@ const ListaMascotas = ({ onClose }) => {
                       *Importante:
                       {/* <input type='radio' placeholder='Importante' defaultValue={mascota.important} {...register('important', {})} style={{ marginLeft: '5px' }} /> */}
                       <select defaultValue={mascota.important} {...register('important', {})} style={{ marginLeft: '5px' }}>
-                        <option value='true'>Perro</option>
-                        <option value='false'>Gato</option>
+                        <option value='false'>-</option>
+                        <option value='true'>Importante</option>
                       </select>
                       <p style={{ fontSize: '10px', marginBottom: '10px', color: 'grey' }}>*Si el animal se encuentra en una situción critica.</p>
                     </label>
@@ -139,7 +139,11 @@ const ListaMascotas = ({ onClose }) => {
                   <Col xs={12} sm={6} md={6}>
                     <label>
                       *Apto para adopción:
-                      <input type='radio' placeholder='EnAdopcion' defaultValue={mascota.inAdoption} {...register('inAdoption', {})} style={{ marginLeft: '5px' }} />
+                      {/* <input type='radio' placeholder='EnAdopcion' defaultValue={mascota.inAdoption} {...register('inAdoption', {})} style={{ marginLeft: '5px' }} /> */}
+                      <select defaultValue={mascota.inAdoption} {...register('inAdoption', {})} style={{ marginLeft: '5px' }}>
+                        <option value='false'>-</option>
+                        <option value='true'>Apto</option>
+                      </select>
                       <p style={{ fontSize: '10px', marginBottom: '10px', color: 'grey' }}>*No marcar si este animal no está apto para ser adoptado.</p>
                     </label>
                   </Col>
@@ -177,8 +181,8 @@ const ListaMascotas = ({ onClose }) => {
                 <img alt={name} src={animal === 'Perro' ? imagenPerro : animal === 'Gato' ? imagenGato : imagen.name} style={imagenEstilo} />
                 <div style={containerTarjeta}>
                   <p>Animal: {animal}</p>
-                  {name === null ? <p>No se le asignó un nombre.</p> : <p>Nombre: {name}</p>}
-                  {important && <p style={{ color: '#d70000' }}>Situación delicada.</p>}
+                  {name === '' ? <p>No se le asignó un nombre.</p> : <p>Nombre: {name}</p>}
+                  {important === 'true' && <p style={{ color: '#d70000' }}>Situación delicada.</p>}
                   <p>Ingreso: {fechaISO}</p>
                 </div>
                 <Row style={botonera}>

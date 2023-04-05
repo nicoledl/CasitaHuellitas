@@ -65,7 +65,7 @@ const getAll = async (req, res) => {
 
 const getByInAdoption = async (req, res) => {
   try {
-    const mascotas = await collectionPet.find({ inAdoption: true }).toArray()
+    const mascotas = await collectionPet.find({ inAdoption: 'true' }).toArray()
     res.json(mascotas)
   } catch (error) {
     res.status(500).json({ error: error.message })

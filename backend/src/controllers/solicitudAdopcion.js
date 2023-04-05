@@ -18,7 +18,7 @@ const createAdoptionRequest = async (req, res) => {
       email: body.email,
       date: new Date(),
       questions: body.questions,
-      pet: ObjectId(body.pet)
+      pet: new ObjectId(body.pet)
     })
 
     const savedAdoptionRequest = await collectionAdoptionRequest.insertOne(adoptionRequest)

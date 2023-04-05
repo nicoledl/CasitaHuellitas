@@ -10,6 +10,7 @@ const Formulario = () => {
   const [isOpen, setIsOpen] = useState(false)
   const onSubmit = async datos => {
     console.log(datos)
+
     try {
       await axios.post('http://localhost:3001/api/mascotas', datos, { withCredentials: true })
       console.log('Datos enviados exitosamente')
@@ -73,14 +74,20 @@ const Formulario = () => {
                   <Col xs={12} sm={6} md={6}>
                     <label>
                       *Importante:
-                      <input type='radio' placeholder='Importante' value='A' {...register('important', { value: false })} style={{ marginLeft: '5px' }} />
+                      <select placeholder='Importante' {...register('important', {})} style={{ marginLeft: '5px' }}>
+                        <option value='false'>-</option>
+                        <option value='true'>Importante</option>
+                      </select>
                       <p style={{ fontSize: '10px', marginBottom: '10px', color: 'grey' }}>*Si el animal se encuentra en una situción critica.</p>
                     </label>
                   </Col>
                   <Col xs={12} sm={6} md={6}>
                     <label>
                       *Apto para adopción:
-                      <input type='radio' placeholder='EnAdopcion' {...register('inAdoption', { value: false })} style={{ marginLeft: '5px' }} />
+                      <select placeholder='En Adopción' {...register('inAdoption', {})} style={{ marginLeft: '5px' }}>
+                        <option value='false'>-</option>
+                        <option value='true'>Apto</option>
+                      </select>
                       <p style={{ fontSize: '10px', marginBottom: '10px', color: 'grey' }}>*No marcar si este animal no está apto para ser adoptado.</p>
                     </label>
                   </Col>
