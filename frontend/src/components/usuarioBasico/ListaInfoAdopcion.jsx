@@ -40,7 +40,7 @@ const ListaInfoAdopcion = () => {
               borderTop: `4px solid #FFCC4E`,
             };
             return (
-              <Col key={i} md={12} className="col" style={estiloCol}>
+              <Col key={i} md={12} className="col bg-white" style={estiloCol}>
                 <p style={{ lineHeight: "22px", fontSize: "1.1rem" }}>
                   <FaExclamationCircle className="" /> {puntos}
                 </p>
