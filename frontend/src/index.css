@@ -1,19 +1,26 @@
 /* Colores: 2dc5a4, 00a682, FFCC4E, 292929 */
+:root {
+  --color-primary: #2dc5a4;
+  --color-secondary: #00a682;
+  --color-accent: #ffcc4e;
+  --color-dark: #292929;
+}
 
 * {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
-  font-family: 'Questrial';
+  font-family: "Questrial";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  background-color: #F3F3F3;
+  background-color: #f3f3f3;
+  box-sizing: border-box;
 }
 
 body h1 {
-  font-family: 'Pacifico', cursive;
+  font-family: "Pacifico", cursive;
 }
 
 body input:focus,
@@ -22,78 +29,39 @@ textarea:focus {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
+p {
+  margin: 0;
+}
 
 /* PAGINA DE INGRESO */
-@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
 
-#ingreso {
+.ingreso {
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgb(45, 197, 164);
-  background: radial-gradient(circle, rgba(45, 197, 164, 1) 10%, rgba(0, 150, 118, 1) 100%);
+  background-image: url("https://upload.wikimedia.org/wikipedia/commons/6/6d/Boston_Public_Garden_May_2018_006.jpg");
+  background-size: cover;
+  background-position: center;
   color: #fff;
 }
 
-#ingresoh1 {
+.ingresoh1 {
   font-size: clamp(2rem, 5.3vw - 0.3rem, 3rem);
 }
 
-#borde-top {
-  top: 0;
-  height: 80px;
-  width: 100%;
-  background-color: #292929;
-  position: absolute;
-  --mask:
-    linear-gradient(to top, #0000 51px, #000 0),
-    radial-gradient(51px, #000 98%, #0000) bottom/94.35px 102px;
-  -webkit-mask: var(--mask);
-  mask: var(--mask);
-}
-
-#borde-bot {
-  bottom: 0;
-  height: 80px;
-  width: 100%;
-  background-color: #292929;
-  position: absolute;
-  --mask:
-    linear-gradient(to bottom, #0000 51px, #000 0),
-    radial-gradient(51px, #000 98%, #0000) top/94.35px 102px;
-  -webkit-mask: var(--mask);
-  mask: var(--mask);
-}
-
-#boton-conocer {
-  border: none;
-  color: #ffffff;
-  background-color: #FFCC4E;
-  width: 50%;
-  border-radius: 6px 6px 6px 6px;
-  padding-top: 18px;
-  padding-bottom: 18px;
-  font-weight: 600;
-  font-size: x-large;
-  margin-top: 40px;
-  margin-bottom: 50px;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: background-color 0.2s, box-shadow
-}
-
-#boton-conocer:hover {
-  background-color: #e0a000;
-}
-
-#boton-conocer:active {
-  background-color: #e0a000;
-  box-shadow: 2px 2px 4px 0px #0220338e inset;
+.ingreso > div {
+  padding: 50px;
+  backdrop-filter: blur(9px) saturate(165%);
+  -webkit-backdrop-filter: blur(9px) saturate(165%);
+  background-color: rgba(101, 101, 101, 0.282);
+  border-radius: 12px;
+  border: 1px solid rgba(209, 213, 219, 0.18);
 }
 
 #divisor-l {
@@ -131,60 +99,37 @@ code {
   text-align: center;
 }
 
-#formulario-login {
+.formulario-login {
   width: 100%;
   display: grid;
   justify-content: center;
   align-items: center;
 }
 
-#formulario-login input {
+.formulario-login input {
   padding-bottom: 2%;
   padding-top: 2%;
   display: block;
   border: none;
-  border-bottom: 2px solid #FFCC4E;
+  border-bottom: 2px solid #ffcc4e;
   margin-bottom: 20px;
   font-size: large;
   background: none;
   color: #f5f5f5;
 }
 
-#formulario-login input:focus {
+.formulario-login input:focus {
   outline: solid 2px #f5f5f594;
   border-radius: 2px 2px 2px 2px;
 }
 
-#formulario-login .error-message {
+.formulario-login .error-message {
   position: relative;
   height: 40px;
   width: 100%;
   color: red;
   font-size: 12px;
   margin-top: 5px;
-}
-
-.boton-submit {
-  border: none;
-  width: 80px;
-  display: block;
-  background-color: #FFCC4E;
-  color: #f5f5f5;
-  padding: 6px;
-  border-radius: 5px 15px 5px 5px;
-  font-weight: 600;
-  font-size: medium;
-  cursor: pointer;
-  transition: background-color 0.2s
-}
-
-.boton-submit:hover {
-  background-color: #e0a000;
-}
-
-.boton-submit:active {
-  background-color: #cc9200;
-  box-shadow: 2px 2px 4px 0px #0220338e inset;
 }
 
 .boton-cancelar {
@@ -199,7 +144,7 @@ code {
   font-weight: 600;
   font-size: medium;
   cursor: pointer;
-  transition: background-color 0.2s
+  transition: background-color 0.2s;
 }
 
 .boton-cancelar:hover {
@@ -211,7 +156,6 @@ code {
   box-shadow: 2px 2px 4px 0px #0220338e inset;
 }
 
-
 /* */
 
 /* NAVBAR */
@@ -219,7 +163,6 @@ code {
   position: absolute;
   top: 0;
   height: 8vh;
-  width: 100vw;
   display: flex;
   text-align: center;
   justify-content: center;
@@ -246,13 +189,16 @@ code {
   padding-left: 40px;
   font-size: x-large;
   color: #fff;
-  transition: font-size 0.5s;
   text-decoration: none;
-  font-family: 'Pacifico', cursive;
+  font-family: "Pacifico", cursive;
+  overflow: hidden;
+  transition: transform 0.5s;
 }
 
 .boton-ch:hover {
-  font-size: 28px;
+  text-decoration: none;
+  transform: scale(1.2);
+  transition: transform 0.5s;
 }
 
 .navbar a {
@@ -262,11 +208,11 @@ code {
 }
 
 .navbar a:hover {
-  color: #FFCC4E
+  color: #ffcc4e;
 }
 
 .navbar a:active {
-  color: #cf990f
+  color: #cf990f;
 }
 
 /* */
@@ -295,7 +241,6 @@ code {
   color: #fff;
 }
 
-
 .navbar-horizontal-content .boton {
   font-size: large;
   transition: transform 0.5s;
@@ -307,7 +252,6 @@ code {
   transition: transform 0.5s;
 }
 
-
 .menu-horizontal {
   margin-top: auto;
   position: relative;
@@ -316,7 +260,7 @@ code {
   text-align: center;
   width: 100%;
   background-color: #292929;
-  border-top: solid 5px #FFCC4E;
+  border-top: solid 5px #ffcc4e;
   z-index: 50;
   row-gap: 15px;
   padding-top: 15px;
@@ -351,7 +295,7 @@ code {
 }
 
 .ps-submenu-content li {
-  background-color: #FFCC4E;
+  background-color: #ffcc4e;
   font-size: small;
   font-weight: 600;
   color: #000000;
@@ -378,7 +322,7 @@ code {
 #item-menu:hover {
   background-color: #1a1a1a;
   color: #fff;
-  border-left: solid 7px #FFCC4E;
+  border-left: solid 7px #ffcc4e;
 }
 
 .menuitem {
@@ -393,7 +337,6 @@ code {
   background: none;
   transition: color 0.1s;
 }
-
 
 /* */
 
@@ -417,7 +360,7 @@ code {
 }
 
 #banner-bienvenida-adm .col p {
-  font-family: 'Questrial', sans-serif;
+  font-family: "Questrial", sans-serif;
   font-size: clamp(1rem, 2.7vw - 0.2rem, 1.5rem);
   color: #ffffff;
   text-align: center;
@@ -430,25 +373,24 @@ code {
 }
 
 #banner-bienvenida-adm .col p:hover {
-  background-color: #2dc5a4;
+  background-color: var(--color-primary);
 }
 
 #banner-bienvenida-adm .col p:active {
-  background-color: #2dc5a4;
+  background-color: var(--color-primary);
 }
 
-
 #banner-bienvenida-adm .col h1 {
-  font-family: 'Pacifico', cursive;
+  font-family: "Pacifico", cursive;
   font-size: clamp(2rem, 5.3vw - 0.3rem, 3rem);
-  color: #2dc5a4;
+  color: var(--color-primary);
   text-align: center;
 }
 
 /*  */
 
 /* LISTA DE MASCOTAS */
-@import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Questrial&display=swap");
 
 #formulario-mascota {
   display: flex;
@@ -462,7 +404,7 @@ code {
 }
 
 #formulario-mascota h1 {
-  color: #2dc5a4;
+  color: var(--color-primary);
   margin-bottom: 10px;
 }
 
@@ -489,7 +431,7 @@ select {
 .formulario-editar p {
   margin: 0;
   justify-content: initial;
-  display: flex
+  display: flex;
 }
 
 .formulario-editar textarea {
@@ -541,7 +483,7 @@ select {
 }
 
 .boton-adoptar:hover {
-  background-color: #2dc5a4;
+  background-color: var(--color-primary);
   font-size: x-large;
 }
 
@@ -616,9 +558,9 @@ select {
 
 #formulario-adopcion h1 {
   text-align: center;
-  font-family: 'Pacifico', cursive;
+  font-family: "Pacifico", cursive;
   font-size: clamp(3rem, -5.3vw + 5.3rem, 2rem);
-  color: #2dc5a4
+  color: var(--color-primary);
 }
 
 #formulario-adopcion p {
@@ -628,7 +570,7 @@ select {
 #formulario-adopcion h3 {
   text-align: left;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: x-large
+  font-size: x-large;
 }
 
 #formulario-adopcion label {
@@ -639,7 +581,7 @@ select {
 #formulario-adopcion input {
   font-size: medium;
   border: none;
-  border-bottom: solid 1px rgb(0, 0, 0)
+  border-bottom: solid 1px rgb(0, 0, 0);
 }
 
 #formulario-adopcion textarea {
@@ -650,6 +592,11 @@ select {
 }
 
 /* */
+
+/* INFORMACION ADOPCION */
+.info-adopcion .col svg:hover {
+  color: var(--color-primary);
+}
 
 /* REGISTRO ADOPCIONES */
 #container-adopciones {
@@ -671,7 +618,7 @@ select {
 .fila-datos {
   border-radius: 5px 5px 0 0;
   text-align: left;
-  background-color: #FFCC4E;
+  background-color: #ffcc4e;
   font-weight: 600;
   color: #f5f5f5;
   padding-top: 10px;
@@ -687,7 +634,7 @@ select {
 }
 
 .fila-registro:hover {
-  background-color: #ececec82
+  background-color: #ececec82;
 }
 
 .container-wrap-datos {
@@ -702,14 +649,14 @@ select {
   height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center
+  align-items: center;
 }
 
 /*  */
 
 /* INICIO UB */
-@import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Questrial&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap");
 
 #container-banner {
   display: flex;
@@ -717,7 +664,7 @@ select {
   justify-content: center;
   align-items: center;
   color: #fff;
-  background-image: url('./assets/banner1.jpg');
+  background-image: url("./assets/banner1.jpg");
   background-size: cover;
   background-position: center;
   height: 100vh;
@@ -730,94 +677,108 @@ select {
 
 .contenido-banner * {
   margin-bottom: 10px;
-  font-family: 'Questrial';
+  font-family: "Questrial";
 }
 
 .contenido-banner h1 {
-  background-color: #00000063;
-  font-size: 3rem;
+  font-size: clamp(2rem, 16vw - 6rem, 4rem);
   border: solid 6px #292929;
-  padding: 16px;
+  padding: 26px;
+  backdrop-filter: blur(11px) saturate(180%);
+  -webkit-backdrop-filter: blur(11px) saturate(180%);
+  background-color: rgba(73, 73, 73, 0.192);
+  border: 4px solid rgba(0, 0, 0, 0.889);
 }
 
 .contenido-banner p {
   font-size: clamp(1rem, 4.3vw - 0.9rem, 1.8rem);
-  font-family: 'Courier Prime', monospace;
+  font-family: "Courier Prime", monospace;
   overflow: hidden;
-  border-right: .15em solid rgb(255, 255, 255);
   white-space: nowrap;
-  animation:
-    typing 3.5s steps(40, end),
-    blink-caret .75s step-end infinite;
+  animation: typing 3.5s steps(40, end);
   max-width: fit-content;
+}
+.contenido-banner span {
+  font-size: x-large;
+  font-weight: bolder;
+  color: transparent;
+  animation: blink-caret 0.75s step-end infinite;
 }
 
 @keyframes typing {
   from {
-    width: 0
+    width: 0;
   }
 
   to {
-    width: 100%
+    width: 100%;
   }
 }
 
 @keyframes blink-caret {
-
   from,
   to {
-    border-color: transparent
+    colori: transparent;
   }
 
   50% {
-    border-color: #FFCC4E;
+    color: var(--color-accent);
   }
 }
 
-#container-mision {
-  height: 100vh;
+.container-mision {
+  height: max-content;
+  padding: 100px 0;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #f3f3f3;
 }
 
-#container-mision h1 {
-  color: #2dc5a4;
-  font-family: 'Pacifico', cursive;
+.container-mision h1 {
+  color: #00dcac;
+  font-family: "Pacifico", cursive;
   font-size: clamp(1.8rem, 6.4vw - 1rem, 3rem);
-  margin-bottom: 20px;
+  text-align: center;
+  padding-bottom: 20px;
 }
 
-#container-mision p {
+.container-mision p {
   line-height: 28px;
   font-size: clamp(1.1rem, 2.1vw + 0.2rem, 1.5rem);
-  font-family: 'Questrial', sans-serif;
+  font-family: "Questrial", sans-serif;
+  text-align: center;
+  color: #292929;
 }
 
 #mural-adoptados {
-  background-image: url('./assets/pattern.png');
   height: max-content;
-  padding-bottom: 80px;
-  padding-top: 80px;
-  --mask:
-    radial-gradient(43.50px at 50% 61.50px, #000 99%, #0000 101%) calc(50% - 60px) 0/120px 51% repeat-x,
-    radial-gradient(43.50px at 50% -31.5px, #0000 99%, #000 101%) 50% 30px/120px calc(51% - 30px) repeat-x,
-    radial-gradient(43.50px at 50% calc(100% - 61.50px), #000 99%, #0000 101%) calc(50% - 60px) 100%/120px 51% repeat-x,
-    radial-gradient(43.50px at 50% calc(100% + 31.50px), #0000 99%, #000 101%) 50% calc(100% - 30px)/120px calc(51% - 30px) repeat-x;
-  -webkit-mask: var(--mask);
-  mask: var(--mask);
-}
-
-.mural-adoptados {
-  height: max-content;
-  padding-top: 50px;
-  padding-bottom: 50px;
 }
 
 .mural-adoptados h1 {
-  padding-bottom: 50px;
-  font-size: clamp(1.8rem, 6.4vw - 1rem, 3rem);
+  font-size: clamp(2rem, 10.7vw - 1.7rem, 5rem);
+  line-height: 70px;
+  text-align: center;
+  color: #292929;
+  margin-top: 40px;
+}
+
+.mural-adoptados img {
+  width: clamp(10rem, 26.7vw - 1.7rem, 15rem);
+  height: clamp(10rem, 26.7vw - 1.7rem, 15rem);
+  object-fit: cover;
+  object-position: top;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mural-adoptados img:hover {
+  transform: scale(1.2);
+  box-shadow: 0px 13px 19px -5px rgba(0, 0, 0, 1);
+  -webkit-box-shadow: 0px 13px 19px -5px rgba(0, 0, 0, 1);
+  -moz-box-shadow: 0px 13px 19px -5px rgba(0, 0, 0, 1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  z-index: 9;
 }
 
 /* */
@@ -840,30 +801,27 @@ a {
 }
 
 .botonera-de-acciones-content .col {
+  height: 220px;
   text-transform: uppercase;
-  padding: 20px;
   display: flex;
   text-align: center;
   justify-content: center;
   align-items: center;
-  background-color: #2dc5a4;
-  border-radius: 50px 50px 0 50px;
-  margin-bottom: 20px;
-  background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  border: solid 7px #292929;
-  box-shadow: 200px 200px 400px 200px rgba(0, 0, 0, 0.56) inset;
-  -webkit-box-shadow: 200px 200px 400px 200px rgba(0, 0, 0, 0.56) inset;
-  -moz-box-shadow: 200px 200px 400px 200px rgba(0, 0, 0, 0.56) inset;
+  border-radius: 12px;
+  border: solid 7px var(--color-accent);
   transition: box-shadow 0.2s, border 0.2s;
+  box-shadow: 200px 200px 400px 200px rgba(0, 0, 0, 0.718) inset;
+  -webkit-box-shadow: 200px 200px 400px 200px rgba(0, 0, 0, 0.718) inset;
+  -moz-box-shadow: 200px 200px 400px 200px rgba(0, 0, 0, 0.718) inset;
 }
 
 .botonera-de-acciones-content .col:hover {
   border: solid 7px #20d9b1;
-  box-shadow: 200px 200px 400px 200px rgba(0, 0, 0, 0.19) inset;
-  -webkit-box-shadow: 200px 200px 400px 200px rgba(0, 0, 0, 0.19) inset;
-  -moz-box-shadow: 200px 200px 400px 200px rgba(0, 0, 0, 0.19) inset;
+  box-shadow: 200px 200px 400px 200px rgba(0, 0, 0, 0.459) inset;
+  -webkit-box-shadow: 200px 200px 400px 200px rgba(0, 0, 0, 0.459) inset;
+  -moz-box-shadow: 200px 200px 400px 200px rgba(0, 0, 0, 0.459) inset;
 }
 
 .botonera-de-acciones-content .col:active {
@@ -878,76 +836,14 @@ a {
 
 .botonera-de-acciones-content .col p {
   color: #ffffff;
-  font-size: clamp(1rem, 1.1vw + 0.5rem, 1.2rem);
+  font-size: 1.8rem;
   font-weight: bold;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
 
 /*  */
 
 /* DONACIONES */
-#container-donaciones {
-  height: 80vh;
-  text-align: center;
-  font-size: large;
-}
-
-#container-donaciones-mq {
-  padding-top: 80px;
-  height: 100vh;
-  text-align: center;
-  font-size: large;
-}
-
-
-.donaciones-links {
-  height: max-content;
-  display: flex;
-  justify-content: center;
-  align-items: center
-}
-
-.donaciones-links-mq {
-  display: flex;
-  justify-content: center;
-  align-items: center
-}
-
-.donaciones-links .row,
-.donaciones-links-mq .row {
-  margin-top: 40px;
-  gap: 10px;
-  width: 80%;
-}
-
-.donaciones-links .col,
-.donaciones-links-mq .col {
-  margin: 0;
-  width: 100%;
-  font-size: 2em;
-  font-weight: 600;
-  color: #ffffff;
-  height: 100px;
-  background-color: #2dc5a4;
-  border-radius: 50px 50px 50px 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-decoration: none;
-  transition: background-color 0.1s;
-}
-
-.donaciones-links .col:hover,
-.donaciones-links-mq .col:hover {
-  background-color: #0da785;
-}
-
-.donaciones-links p,
-.donaciones-links-mq p {
-  font-family: 'Questrial';
-  font-size: clamp(1.4rem, 3.2vw + 0rem, 2rem);
-}
-
 /*  */
 
 /* FOOTER */
@@ -962,7 +858,7 @@ a {
 }
 
 .footer-content h3 {
-  color: #2dc5a4;
+  color: var(--color-primary);
 }
 
 .footer-content .col {
@@ -985,3 +881,13 @@ a {
 }
 
 /*  */
+
+@media only screen and (max-width: 600px) {
+  .contenido-banner p {
+    white-space: normal;
+    animation: none;
+  }
+  .mural-adoptados main > img {
+    width: 40%;
+  }
+}
