@@ -12,8 +12,13 @@ const Login = () => {
 
   const onSubmit = async (datos) => {
     try {
-      const response = await axios.post(`${baseUrl}/api/usuarios/login`, datos);
-      Cookies.set("token", response.data.token);
+      const response = await axios.post(
+        `${baseUrl}/api/usuarios/login`,
+        datos,
+        {
+          withCredentials: true,
+        }
+      );
       navigate("/administracion");
     } catch (error) {
       if (

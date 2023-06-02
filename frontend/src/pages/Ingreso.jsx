@@ -1,5 +1,6 @@
 import BotonParaAdoptantes from "../components/sesion/BotonParaAdoptantes";
 import Login from "../components/sesion/Login";
+import { motion } from "framer-motion";
 
 const styleDiv = {
   marginLeft: "5%",
@@ -18,7 +19,11 @@ const styleDivisor = {
 
 const Ingreso = () => {
   return (
-    <div className="ingreso">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="ingreso"
+    >
       <div style={styleDiv}>
         <BotonParaAdoptantes />
         <div className="mt-4" style={styleDivisor}>
@@ -27,7 +32,7 @@ const Ingreso = () => {
         </div>
         <Login />
       </div>
-    </div>
+    </motion.div>
   );
 };
 

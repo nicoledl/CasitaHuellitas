@@ -1,5 +1,6 @@
 import { Col, Container, Row } from "react-grid-system";
 import { FaExclamationCircle } from "react-icons/fa";
+import { motion } from "framer-motion";
 
 const listaPuntos = [
   "Antes de adoptar o comprar una mascota, debes investigar y considerar el tipo de animal que mejor se adapte a tu estilo de vida y a tus necesidades. Además, debes asegurarte de que tienes suficiente espacio y recursos para cuidar adecuadamente de tu mascota.",
@@ -22,14 +23,24 @@ const ListaInfoAdopcion = () => {
         className="container lista-info-adopcion pt-s5"
         style={{ padding: "80px 0 140px" }}
       >
-        <h1 className=" pt-5 pb-3" style={{ color: "var(--color-primary)" }}>
+        <motion.h1
+          initial={{ opacity: 0, translateY:-10 }}
+          animate={{ opacity: 1, translateY:1 }}
+          className=" pt-5 pb-3"
+          style={{ color: "var(--color-primary)" }}
+        >
           Información pre-adopción.
-        </h1>
-        <p className="text-secondary h5">
+        </motion.h1>
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2, duration: 1 }}
+          className="text-secondary h5"
+        >
           Tener una mascota implica una gran responsabilidad. Estos son los
           puntos que debés tener en cuenta antes de incorporar a un peludin a tu
           familia.
-        </p>
+        </motion.p>
         <Row
           className="row container"
           style={{ gap: "25px", marginTop: "50px" }}
@@ -40,11 +51,18 @@ const ListaInfoAdopcion = () => {
               borderTop: `4px solid #FFCC4E`,
             };
             return (
-              <Col key={i} md={12} className="col bg-white" style={estiloCol}>
-                <p style={{ lineHeight: "22px", fontSize: "1.1rem" }}>
-                  <FaExclamationCircle className="" /> {puntos}
-                </p>
-              </Col>
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, translateY:-10 }}
+                animate={{ opacity: 1, translateY:1 }}
+                transition={{ delay: i / 3, duration: 0.6 }}
+              >
+                <Col md={12} className="col bg-white" style={estiloCol}>
+                  <p style={{ lineHeight: "22px", fontSize: "1.1rem" }}>
+                    <FaExclamationCircle className="" /> {puntos}
+                  </p>
+                </Col>
+              </motion.div>
             );
           })}
         </Row>

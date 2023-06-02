@@ -1,18 +1,23 @@
-const { MongoClient } = require('mongodb')
+const mongoose = require('mongoose')
 require('dotenv').config()
 
-const url = process.env.MONGODB_ATLAS
-const client = new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology: true, keepAlive: true })
+mongoose.set('strictQuery', false)
+const mongoDB = process.env.MONGODB_ATLAS
 
-const connectToDB = async () => {
+async function connectToDB () {
   try {
-    await client.connect()
-    console.log('Connected to MongoDB')
-    return client.db('CasitaHuellitas_DB')
-  } catch (err) {
-    console.error('Error connecting to MongoDB:', err)
-    process.exit(1)
+    await mongoose.connect(mongoDB, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    })
+    console.log('Connected to the database!')
+
+    // // Obtener la lista de colecciones
+    // const collections = await mongoose.connection.db.listCollections().toArray()
+    // console.log('Collections:', collections.map(collection => collection.name))
+  } catch (error) {
+    console.error('Failed to connect to the database:', error)
   }
 }
 
-module.exports = { connectToDB, client }
+module.exports = { connectToDB }
