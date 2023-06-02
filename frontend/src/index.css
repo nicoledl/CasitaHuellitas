@@ -45,7 +45,7 @@ p {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url("https://upload.wikimedia.org/wikipedia/commons/6/6d/Boston_Public_Garden_May_2018_006.jpg");
+  background-image: url("./assets/login-background.png");
   background-size: cover;
   background-position: center;
   color: #fff;
@@ -664,7 +664,7 @@ select {
   justify-content: center;
   align-items: center;
   color: #fff;
-  background-image: url("./assets/banner1.jpg");
+  background-image: url("./assets/banner1.png");
   background-size: cover;
   background-position: center;
   height: 100vh;
