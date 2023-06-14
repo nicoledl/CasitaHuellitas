@@ -1,8 +1,6 @@
-import { useContext, useState } from 'react'
-import { AppContext } from '../../App'
+import { useState } from 'react'
 
 const Modal = ({ contenido, textoDelBoton, estiloDelBoton }) => {
-  const { dataMascota } = useContext(AppContext)
   const [isOpen, setIsOpen] = useState(false)
   const handleClose = () => {
     dataMascota({})

@@ -1,20 +1,14 @@
-import Cookies from 'js-cookie'
-import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import Cargando from '../components/commons/Cargando';
 import SideNav from '../components/commons/Sidebar'
 import RegistroSolicitudes from '../components/usuarioAvanzado/RegistroSolicitudes'
+import { useSelector } from 'react-redux'
 
 const Solicitudes = () => {
-  const navigate = useNavigate()
+  const user = useSelector((state) => state.user);
 
-  useEffect(() => {
-    const token = Cookies.get('token') // Obtener token de las cookies
-    if (token === undefined) {
-      return navigate('/')
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
+  if (!user.id) {
+    return <Cargando />
+  }
   return (
     <>
       <SideNav />

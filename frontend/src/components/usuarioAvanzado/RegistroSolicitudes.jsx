@@ -1,9 +1,8 @@
 import axios from 'axios'
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Col, Container, Row } from 'react-grid-system'
 import { FallingLines } from 'react-loader-spinner'
 import { useMediaQuery } from 'react-responsive'
-import { AppContext } from '../../App'
 
 const estiloCentrar = { display: 'flex', justifyContent: 'center', alignContent: 'center' }
 
@@ -16,7 +15,6 @@ const breakpoints = {
 
 const RegistroSolicitudes = () => {
   // eslint-disable-next-line no-unused-vars
-  const { estado, cambiarEstado } = useContext(AppContext)
   const [solicitudes, setSolicitudes] = useState(null)
   const [estados, setEstados] = useState({})
   const [showContent, setShowContent] = useState(false)

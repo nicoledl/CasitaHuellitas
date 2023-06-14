@@ -25,9 +25,18 @@ const createUser = async (email, name, password) => {
 }
 
 const getDataUser = async (decodedToken) => {
-  const userId = decodedToken.userId
-  const userData = await User.findById(userId)
-  return userData
+  const { _id, email, name } = decodedToken._id
+  const userData = await User.findById(_id)
+  if (userData) {
+    return {
+      _id,
+      email,
+      name,
+      userData
+    }
+  } else {
+    throw new Error('Usuario no encontrado')
+  }
 }
 
 module.exports = { getUserByEmail, createUser, getDataUser }

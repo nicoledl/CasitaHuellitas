@@ -41,11 +41,11 @@ export const SideNav = () => {
         }
       ]
     },
-    {
-      id: 'item-menu',
-      component: <Link to='/contactosvoluntarios' />,
-      content: collapsed ? <FaPeopleCarry size={25} /> : <span style={estiloItem}><FaPeopleCarry size={25} /><p>Voluntarios</p></span>
-    },
+    // {
+    //   id: 'item-menu',
+    //   component: <Link to='/contactosvoluntarios' />,
+    //   content: collapsed ? <FaPeopleCarry size={25} /> : <span style={estiloItem}><FaPeopleCarry size={25} /><p>Voluntarios</p></span>
+    // },
     {
       id: 'item-menu',
       component: <Link to='/solicitudes' />,
@@ -97,14 +97,14 @@ export const SideNav = () => {
           }
           )}
         </Menu>
-        <div style={{ padding: '0 24px', marginBottom: '8px', marginTop: '32px' }}>
+        {/* <div style={{ padding: '0 24px', marginBottom: '8px', marginTop: '32px' }}>
           {collapsed ? <FaMinus size={25} /> : <h4>Extra</h4>}
-        </div>
-        <Menu menuItemStyles={menuItemStyles}>
+        </div> */}
+        {/* <Menu menuItemStyles={menuItemStyles}>
           <MenuItem id='item-menu'>
             {collapsed ? <FaRegCalendarAlt size={25} /> : <span style={estiloItem}><FaRegCalendarAlt size={25} /><p>Calendario</p></span>}
           </MenuItem>
-        </Menu>
+        </Menu> */}
 
         <div style={{ padding: '0 24px', marginBottom: '8px', marginTop: '32px' }}>
           <FaMinus size={20} />

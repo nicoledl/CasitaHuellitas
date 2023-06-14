@@ -5,7 +5,6 @@ const Banner = () => {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      fluid
       id="container-banner"
       className="p-5"
     >

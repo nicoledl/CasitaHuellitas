@@ -59,10 +59,9 @@ const createUserController = async (req, res) => {
 
 const getUserDataController = async (req, res) => {
   try {
-    const token = (req.headers.cookie).replace('token=', '') // Obtén el token del encabezado de la solicitud
+    const token = req.headers.cookie.replace('token=', '') // Obtén el token del encabezado de la solicitud
     // Validar el token
     const decodedToken = validateToken(token)
-
     // Obtener los datos del usuario según el token decodificado
     const userData = await getDataUser(decodedToken)
 

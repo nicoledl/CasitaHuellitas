@@ -1,10 +1,12 @@
 import axios from "axios";
-import Cookies from "js-cookie";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { loginUser } from "../../redux/userSlice";
 
 const Login = () => {
+  const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
   const baseUrl = "http://localhost:3001";
   const [errorMessage, setErrorMessage] = useState(null);
@@ -12,14 +14,12 @@ const Login = () => {
 
   const onSubmit = async (datos) => {
     try {
-      const response = await axios.post(
-        `${baseUrl}/api/usuarios/login`,
-        datos,
-        {
+      const response = await axios
+        .post(`${baseUrl}/api/usuarios/login`, datos, {
           withCredentials: true,
-        }
-      );
-      navigate("/administracion");
+        })
+        .then((res) => dispatch(loginUser(res.data)))
+        .then(() => navigate("/administracion"))
     } catch (error) {
       if (
         error.response.data.message === "Contraseña incorrecta" ||

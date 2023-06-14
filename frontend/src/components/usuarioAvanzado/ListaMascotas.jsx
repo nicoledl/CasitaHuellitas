@@ -1,8 +1,7 @@
 import axios from 'axios'
 import { useForm } from 'react-hook-form'
-import { useContext, useEffect, useState } from 'react'
+import {  useEffect, useState } from 'react'
 import { Col, Container, Row } from 'react-grid-system'
-import { AppContext } from '../../App'
 import imagenPerro from '../../assets/perro-default.png'
 import imagenGato from '../../assets/gato-default.png'
 import Formulario from './FormularioDeMascota'
@@ -13,7 +12,6 @@ const botonera = { backgroundColor: '#292929', height: '22%', borderRadius: '0px
 const estiloBoton = { display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', fontWeight: '600', cursor: 'pointer', margin: 0, background: 'none', border: 'none', color: '#f5f5f5', fontSize: 'large', fontFamily: "'Questrial', sans-serif" }
 
 const ListaMascotas = ({ onClose }) => {
-  const { estado, cambiarEstado, mascota, dataMascota } = useContext(AppContext)
   const [mascotas, setMascotas] = useState([])
   const [imagen, setImagen] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
@@ -32,13 +30,12 @@ const ListaMascotas = ({ onClose }) => {
       }
     }
     fetchData()
-  }, [estado])
+  }, [])
 
   const onSubmit = async datos => {
     try {
       console.log(datos)
       await axios.put(`${baseUrl}/api/mascotas/${id}`, datos)
-      cambiarEstado(!estado)
       setIsOpen(false)
     } catch (error) {
       console.error('Error al modificar los datos:', error)
@@ -48,7 +45,6 @@ const ListaMascotas = ({ onClose }) => {
 
   const borrarMascota = (id) => {
     axios.delete(`${baseUrl}/api/mascotas/${id}`)
-      .then(() => cambiarEstado(!estado))
       .catch((error) => console.error(error))
   }
 

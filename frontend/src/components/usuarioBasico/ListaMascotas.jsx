@@ -1,8 +1,7 @@
 import axios from 'axios'
-import { useContext, useEffect, useState } from 'react'
+import {  useEffect, useState } from 'react'
 import { Col, Container, Row } from 'react-grid-system'
 import { useNavigate } from 'react-router-dom'
-import { AppContext } from '../../App'
 import imagenPerro from '../../assets/perro-default.png'
 import imagenGato from '../../assets/gato-default.png'
 import { Oval } from 'react-loader-spinner'
@@ -11,7 +10,6 @@ const imagenEstilo = { height: '50%', width: '100%', borderRadius: '8px 8px 0px 
 const containerTarjeta = { height: '25%', display: 'grid', justifyContent: 'center', alignItems: 'center', paddingBottom: 8 }
 
 const ListaMascotas = () => {
-  const { dataMascota } = useContext(AppContext)
   const navigate = useNavigate()
   const [mascotas, setMascotas] = useState([])
   const [showContent, setShowContent] = useState(false)

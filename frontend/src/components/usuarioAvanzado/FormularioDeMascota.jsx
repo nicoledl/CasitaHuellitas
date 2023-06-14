@@ -1,11 +1,9 @@
 import { useForm } from 'react-hook-form'
 import axios from 'axios'
-import { useContext, useState } from 'react'
-import { AppContext } from '../../App'
+import { useState } from 'react'
 import { Col, Container, Row } from 'react-grid-system'
 
 const Formulario = () => {
-  const { estado, cambiarEstado } = useContext(AppContext)
   const { register, handleSubmit, reset } = useForm()
   const [isOpen, setIsOpen] = useState(false)
   const onSubmit = async datos => {

@@ -1,12 +1,10 @@
 import axios from 'axios'
 import { useForm } from 'react-hook-form'
 import { Col, Container, Row } from 'react-grid-system'
-import { useContext, useEffect, useState } from 'react'
-import { AppContext } from '../../App'
+import {  useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const FormularioDeAdopcion = () => {
-  const { mascota } = useContext(AppContext)
   const navigate = useNavigate()
   const [valorSeleccionado, setValorSeleccionado] = useState()
   const { register, handleSubmit } = useForm()

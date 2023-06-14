@@ -40,10 +40,10 @@ const BotoneraDeAcciones = () => {
         <hr />
         <h2 className="mb-5">
           Tus acciones hacen el cambio
+        </h2>
           <h5 className="text-muted">
             La unión de pequeñas personas y acciones puede cambiar el mundo.
           </h5>
-        </h2>
         <Row ref={ref} className="row" justify="center">
           {content.map((elem, i) => (
             <motion.div
