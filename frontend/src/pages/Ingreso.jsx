@@ -1,6 +1,9 @@
+import { useSelector } from "react-redux";
 import BotonParaAdoptantes from "../components/sesion/BotonParaAdoptantes";
 import Login from "../components/sesion/Login";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useEffect } from "react";
 
 const styleDiv = {
   marginLeft: "5%",
@@ -18,6 +21,15 @@ const styleDivisor = {
 };
 
 const Ingreso = () => {
+  const user = useSelector((state) => state.user);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user.name) {
+      return navigate("/administracion");
+    }
+  }, []);
+
   return (
     <motion.div
       initial={{ opacity: 0 }}

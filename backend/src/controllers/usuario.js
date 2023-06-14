@@ -4,7 +4,7 @@ const {
   getUserByEmail,
   createUser,
   getDataUser
-} = require('../services/usuarios')
+} = require('../services/usuario')
 
 const loginUserController = async (req, res) => {
   try {
@@ -32,12 +32,22 @@ const loginUserController = async (req, res) => {
     const token = generateToken(payload)
 
     // Establecer el token en una cookie
-    res.cookie('token', token, { maxAge: 3600000, httpOnly: true })
+    res.cookie('token', token, { maxAge: 3600000 })
 
     // Enviar el token como parte de la respuesta
     res.status(200).json({ token, username: user.username, name: user.name })
   } catch (err) {
     return res.status(500).json({ message: 'Error interno del servidor' })
+  }
+}
+
+const logoutUserController = (req, res) => {
+  try {
+    res.clearCookie('token')
+    res.status(200).json({ message: 'Cierre de sesión exitoso' })
+  } catch (err) {
+    console.log(err)
+    res.status(500).json({ message: 'Error interno del servidor' })
   }
 }
 
@@ -71,60 +81,14 @@ const getUserDataController = async (req, res) => {
   }
 }
 
-// const createUser = async (req, res) => {
-//   const body = req.body
-
-//   if (!body.email) {
-//     return res.status(400).json({ error: 'Email is required' })
-//   }
-
-//   if (!body.password) {
-//     return res.status(400).json({ error: 'Password is required' })
-//   }
-
-//   const saltRounds = 10
-//   const salt = await bcrypt.genSalt(saltRounds)
-//   const passwordHash = await bcrypt.hash(body.password, salt)
-
-//   const user = new User({
-//     email: body.email,
-//     name: body.name,
-//     passwordHash,
-//     pets: []
-//   })
-
-//   const savedUser = await user.save()
-
-//   res.json(savedUser)
-// }
-
 // const getAll = async (req, res) => {
 //   const users = await collectionUser.find({})
 //   res.json(users)
 // }
 
-// const getById = async (req, res) => {
-//   try {
-//     const user = await collectionUser.findOne({ _id: new ObjectId(req.params.id) })
-//     res.json(user)
-//   } catch (error) {
-//     res.status(500).json({ error: error.message })
-//   }
-// }
-
-// const getIdToken = async (req, res) => {
-//   const userId = req._id._id
-//   res.json({ _id: userId, message: 'Acceso autorizado' })
-// }
-
-// const logout = async (req, res) => {
-//   res.clearCookie('token')
-//   res.json({ message: 'Cierre de sesión exitoso' })
-// }
-
-// module.exports = { createUser, getAll, getById, getIdToken, login, logout }
 module.exports = {
   loginUserController,
+  logoutUserController,
   createUserController,
   getUserDataController
 }

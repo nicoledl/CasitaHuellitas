@@ -1,12 +1,10 @@
 import axios from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { loginUser } from "../../redux/userSlice";
+import {getData} from "../../utils/getData"
 
 const Login = () => {
-  const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
   const baseUrl = "http://localhost:3001";
   const [errorMessage, setErrorMessage] = useState(null);
@@ -14,11 +12,12 @@ const Login = () => {
 
   const onSubmit = async (datos) => {
     try {
+      console.log(datos);
       const response = await axios
         .post(`${baseUrl}/api/usuarios/login`, datos, {
           withCredentials: true,
         })
-        .then((res) => dispatch(loginUser(res.data)))
+        .then(() => getData())
         .then(() => navigate("/administracion"))
     } catch (error) {
       if (

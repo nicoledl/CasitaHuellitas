@@ -1,14 +1,14 @@
 const express = require('express')
 const router = express.Router()
-const { createPet, getAll, getByInAdoption, updateInfo, deletePet, getById } = require('../controllers/mascota')
+const mascotaController = require('../controllers/mascota')
 
 router.use(express.json())
 
-router.post('/', createPet)
-router.get('/', getAll)
-router.get('/en-adopcion', getByInAdoption)
-router.get('/:id', getById)
-router.put('/:id', updateInfo)
-router.delete('/:id', deletePet)
+router.post('/', mascotaController.createPetController)
+router.get('/', mascotaController.getAllController)
+// router.get('/en-adopcion', mascotaController.getByInAdoption)
+// router.get('/:id', mascotaController.getById)
+// router.put('/:id', mascotaController.updateInfo)
+// router.delete('/:id', mascotaController.deletePet)
 
 module.exports = router
