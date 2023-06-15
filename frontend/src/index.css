@@ -441,31 +441,44 @@ select {
   width: 100%;
 }
 
-#display-de-mascota {
+.display-de-mascota {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  text-align: center;
 }
 
-#carta-mascota {
-  width: 100%;
-  margin: 20px;
-  height: 380px;
-  background: #f8f8f8;
-  border-radius: 4px 4px 4px 4px;
-}
-
-#carta-mascota-nueva {
-  display: flex;
+.carta-mascota {
   justify-content: center;
   align-items: center;
   width: 100%;
   margin: 20px;
-  height: 380px;
-  background: rgb(228, 228, 228);
+  height: 340px;
+  background: #ffffff;
   border-radius: 8px 8px 8px 8px;
+  transition: background 0.2s ease;
+}
+.carta-mascota-nueva {
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 20px;
+  height: 340px;
+  background: #ffffff;
+  border-radius: 8px 8px 8px 8px;
+  transition: background 0.2s ease;
+}
+.carta-mascota-nueva:hover {
+  background: #e2e2e2;
+  transition: background 0.2s ease;
+}
+.carta-mascota-nueva span {
+  font-family: "Courier New", Courier, monospace;
+  height: 50px;
+  width: 50px;
+  font-size: 2rem;
+  padding-top: 9px;
+  cursor: pointer;
 }
 
 .boton-adoptar {
@@ -504,6 +517,7 @@ select {
   align-items: center;
   color: #000;
   animation: fadeIn 0.2s ease 0.2s forwards;
+  cursor: auto;
 }
 
 @keyframes fadeIn {

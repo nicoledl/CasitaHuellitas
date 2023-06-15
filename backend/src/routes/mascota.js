@@ -6,9 +6,8 @@ router.use(express.json())
 
 router.post('/', mascotaController.createPetController)
 router.get('/', mascotaController.getAllController)
-// router.get('/en-adopcion', mascotaController.getByInAdoption)
-// router.get('/:id', mascotaController.getById)
-// router.put('/:id', mascotaController.updateInfo)
-// router.delete('/:id', mascotaController.deletePet)
+router.put('/en-adopcion/:id', mascotaController.inAdoptionPetController)
+router.put('/:id', mascotaController.editPetController)
+router.delete('/:id', mascotaController.deletePetController)
 
 module.exports = router

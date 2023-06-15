@@ -15,8 +15,7 @@ const petSchema = new mongoose.Schema({
     required: false
   },
   note: {
-    type: String,
-    required: false
+    type: String
   },
   date: {
     type: Date
@@ -25,7 +24,7 @@ const petSchema = new mongoose.Schema({
     type: Boolean
   },
   inAdoption: {
-    type: String
+    type: Boolean
   },
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
 })

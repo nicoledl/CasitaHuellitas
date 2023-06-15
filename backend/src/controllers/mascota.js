@@ -1,4 +1,4 @@
-const { createPet, getAll } = require('../services/mascota')
+const { createPet, getAll, deletePet, editPet, getInAdoptionPet } = require('../services/mascota')
 
 const createPetController = async (req, res) => {
   try {
@@ -19,52 +19,36 @@ const getAllController = async (req, res) => {
   }
 }
 
-// const getByInAdoption = async (req, res) => {
-//   try {
-//     const mascotas = await collectionPet.find({ inAdoption: 'true' }).toArray()
-//     res.json(mascotas)
-//   } catch (error) {
-//     res.status(500).json({ error: error.message })
-//   }
-// }
+const inAdoptionPetController = async (req, res) => {
+  try {
+    const { id } = req.params
+    const { inAdoption } = req.body
+    const updatedPet = await getInAdoptionPet(id, inAdoption)
+    res.json(updatedPet)
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
+}
 
-// const updateInfo = async (req, res) => {
-//   try {
-//     const pet = await collectionPet.findOneAndUpdate(
-//       { _id: new ObjectId(req.params.id) },
-//       {
-//         $set:
-//         {
-//           animal: req.body.animal,
-//           size: req.body.size,
-//           breed: req.body.breed,
-//           name: req.body.name,
-//           note: req.body.note,
-//           important: req.body.important,
-//           inAdoption: req.body.inAdoption
-//         }
-//       },
-//       { new: true }
-//     )
-//     res.json(pet)
-//   } catch (error) {
-//     res.status(500).json({ error: error.message })
-//   }
-// }
+const editPetController = async (req, res) => {
+  try {
+    const pet = await editPet(req.params.id, req.body)
+    res.json(pet)
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
+}
 
-// const deletePet = async (req, res) => {
-//   try {
-//     const pet = await collectionPet.findOneAndDelete({ _id: new ObjectId(req.params.id) })
-//     if (!pet) {
-//       return res.status(404).json({ error: 'Pet not found' })
-//     }
-//     res.status(204).end()
-//     console.log('Mascota eliminada.')
-//   } catch (error) {
-//     console.log(error)
-//     res.status(400).json({ error: 'malformatted id' })
-//   }
-// }
+const deletePetController = async (req, res) => {
+  try {
+    await deletePet(req.params.id)
+    res.status(204).end()
+    console.log('Mascota eliminada.')
+  } catch (error) {
+    console.error(error)
+    res.status(400).json({ error: 'malformatted id' })
+  }
+}
 
 // const getById = async (req, res) => {
 //   try {
@@ -77,6 +61,9 @@ const getAllController = async (req, res) => {
 
 module.exports = {
   createPetController,
-  getAllController
+  getAllController,
+  inAdoptionPetController,
+  editPetController,
+  deletePetController
   // getAll, getByInAdoption, updateInfo, deletePet, getById
 }

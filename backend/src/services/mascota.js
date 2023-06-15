@@ -33,7 +33,7 @@ const createPet = async (req) => {
     user: new ObjectId(userId)
   })
 
-  const savedPet = await Pet.insertOne(pet)
+  const savedPet = await pet.save()
 
   // Actualizar la lista de mascotas del usuario
   await User.updateOne(
@@ -53,7 +53,58 @@ const getAll = async () => {
   }
 }
 
+const getInAdoptionPet = async (id, inAdoption) => {
+  try {
+    const updatedPet = await Pet.findOneAndUpdate(
+      { _id: id },
+      { $set: { inAdoption } },
+      { new: true }
+    )
+    return updatedPet
+  } catch (error) {
+    throw new Error(error.message)
+  }
+}
+
+const editPet = async (id, petData) => {
+  try {
+    const pet = await Pet.findOneAndUpdate(
+      { _id: id },
+      {
+        $set: {
+          animal: petData.animal,
+          size: petData.size,
+          breed: petData.breed,
+          name: petData.name,
+          note: petData.note,
+          important: petData.important,
+          inAdoption: petData.inAdoption
+        }
+      },
+      { new: true }
+    )
+    return pet
+  } catch (error) {
+    throw new Error(error.message)
+  }
+}
+
+const deletePet = async (petId) => {
+  try {
+    const pet = await Pet.findOneAndDelete({ _id: new ObjectId(petId) })
+    if (!pet) {
+      throw new Error('Pet not found')
+    }
+    console.log('Mascota eliminada.')
+  } catch (error) {
+    throw new Error('Error deleting pet')
+  }
+}
+
 module.exports = {
   createPet,
-  getAll
+  getAll,
+  getInAdoptionPet,
+  editPet,
+  deletePet
 }

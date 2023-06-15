@@ -1,202 +1,312 @@
-import axios from 'axios'
-import { useForm } from 'react-hook-form'
-import {  useEffect, useState } from 'react'
-import { Col, Container, Row } from 'react-grid-system'
-import imagenPerro from '../../assets/perro-default.png'
-import imagenGato from '../../assets/gato-default.png'
-import Formulario from './FormularioDeMascota'
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { Col, Container, Row } from "react-grid-system";
+import imagenPerro from "../../assets/perro-default.png";
+import imagenGato from "../../assets/gato-default.png";
+import { useForm } from "react-hook-form";
+import Formulario from "./FormularioDeMascota";
 
-const imagenEstilo = { height: '50%', width: '100%', borderRadius: '8px 8px 0px 0px', objectFit: 'cover' }
-const containerTarjeta = { height: '25%', display: 'grid', justifyContent: 'center', alignItems: 'center', paddingBottom: 8 }
-const botonera = { backgroundColor: '#292929', height: '22%', borderRadius: '0px 0px 8px 8px', margin: 0, color: '#f5f5f5', fontWeight: '600' }
-const estiloBoton = { display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', fontWeight: '600', cursor: 'pointer', margin: 0, background: 'none', border: 'none', color: '#f5f5f5', fontSize: 'large', fontFamily: "'Questrial', sans-serif" }
+const ListaMascotas = () => {
+  const [mascotas, setMascotas] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
+  const [action, setAction] = useState(false);
+  const [selectedMascota, setSelectedMascota] = useState(null);
+  const { register, handleSubmit, reset } = useForm();
 
-const ListaMascotas = ({ onClose }) => {
-  const [mascotas, setMascotas] = useState([])
-  const [imagen, setImagen] = useState(false)
-  const [isOpen, setIsOpen] = useState(false)
-  // eslint-disable-next-line no-unused-vars
-  const [id, setId] = useState('')
-  const { register, handleSubmit, reset } = useForm()
-  const baseUrl = 'http://localhost:3001'
+  const baseUrl = "http://localhost:3001";
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${baseUrl}/api/mascotas`)
-        setMascotas(response.data)
+        const response = await axios.get(`${baseUrl}/api/mascotas`);
+        setMascotas(response.data);
       } catch (error) {
-        console.error(error)
+        console.error(error);
       }
-    }
-    fetchData()
-  }, [])
+    };
+    fetchData();
+  }, [action]);
 
-  const onSubmit = async datos => {
+  const onSubmit = async (datos) => {
     try {
-      console.log(datos)
-      await axios.put(`${baseUrl}/api/mascotas/${id}`, datos)
-      setIsOpen(false)
+      await axios
+        .put(`${baseUrl}/api/mascotas/${selectedMascota._id}`, datos)
+        .then(() => setAction(!action));
+      setIsOpen(false);
     } catch (error) {
-      console.error('Error al modificar los datos:', error)
+      console.error("Error al modificar los datos:", error);
     }
-    reset()
-  }
+    reset();
+  };
 
   const borrarMascota = (id) => {
-    axios.delete(`${baseUrl}/api/mascotas/${id}`)
-      .catch((error) => console.error(error))
-  }
+    axios
+      .delete(`${baseUrl}/api/mascotas/${id}`)
+      .then(() => setAction(!action))
+      .catch((error) => console.error(error));
+  };
 
-  const handleClick = (mascota) => {
-    dataMascota(mascota)
-    setId(mascota._id)
-    setIsOpen(true)
-  }
-
-  // eslint-disable-next-line no-unused-vars
-  const handleClose = () => {
-    setIsOpen(false)
-    reset()
-  }
-
-  // eslint-disable-next-line no-unused-vars
-  const handleChange = (event) => {
-    const file = event.target.files[0]
-    setImagen(file)
-  }
-
-  if (mascotas.length === 0) {
-    return (
-      <Container id='container-mascotas'>
-        <Row>
-          <Col id='display-de-mascota' xs={12} sm={6} md={6} xl={3}>
-            <div style={{ width: '330px', height: '380px' }}>
-              <Formulario />
-            </div>
-          </Col>
-        </Row>
-      </Container>
-    )
-  }
+  const checkAdopcion = (id, inAdoption) => {
+    axios
+      .put(`${baseUrl}/api/mascotas/en-adopcion/${id}`, {
+        inAdoption: !inAdoption,
+      })
+      .then(() => setAction(!action))
+      .catch((error) => console.error(error));
+  };
 
   const editarMascota = () => {
+    const { size, breed, inAdoption, animal, name, important, note } =
+      selectedMascota;
     return (
-      <div id='modal'>
-        <div className='modal'>
-          <div className='modal-content'>
-            <form id='formulario-mascota' onSubmit={handleSubmit(onSubmit)} key={mascota._id}>
-              <Container style={{ maxWidth: '1200px' }}>
-                <h3 style={{ marginBottom: '10px', textAlign: 'center' }}>Editar datos {mascota.name} </h3>
-                <Row style={{ display: 'flex' }}>
-                  <Col xs={12} sm={6} md={6}>
-                    <p>Animal: </p>
-                    <select defaultValue={mascota.animal} {...register('animal')}>
-                      <option value='Perro'>Perro</option>
-                      <option value='Gato'>Gato</option>
-                    </select>
-                  </Col>
-                  <Col xs={12} sm={6} md={6}>
-                    <p>Tamaño estimado: </p>
-                    <select defaultValue={mascota.size} {...register('size')}>
-                      <option value='Grande'>Grande</option>
-                      <option value='Mediano'>Mediano</option>
-                      <option value='Pequeño'>Pequeño</option>
-                    </select>
-                  </Col>
-                </Row>
+      <div id="modal">
+        <div className="modal">
+          <div className="modal-content m-2">
+            <form id="formulario-mascota" onSubmit={handleSubmit(onSubmit)}>
+              <h3 style={{ marginBottom: "10px", textAlign: "center" }}>
+                Editar Huellita
+              </h3>
+              <Row>
+                <Col xs={12} sm={6} md={6} className="d-flex">
+                  <select
+                    {...register("animal", {
+                      required: "Este campo es requerido",
+                    })}
+                    className="input-group input-group-sm p-1"
+                    defaultValue={animal}
+                  >
+                    <option value="undefind">Animal</option>
+                    <option value="perro">Perro</option>
+                    <option value="gato">Gato</option>
+                  </select>
+                </Col>
+                <Col xs={12} sm={6} md={6} className="d-flex">
+                  <select
+                    {...register("size", {
+                      required: "Este campo es requerido",
+                    })}
+                    className="input-group input-group-sm p-1"
+                    defaultValue={size}
+                  >
+                    <option value="undefind">Tamaño</option>
+                    <option value="grande">Grande</option>
+                    <option value="mediano">Mediano</option>
+                    <option value="pequeño">Pequeño</option>
+                  </select>
+                </Col>
+              </Row>
 
-                <Row style={{ display: 'flex' }}>
-                  <Col xs={12} sm={6} md={6}>
-                    <p>Raza: </p>
-                    <input type='text' placeholder='Raza' defaultValue={mascota.breed} {...register('breed')} />
-                  </Col>
-                  <Col xs={12} sm={6} md={6}>
-                    <p>Nombre: </p>
-                    <input type='text' placeholder='Nombre' defaultValue={mascota.name} {...register('name')} />
-                  </Col>
-                </Row>
+              <Row>
+                <Col xs={12} sm={6} md={6}>
+                  <input
+                    className="input-group input-group-sm"
+                    type="text"
+                    placeholder="Raza"
+                    {...register("breed", {
+                      required: "Este campo es requerido",
+                    })}
+                    defaultValue={breed}
+                  />
+                </Col>
+                <Col xs={12} sm={6} md={6}>
+                  <input
+                    className="input-group input-group-sm"
+                    type="text"
+                    placeholder="Nombre"
+                    {...register("name", {
+                      required: "Este campo es requerido",
+                    })}
+                    defaultValue={name}
+                  />
+                </Col>
+              </Row>
+              <textarea
+                className="input-group input-group-sm"
+                type="text"
+                placeholder="Nota"
+                {...register("note")}
+                style={{ resize: "none" }}
+                defaultValue={note}
+              />
 
-                <p>Nota: </p>
-                <textarea type='text' placeholder='Nota' defaultValue={mascota.note} {...register('note')} style={{ width: '100%' }} />
-
-                <Row style={{ display: 'flex' }}>
-                  <Col xs={12} sm={6} md={6}>
-                    <label>
-                      *Importante:
-                      {/* <input type='radio' placeholder='Importante' defaultValue={mascota.important} {...register('important', {})} style={{ marginLeft: '5px' }} /> */}
-                      <select defaultValue={mascota.important} {...register('important', {})} style={{ marginLeft: '5px' }}>
-                        <option value='false'>-</option>
-                        <option value='true'>Importante</option>
-                      </select>
-                      <p style={{ fontSize: '10px', marginBottom: '10px', color: 'grey' }}>*Si el animal se encuentra en una situción critica.</p>
-                    </label>
-                  </Col>
-                  <Col xs={12} sm={6} md={6}>
-                    <label>
-                      *Apto para adopción:
-                      {/* <input type='radio' placeholder='EnAdopcion' defaultValue={mascota.inAdoption} {...register('inAdoption', {})} style={{ marginLeft: '5px' }} /> */}
-                      <select defaultValue={mascota.inAdoption} {...register('inAdoption', {})} style={{ marginLeft: '5px' }}>
-                        <option value='false'>-</option>
-                        <option value='true'>Apto</option>
-                      </select>
-                      <p style={{ fontSize: '10px', marginBottom: '10px', color: 'grey' }}>*No marcar si este animal no está apto para ser adoptado.</p>
-                    </label>
-                  </Col>
-                </Row>
-                <Row style={{ display: 'flex' }}>
-                  <Col xs={6} sm={6} md={6}>
-                    <button type='submit' className='boton-submit'>Editar</button>
-                  </Col>
-                  <Col xs={6} sm={6} md={6}>
-                    <button onClick={handleClose} className='boton-cancelar'>Cancelar</button>
-                  </Col>
-                </Row>
-              </Container>
+              <Row>
+                <Col xs={12} sm={6} md={6}>
+                  <label className="d-block m-0">*Importante:</label>
+                  <select
+                    className="input-group input-group-sm p-1"
+                    placeholder="Importante"
+                    {...register("important", {
+                      required: "Este campo es requerido",
+                    })}
+                    defaultValue={important}
+                  >
+                    <option value={false}>-</option>
+                    <option value={true}>Importante</option>
+                  </select>
+                  <p
+                    className="text-secondary "
+                    style={{
+                      fontSize: "10px",
+                    }}
+                  >
+                    *Si el animal se encuentra en una situción critica.
+                  </p>
+                </Col>
+                <Col xs={12} sm={6} md={6}>
+                  <label className="d-block m-0">*Apto para adopción: </label>
+                  <select
+                    className="input-group input-group-sm p-1"
+                    placeholder="En Adopción"
+                    {...register("inAdoption", {
+                      required: "Este campo es requerido",
+                    })}
+                    defaultValue={inAdoption}
+                  >
+                    <option value={false}>-</option>
+                    <option value={true}>Apto</option>
+                  </select>
+                  <p
+                    className="text-secondary"
+                    style={{
+                      fontSize: "10px",
+                    }}
+                  >
+                    *No marcar si este animal no está apto para ser adoptado.
+                  </p>
+                </Col>
+              </Row>
+              <Row>
+                <Col className="d-flex justify-content-between">
+                  <button type="submit" className="btn btn-success">
+                    Editar
+                  </button>
+                  <button
+                    type="button"
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      setIsOpen(false);
+                      reset();
+                    }}
+                    className="btn btn-danger"
+                  >
+                    Cancelar
+                  </button>
+                </Col>
+              </Row>
             </form>
           </div>
         </div>
       </div>
-    )
-  }
+    );
+  };
+
+  const fecha = (date) => {
+    const dateObj = new Date(date);
+    const dia = dateObj.getDate();
+    const mes = dateObj.getMonth() + 1;
+    const año = dateObj.getFullYear();
+    const hora = dateObj.getHours();
+    const minutos = dateObj.getMinutes();
+
+    const fechaFormateada = `${dia < 10 ? "0" + dia : dia}-${
+      mes < 10 ? "0" + mes : mes
+    }-${año} ${hora}:${minutos}`;
+
+    return fechaFormateada;
+  };
 
   return (
-    <Container id='container-mascotas'>
+    <Container id="container-mascotas">
       <Row>
-        <Col id='display-de-mascota' sm={12} md={6} xl={4} xxl={3}>
-          <Formulario />
+        <Col className="display-de-mascota" sm={12} md={6} xl={4} xxl={3}>
+          <Formulario action={action} setAction={setAction} />
         </Col>
-        {mascotas.map((mascotaData) => {
-          const { _id, date, animal, name, important } = mascotaData
-          const fecha = new Date(date)
-          const fechaISO = fecha.toISOString().substring(0, 10)
+        {mascotas.length !== 0 &&
+          mascotas.map((mascotaData) => {
+            const { _id, date, animal, name, important, note, inAdoption } =
+              mascotaData;
 
-          return (
-            <Col id='display-de-mascota' sm={12} md={6} xl={4} xxl={3} key={_id}>
-              <div id='carta-mascota'>
-                <img alt={name} src={animal === 'Perro' ? imagenPerro : animal === 'Gato' ? imagenGato : imagen.name} style={imagenEstilo} />
-                <div style={containerTarjeta}>
-                  <p>Animal: {animal}</p>
-                  {name === '' ? <p>No se le asignó un nombre.</p> : <p>Nombre: {name}</p>}
-                  {important === 'true' && <p style={{ color: '#d70000' }}>Situación delicada.</p>}
-                  <p>Ingreso: {fechaISO}</p>
+            return (
+              <Col
+                key={_id}
+                sm={12}
+                md={6}
+                xl={4}
+                xxl={3}
+                className="display-de-mascota"
+              >
+                <div className="carta-mascota">
+                  <section className="w-100 d-flex p-relative p-3 align-items-center">
+                    <img
+                      alt={name}
+                      src={
+                        animal === "perro"
+                          ? imagenPerro
+                          : animal === "gato"
+                          ? imagenGato
+                          : "https://plantillasdememes.com/img/plantillas/imagen-no-disponible01601774755.jpg"
+                      }
+                      className="rounded-circle"
+                      style={{ height: "100px", width:"100px", objectFit: "cover" }}
+                    />
+                    <section className="ml-2">
+                      <h4 className="m-0 text-capitalize">{name}</h4>
+                      <h5 className="m-0 text-capitalize">{animal}</h5>
+                      <h5 className="text-capitalize">{fecha(date)}</h5>
+                    </section>
+                  </section>
+                  <section
+                    className={`w-100 text-center text-white d-flex justify-content-center align-items-center ${
+                      important === true && inAdoption === false && "bg-danger"
+                    }`}
+                    style={{ height: "30px" }}
+                  >
+                    {important === true && inAdoption === false && (
+                      <h5 className="m-0 text-uppercase">Importante</h5>
+                    )}
+                  </section>
+                  <section
+                    className="border m-2 p-1 rounded"
+                    style={{ height: "110px", overflowY: "scroll" }}
+                  >
+                    <p>{note}</p>
+                  </section>
+                  <section className="w-100 d-flex justify-content-around">
+                    <button
+                      className="border border-0 bg-transparent"
+                      onClick={() => {
+                        setSelectedMascota(mascotaData);
+                        setIsOpen(true);
+                      }}
+                    >
+                      <i className="bi bi-pencil"></i>
+                    </button>
+                    <button
+                      className="btn border border-0 bg-transparent text-danger"
+                      onClick={() => borrarMascota(_id)}
+                    >
+                      <i className="bi bi-trash"></i>
+                    </button>
+                    <button
+                      className={`btn border border-0 bg-transparent ${
+                        inAdoption === true ? "text-success" : "text-secondary"
+                      }`}
+                      onClick={() => checkAdopcion(_id, inAdoption)}
+                    >
+                      <i className="bi bi-clipboard2-check"></i>
+                    </button>
+                    <button className="btn border border-0 bg-transparent">
+                      <i className="bi bi-door-open"></i>
+                    </button>
+                  </section>
                 </div>
-                <Row style={botonera}>
-                  <Col sm={4}>
-                    <p onClick={() => borrarMascota(_id)} style={estiloBoton}>ELIMINAR</p>
-                  </Col>
-                  <Col sm={4}>
-                    <button onClick={() => handleClick(mascotaData)} style={estiloBoton}>EDITAR</button>
-                    {isOpen && editarMascota()}
-                  </Col>
-                </Row>
-              </div>
-            </Col>
-          )
-        })}
+              </Col>
+            );
+          })}
+        {isOpen && selectedMascota && editarMascota()}
       </Row>
     </Container>
-  )
-}
+  );
+};
 
-export default ListaMascotas
+export default ListaMascotas;
