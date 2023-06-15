@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/static/css/main.71a5c76a.css",
-    "main.js": "/static/js/main.fd1be97c.js",
+    "main.css": "/static/css/main.6438e278.css",
+    "main.js": "/static/js/main.f71913f1.js",
     "static/media/banner2.jpg": "/static/media/banner2.431e2d9fd7531a1f2fbc.jpg",
     "static/media/login-background.png": "/static/media/login-background.f80abea69982abc31241.png",
     "static/media/banner1.png": "/static/media/banner1.198f955815cdbbf01370.png",
     "static/media/perro-default.png": "/static/media/perro-default.7adffffed5ad82ab39c8.png",
     "static/media/gato-default.png": "/static/media/gato-default.54a2156046cd2271736d.png",
     "index.html": "/index.html",
-    "main.71a5c76a.css.map": "/static/css/main.71a5c76a.css.map",
-    "main.fd1be97c.js.map": "/static/js/main.fd1be97c.js.map"
+    "main.6438e278.css.map": "/static/css/main.6438e278.css.map",
+    "main.f71913f1.js.map": "/static/js/main.f71913f1.js.map"
   },
   "entrypoints": [
-    "static/css/main.71a5c76a.css",
-    "static/js/main.fd1be97c.js"
+    "static/css/main.6438e278.css",
+    "static/js/main.f71913f1.js"
   ]
 }
