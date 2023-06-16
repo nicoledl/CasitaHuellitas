@@ -65,5 +65,4 @@ module.exports = {
   inAdoptionPetController,
   editPetController,
   deletePetController
-  // getAll, getByInAdoption, updateInfo, deletePet, getById
 }

@@ -9,7 +9,6 @@ import Adoptados from "./pages/Adoptados";
 import ContactosVoluntarios from "./pages/ContactosVoluntarios";
 import Calendario from "./pages/Calendario";
 import MascotasEnAdopcion from "./pages/MascotasEnAdopcion";
-import FormularioAdopcion from "./pages/FormularioAdopcion";
 import Solicitudes from "./pages/Solicitudes";
 import InfoPreAdopcion from "./pages/InfoPreAdopcion";
 import Donaciones from "./pages/Donaciones";
@@ -37,7 +36,6 @@ const App = () => {
         <Route path="/adoptar" element={<MascotasEnAdopcion />} />
         <Route path="/donaciones" element={<Donaciones />} />
         <Route path="/info-pre-adopcion" element={<InfoPreAdopcion />} />
-        <Route path="/formulario-adopcion" element={<FormularioAdopcion />} />
       </Routes>
     </Router>
   );

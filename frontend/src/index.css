@@ -555,54 +555,42 @@ select {
 /* */
 
 /* FORMULARIO ADOPCION */
-#formulario-adopcion {
+.formulario-adopcion {
   margin-top: 50px;
 }
 
-#formulario-adopcion select {
+.formulario-adopcion select {
   max-width: 200px;
 }
 
-#formulario-adopcion * {
+.formulario-adopcion * {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   margin-bottom: 20px;
 }
 
-#formulario-adopcion h1 {
+.formulario-adopcion h1 {
   text-align: center;
   font-family: "Pacifico", cursive;
   font-size: clamp(3rem, -5.3vw + 5.3rem, 2rem);
   color: var(--color-primary);
 }
 
-#formulario-adopcion p {
+.formulario-adopcion p {
   line-height: 18px;
 }
 
-#formulario-adopcion h3 {
+.formulario-adopcion h3 {
   text-align: left;
   font-family: Arial, Helvetica, sans-serif;
   font-size: x-large;
 }
 
-#formulario-adopcion label {
-  font-size: medium;
-  width: 100%;
-}
 
-#formulario-adopcion input {
-  font-size: medium;
-  border: none;
-  border-bottom: solid 1px rgb(0, 0, 0);
-}
-
-#formulario-adopcion textarea {
+.formulario-adopcion textarea {
   resize: none;
   height: 300px;
-  width: 100%;
-  font-size: medium;
 }
 
 /* */

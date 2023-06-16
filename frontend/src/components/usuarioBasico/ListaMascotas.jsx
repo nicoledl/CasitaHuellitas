@@ -1,90 +1,133 @@
-import axios from 'axios'
-import {  useEffect, useState } from 'react'
-import { Col, Container, Row } from 'react-grid-system'
-import { useNavigate } from 'react-router-dom'
-import imagenPerro from '../../assets/perro-default.png'
-import imagenGato from '../../assets/gato-default.png'
-import { Oval } from 'react-loader-spinner'
-
-const imagenEstilo = { height: '50%', width: '100%', borderRadius: '8px 8px 0px 0px', objectFit: 'cover' }
-const containerTarjeta = { height: '25%', display: 'grid', justifyContent: 'center', alignItems: 'center', paddingBottom: 8 }
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { Col, Container, Row } from "react-grid-system";
+import imagenPerro from "../../assets/perro-default.png";
+import imagenGato from "../../assets/gato-default.png";
+import { Oval } from "react-loader-spinner";
+import FormularioDeAdopcion from "./FormularioDeAdopcion";
 
 const ListaMascotas = () => {
-  const navigate = useNavigate()
-  const [mascotas, setMascotas] = useState([])
-  const [showContent, setShowContent] = useState(false)
-  const baseUrl = 'http://localhost:3001'
+  const [mascotas, setMascotas] = useState([]);
+  const [formulario, setFormulario] = useState(false);
+  const [mascotaSelected, setMascotaSelected] = useState(false);
+  const [showContent, setShowContent] = useState(false);
+  const baseUrl = "http://localhost:3001";
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${baseUrl}/api/mascotas/en-adopcion`)
-        setMascotas(response.data)
+        const response = await axios
+          .get(`${baseUrl}/api/mascotas`)
+          .then((res) =>
+            res.data.filter((mascota) => mascota.inAdoption === true)
+          )
+          .then((res) => setMascotas(res));
       } catch (error) {
-        console.error(error)
+        console.error(error);
       }
-    }
-    fetchData()
-  }, [])
-
-  const hanldeClick = (mascota) => {
-    dataMascota(mascota)
-    navigate('/formulario-adopcion')
-  }
+    };
+    fetchData();
+  }, []);
 
   setTimeout(() => {
-    setShowContent(true)
-  }, 3000)
+    setShowContent(true);
+  }, 3000);
 
   if (mascotas[0] === undefined) {
     return (
-      <Container style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-        {showContent
-          ? <p>Aún no hay huellitas en adopción...</p>
-          : (
-            <Oval
-              height={100}
-              width={100}
-              color='#FFCC4E'
-              wrapperStyle={{}}
-              wrapperClass=''
-              visible
-              ariaLabel='oval-loading'
-              secondaryColor='#FFCC4E'
-              strokeWidth={2}
-              strokeWidthSecondary={2}
-            />)}
+      <Container
+        className="d-flex justify-content-center align-items-center"
+        style={{ height: "100vh" }}
+      >
+        {showContent ? (
+          <p>Aún no hay huellitas en adopción...</p>
+        ) : (
+          <Oval
+            height={100}
+            width={100}
+            color="#FFCC4E"
+            wrapperStyle={{}}
+            wrapperClass=""
+            visible
+            ariaLabel="oval-loading"
+            secondaryColor="#FFCC4E"
+            strokeWidth={2}
+            strokeWidthSecondary={2}
+          />
+        )}
       </Container>
-    )
+    );
   }
 
   return (
-    <Container>
-      <Row>
-        {
-          mascotas.map((mascota) => {
-            const fecha = new Date(mascota.date)
-            const fechaISO = fecha.toISOString().substring(0, 10)
-
+    <Container className="pt-5 pb-5">
+      {formulario ? (
+        <FormularioDeAdopcion
+          mascota={mascotaSelected}
+          setFormulario={setFormulario}
+        />
+      ) : (
+        <Row className="pt-5 pb-5">
+          {mascotas.map((mascota) => {
             return (
-              <Col id='display-de-mascota' sm={12} md={6} xl={4} xxl={3} key={mascota._id}>
-                <div id='carta-mascota'>
-                  <img alt={mascota.name} src={mascota.animal === 'Perro' ? imagenPerro : imagenGato} style={imagenEstilo} />
-                  <div style={containerTarjeta}>
-                    {mascota.name === undefined ? <p style={{ fontSize: 'x-large' }}>No se le asignó un nombre.</p> : <p style={{ fontSize: 'x-large' }}>Nombre: {mascota.name}</p>}
-                    <p>Ingreso: {fechaISO}</p>
-                  </div>
-                  <div className='boton-adoptar' onClick={() => hanldeClick(mascota)}>
-                    <p>ADOPTAR</p>
-                  </div>
+              <Col
+                id="display-de-mascota"
+                sm={12}
+                md={6}
+                xl={4}
+                xxl={3}
+                key={mascota._id}
+              >
+                <div
+                  className="bg-white p-2 rounded "
+                  style={{
+                    height: "310px",
+                    width: "500px",
+                  }}
+                >
+                  <p className="text-bolder">
+                    Nombre: <b>{mascota.name}</b>
+                  </p>
+                  <section className="d-flex">
+                    <img
+                      alt={mascota.name}
+                      className="w-50 rounded"
+                      style={{ objectFit: "cover" }}
+                      src={
+                        mascota.animal === "Perro" ? imagenPerro : imagenGato
+                      }
+                    />
+                    <section className="p-2 text-capitalize w-50">
+                      <p>Edad: {mascota.age}</p>
+                      <p>Tamaño: {mascota.size}</p>
+                      <p
+                        style={{
+                          height: "170px",
+                          overflowY: "scroll",
+                        }}
+                      >
+                        Nota: {mascota.note}
+                      </p>
+                    </section>
+                  </section>
+                  <button
+                    className="btn btn-link border border-0 w-100 text-uppercase"
+                    onClick={() => {
+                      setMascotaSelected(mascota);
+                      setFormulario(true);
+                    }}
+                  >
+                    Solicitud de adopción
+                    <i className="pl-2 bi bi-envelope-heart"></i>
+                  </button>
                 </div>
               </Col>
-            )
-          })
-        }
-      </Row>
+            );
+          })}
+        </Row>
+      )}
     </Container>
-  )
-}
+  );
+};
 
-export default ListaMascotas
+export default ListaMascotas;
