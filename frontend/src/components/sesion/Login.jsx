@@ -2,7 +2,6 @@ import axios from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import {getData} from "../../utils/getData"
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
@@ -12,22 +11,20 @@ const Login = () => {
 
   const onSubmit = async (datos) => {
     try {
-      console.log(datos);
-      const response = await axios
+      await axios
         .post(`${baseUrl}/api/usuarios/login`, datos, {
           withCredentials: true,
         })
-        .then(() => getData())
-        .then(() => navigate("/administracion"))
+        .then(() => navigate("/administracion"));
     } catch (error) {
-      if (
-        error.response.data.message === "Contraseña incorrecta" ||
-        error.response.data.message === "Usuario no encontrado"
-      ) {
-        setErrorMessage("El correo o la contraseña son incorrectos");
-      } else {
-        setErrorMessage("Ocurrió un error al procesar la solicitud");
-      }
+      const errorMessage = error?.response?.data?.message;
+
+      setErrorMessage(
+        errorMessage === "Contraseña incorrecta" ||
+          errorMessage === "Usuario no encontrado"
+          ? "El correo o la contraseña son incorrectos"
+          : "Ocurrió un error al procesar la solicitud"
+      );
     }
   };
 

@@ -82,9 +82,7 @@ const ListaMascotas = () => {
                 </Col>
                 <Col xs={12} sm={6} md={6} className="d-flex">
                   <select
-                    {...register("size", {
-                      required: "Este campo es requerido",
-                    })}
+                    {...register("size")}
                     className="input-group input-group-sm p-1"
                     defaultValue={size}
                   >
@@ -102,9 +100,7 @@ const ListaMascotas = () => {
                     className="input-group input-group-sm"
                     type="text"
                     placeholder="Raza"
-                    {...register("breed", {
-                      required: "Este campo es requerido",
-                    })}
+                    {...register("breed")}
                     defaultValue={breed}
                   />
                 </Col>
@@ -135,9 +131,7 @@ const ListaMascotas = () => {
                   <select
                     className="input-group input-group-sm p-1"
                     placeholder="Importante"
-                    {...register("important", {
-                      required: "Este campo es requerido",
-                    })}
+                    {...register("important")}
                     defaultValue={important}
                   >
                     <option value={false}>-</option>
@@ -157,9 +151,7 @@ const ListaMascotas = () => {
                   <select
                     className="input-group input-group-sm p-1"
                     placeholder="En Adopción"
-                    {...register("inAdoption", {
-                      required: "Este campo es requerido",
-                    })}
+                    {...register("inAdoption")}
                     defaultValue={inAdoption}
                   >
                     <option value={false}>-</option>

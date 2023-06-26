@@ -3,6 +3,7 @@ const app = express()
 const cors = require('cors')
 const usuariosRouter = require('./routes/usuario')
 const mascotasRouter = require('./routes/mascota')
+const solicitudesAdopcionRouter = require('./routes/solicitudAdopcion')
 const cookieParser = require('cookie-parser')
 const { connectToDB } = require('./mongo')
 
@@ -24,6 +25,7 @@ connectToDB()
     // Rutas y middleware adicionales
     app.use('/api/usuarios', usuariosRouter)
     app.use('/api/mascotas', mascotasRouter)
+    app.use('/api/solicitudes-adopcion', solicitudesAdopcionRouter)
     app.use(express.static('build'))
 
     const PORT = process.env.PORT || 3001

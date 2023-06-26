@@ -71,11 +71,10 @@ const ListaMascotas = () => {
           {mascotas.map((mascota) => {
             return (
               <Col
-                id="display-de-mascota"
-                sm={12}
-                md={6}
-                xl={4}
-                xxl={3}
+                md={12}
+                xl={6}
+                xxl={4}
+                className="w-100 p-3 d-flex justify-content-center "
                 key={mascota._id}
               >
                 <div

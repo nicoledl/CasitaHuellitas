@@ -25,7 +25,6 @@ const Logout = ({ collapsed }) => {
         .then(() => navigate("/"));
     } catch (error) {
       console.log("Error al cerrar sesión:", error);
-      // Aquí puedes mostrar un mensaje de error al usuario o realizar otra acción de manejo de errores
     }
   };
 

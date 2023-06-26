@@ -24,9 +24,8 @@ const RegistroSolicitudes = () => {
   useEffect(() => {
     async function fetchData () {
       try {
-        const responseSolicitudes = await axios.get(`${baseUrl}/api/solicitudes-de-adopcion`)
+        const responseSolicitudes = await axios.get(`${baseUrl}/api/solicitudes-adopcion`)
         setSolicitudes(responseSolicitudes.data)
-        console.log(responseSolicitudes)
       } catch (error) {
         console.error('Error al cargar registro', error)
       }
@@ -57,7 +56,7 @@ const RegistroSolicitudes = () => {
     if (!solicitud) {
       return null
     }
-
+    
     return (
       <Row key={solicitud._id} className='fila-registro'>
         <Col>
@@ -76,7 +75,7 @@ const RegistroSolicitudes = () => {
           <p>{solicitud.address}</p>
         </Col>
         <Col>
-          {/* <p>{mascota.name}</p> */}
+          <p>{solicitud.name}</p>
         </Col>
         <Col>
           <p>{fecha(solicitud.date)} / </p>

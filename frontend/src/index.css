@@ -410,9 +410,10 @@ p {
 
 #formulario-mascota input,
 textarea,
-select {
+select, option {
   margin-bottom: 10px;
   font-size: medium;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 #formulario-mascota textarea {

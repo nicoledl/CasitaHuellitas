@@ -48,11 +48,8 @@ const FormularioDeAdopcion = ({ mascota, setFormulario }) => {
         pet: mascota._id,
       };
 
-      await axios.post(
-        "http://localhost:3001/api/solicitudes-de-adopcion",
-        datos
-      );
       navigate("/");
+      await axios.post("http://localhost:3001/api/solicitudes-adopcion", datos);
     } catch (error) {
       console.error("Error al enviar los datos:", error);
     }
@@ -246,7 +243,7 @@ const FormularioDeAdopcion = ({ mascota, setFormulario }) => {
             </label>
           </Col>
           <Col sm={12} className="d-flex justify-content-center">
-            <button className="btn btn-dark w-25">Enviar</button>
+            <button className="btn btn-dark text-uppercase" style={{width:"200px"}}>Enviar</button>
           </Col>
         </Row>
       </form>
